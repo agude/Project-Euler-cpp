@@ -14,17 +14,19 @@
 // along with this program; if not, write to the Free Software Foundation,
 // Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-// The most recent version of this program is avaible at:
+// The most recent version of this program is avaible at: 
 // http://github.com/Falcorian/Project-Euler-Solutions
 
 /*
- * By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can see that the 6th prime is 13.
+ * The sum of the primes below 10 is 2 + 3 + 5 + 7 = 17.
  *
- * What is the 10001st prime number?
+ * Find the sum of all the primes below two million.
+ *
  */
 
 #include <iostream>
 #include <math.h>
+
 bool isPrime(long num){
     if(num < 2){ // 0,1 and negative are not prime
         return false; 
@@ -54,18 +56,13 @@ bool isPrime(long num){
 
 int main(){
 
-    int count = 1; // Skipping 2 and adding it by hand
-    long testNumber = 1;
+    long sum = 2;
 
-    while(count < 10001){
-        testNumber += 2;
+    for(long testNumber = 3; testNumber < 2000000; testNumber += 2){
         if(isPrime(testNumber)){
-            count++;
-//          std::cout << count << " " << testNumber << std::endl;
+            sum += testNumber;
         }
-        
     }
-
-    std::cout << testNumber << std::endl;
+    std::cout << sum << std::endl;
     return 0;
 }
