@@ -38,7 +38,7 @@
 class Grid {
     private:
         // Gameboard
-        short grid[9][9];
+        short m_grid[9][9];
         short *returnRow( short i, short j);
         short *returnCol( short i, short j);
 
@@ -56,7 +56,7 @@ class Grid {
             short *G1, *G2, *G3, *G4, *G5, *G6, *G7, *G8, *G9;
             short *H1, *H2, *H3, *H4, *H5, *H6, *H7, *H8, *H9;
             short *I1, *I2, *I3, *I4, *I5, *I6, *I7, *I8, *I9;
-        } cells;
+        } m_cells;
 
 };
 
@@ -64,22 +64,22 @@ Grid::Grid (){
     // Blank gameboard 
     for ( short i=0 ; i<9 ; i++ ) {
         for ( short j=0 ; j<9 ; j++ ) {
-            grid[i][j] = i+1;
+            m_grid[i][j] = i+1;
         }
     }
 
-    // Assigns all the poshorters need for cells
-    cells.A1 = &grid[0][0]; cells.A2 = &grid[0][1]; cells.A3 = &grid[0][2]; cells.A4 = &grid[0][3]; cells.A5 = &grid[0][4]; cells.A6 = &grid[0][5]; cells.A7 = &grid[0][6]; cells.A8 = &grid[0][7]; cells.A9 = &grid[0][8];
-    cells.B1 = &grid[1][0]; cells.B2 = &grid[1][1]; cells.B3 = &grid[1][2]; cells.B4 = &grid[1][3]; cells.B5 = &grid[1][4]; cells.B6 = &grid[1][5]; cells.B7 = &grid[1][6]; cells.B8 = &grid[1][7]; cells.B9 = &grid[1][8];
-    cells.C1 = &grid[2][0]; cells.C2 = &grid[2][1]; cells.C3 = &grid[2][2]; cells.C4 = &grid[2][3]; cells.C5 = &grid[2][4]; cells.C6 = &grid[2][5]; cells.C7 = &grid[2][6]; cells.C8 = &grid[2][7]; cells.C9 = &grid[2][8];
-    cells.D1 = &grid[3][0]; cells.D2 = &grid[3][1]; cells.D3 = &grid[3][2]; cells.D4 = &grid[3][3]; cells.D5 = &grid[3][4]; cells.D6 = &grid[3][5]; cells.D7 = &grid[3][6]; cells.D8 = &grid[3][7]; cells.D9 = &grid[3][8];
-    cells.E1 = &grid[4][0]; cells.E2 = &grid[4][1]; cells.E3 = &grid[4][2]; cells.E4 = &grid[4][3]; cells.E5 = &grid[4][4]; cells.E6 = &grid[4][5]; cells.E7 = &grid[4][6]; cells.E8 = &grid[4][7]; cells.E9 = &grid[4][8];
-    cells.F1 = &grid[5][0]; cells.F2 = &grid[5][1]; cells.F3 = &grid[5][2]; cells.F4 = &grid[5][3]; cells.F5 = &grid[5][4]; cells.F6 = &grid[5][5]; cells.F7 = &grid[5][6]; cells.F8 = &grid[5][7]; cells.F9 = &grid[5][8];
-    cells.G1 = &grid[6][0]; cells.G2 = &grid[6][1]; cells.G3 = &grid[6][2]; cells.G4 = &grid[6][3]; cells.G5 = &grid[6][4]; cells.G6 = &grid[6][5]; cells.G7 = &grid[6][6]; cells.G8 = &grid[6][7]; cells.G9 = &grid[6][8];
-    cells.H1 = &grid[7][0]; cells.H2 = &grid[7][1]; cells.H3 = &grid[7][2]; cells.H4 = &grid[7][3]; cells.H5 = &grid[7][4]; cells.H6 = &grid[7][5]; cells.H7 = &grid[7][6]; cells.H8 = &grid[7][7]; cells.H9 = &grid[7][8];
-    cells.I1 = &grid[8][0]; cells.I2 = &grid[8][1]; cells.I3 = &grid[8][2]; cells.I4 = &grid[8][3]; cells.I5 = &grid[8][4]; cells.I6 = &grid[8][5]; cells.I7 = &grid[8][6]; cells.I8 = &grid[8][7]; cells.I9 = &grid[8][8];
+    // Assigns all the poshorters need for m_cells
+    m_cells.A1 = &m_grid[0][0]; m_cells.A2 = &m_grid[0][1]; m_cells.A3 = &m_grid[0][2]; m_cells.A4 = &m_grid[0][3]; m_cells.A5 = &m_grid[0][4]; m_cells.A6 = &m_grid[0][5]; m_cells.A7 = &m_grid[0][6]; m_cells.A8 = &m_grid[0][7]; m_cells.A9 = &m_grid[0][8];
+    m_cells.B1 = &m_grid[1][0]; m_cells.B2 = &m_grid[1][1]; m_cells.B3 = &m_grid[1][2]; m_cells.B4 = &m_grid[1][3]; m_cells.B5 = &m_grid[1][4]; m_cells.B6 = &m_grid[1][5]; m_cells.B7 = &m_grid[1][6]; m_cells.B8 = &m_grid[1][7]; m_cells.B9 = &m_grid[1][8];
+    m_cells.C1 = &m_grid[2][0]; m_cells.C2 = &m_grid[2][1]; m_cells.C3 = &m_grid[2][2]; m_cells.C4 = &m_grid[2][3]; m_cells.C5 = &m_grid[2][4]; m_cells.C6 = &m_grid[2][5]; m_cells.C7 = &m_grid[2][6]; m_cells.C8 = &m_grid[2][7]; m_cells.C9 = &m_grid[2][8];
+    m_cells.D1 = &m_grid[3][0]; m_cells.D2 = &m_grid[3][1]; m_cells.D3 = &m_grid[3][2]; m_cells.D4 = &m_grid[3][3]; m_cells.D5 = &m_grid[3][4]; m_cells.D6 = &m_grid[3][5]; m_cells.D7 = &m_grid[3][6]; m_cells.D8 = &m_grid[3][7]; m_cells.D9 = &m_grid[3][8];
+    m_cells.E1 = &m_grid[4][0]; m_cells.E2 = &m_grid[4][1]; m_cells.E3 = &m_grid[4][2]; m_cells.E4 = &m_grid[4][3]; m_cells.E5 = &m_grid[4][4]; m_cells.E6 = &m_grid[4][5]; m_cells.E7 = &m_grid[4][6]; m_cells.E8 = &m_grid[4][7]; m_cells.E9 = &m_grid[4][8];
+    m_cells.F1 = &m_grid[5][0]; m_cells.F2 = &m_grid[5][1]; m_cells.F3 = &m_grid[5][2]; m_cells.F4 = &m_grid[5][3]; m_cells.F5 = &m_grid[5][4]; m_cells.F6 = &m_grid[5][5]; m_cells.F7 = &m_grid[5][6]; m_cells.F8 = &m_grid[5][7]; m_cells.F9 = &m_grid[5][8];
+    m_cells.G1 = &m_grid[6][0]; m_cells.G2 = &m_grid[6][1]; m_cells.G3 = &m_grid[6][2]; m_cells.G4 = &m_grid[6][3]; m_cells.G5 = &m_grid[6][4]; m_cells.G6 = &m_grid[6][5]; m_cells.G7 = &m_grid[6][6]; m_cells.G8 = &m_grid[6][7]; m_cells.G9 = &m_grid[6][8];
+    m_cells.H1 = &m_grid[7][0]; m_cells.H2 = &m_grid[7][1]; m_cells.H3 = &m_grid[7][2]; m_cells.H4 = &m_grid[7][3]; m_cells.H5 = &m_grid[7][4]; m_cells.H6 = &m_grid[7][5]; m_cells.H7 = &m_grid[7][6]; m_cells.H8 = &m_grid[7][7]; m_cells.H9 = &m_grid[7][8];
+    m_cells.I1 = &m_grid[8][0]; m_cells.I2 = &m_grid[8][1]; m_cells.I3 = &m_grid[8][2]; m_cells.I4 = &m_grid[8][3]; m_cells.I5 = &m_grid[8][4]; m_cells.I6 = &m_grid[8][5]; m_cells.I7 = &m_grid[8][6]; m_cells.I8 = &m_grid[8][7]; m_cells.I9 = &m_grid[8][8];
 
-    std::cout << grid[0][0] << std::endl;
+    std::cout << m_grid[0][0] << std::endl;
 
     short *irow = returnRow(2,2);
     short *icol = returnCol(2,2);
@@ -98,8 +98,8 @@ short *Grid::returnRow( short i, short j) {
     short *row = new short[8];
     for ( short k=0; k<9; k++) {
         if ( k != j ) { // We don't want the cell we're looking at in the row
-            //std::cout << grid[i][k] << ' ' << i << ' ' << k  << std::endl;
-            row[i] = grid[i][k];
+            //std::cout << m_grid[i][k] << ' ' << i << ' ' << k  << std::endl;
+            row[i] = m_grid[i][k];
         }
     }
     return row;
@@ -109,8 +109,8 @@ short *Grid::returnCol( short i, short j) {
     short *col = new short[8];
     for ( short k=0; k<9; k++) {
         if ( k != i ) { // We don't want the cell we're looking at in the row
-            //std::cout << grid[k][j] << ' ' << k << ' ' << j  << std::endl;
-            col[i] = grid[k][j];
+            //std::cout << m_grid[k][j] << ' ' << k << ' ' << j  << std::endl;
+            col[i] = m_grid[k][j];
         }
     }
     return col;
