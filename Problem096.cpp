@@ -64,7 +64,7 @@ Grid::Grid (){
     // Blank gameboard 
     for ( short i=0 ; i<9 ; i++ ) {
         for ( short j=0 ; j<9 ; j++ ) {
-            m_grid[i][j] = i+1;
+            m_grid[i][j] = 0;
         }
     }
 
@@ -79,27 +79,15 @@ Grid::Grid (){
     m_cells.H1 = &m_grid[7][0]; m_cells.H2 = &m_grid[7][1]; m_cells.H3 = &m_grid[7][2]; m_cells.H4 = &m_grid[7][3]; m_cells.H5 = &m_grid[7][4]; m_cells.H6 = &m_grid[7][5]; m_cells.H7 = &m_grid[7][6]; m_cells.H8 = &m_grid[7][7]; m_cells.H9 = &m_grid[7][8];
     m_cells.I1 = &m_grid[8][0]; m_cells.I2 = &m_grid[8][1]; m_cells.I3 = &m_grid[8][2]; m_cells.I4 = &m_grid[8][3]; m_cells.I5 = &m_grid[8][4]; m_cells.I6 = &m_grid[8][5]; m_cells.I7 = &m_grid[8][6]; m_cells.I8 = &m_grid[8][7]; m_cells.I9 = &m_grid[8][8];
 
-    std::cout << m_grid[0][0] << std::endl;
-
-    short *irow = returnRow(2,2);
-    short *icol = returnCol(2,2);
-    
-    for ( short i=0; i<8; i++) {
-        std::cout << irow[i] << ' ';
-    }
-    std::cout << std::endl;
-    for ( short i=0; i<8; i++) {
-        std::cout << icol[i] << ' ';
-    }
-    std::cout << std::endl;
 }
 
 short *Grid::returnRow( short i, short j) {
     short *row = new short[8];
+    short l=0;
     for ( short k=0; k<9; k++) {
         if ( k != j ) { // We don't want the cell we're looking at in the row
-            //std::cout << m_grid[i][k] << ' ' << i << ' ' << k  << std::endl;
-            row[i] = m_grid[i][k];
+            row[l] = m_grid[i][k];
+            l++;
         }
     }
     return row;
@@ -107,10 +95,11 @@ short *Grid::returnRow( short i, short j) {
 
 short *Grid::returnCol( short i, short j) {
     short *col = new short[8];
+    short l=0;
     for ( short k=0; k<9; k++) {
-        if ( k != i ) { // We don't want the cell we're looking at in the row
-            //std::cout << m_grid[k][j] << ' ' << k << ' ' << j  << std::endl;
-            col[i] = m_grid[k][j];
+        if ( k != i ) { // We don't want the cell we're looking at in the col
+            col[l] = m_grid[k][j];
+            l++;
         }
     }
     return col;
@@ -119,6 +108,6 @@ short *Grid::returnCol( short i, short j) {
 int main () {
 
     Grid g;
-     
+
     return EXIT_SUCCESS;
 }
