@@ -63,7 +63,7 @@ int main(){
         int checkNum = returnSumOfFactors(i);
         if(checkNum > i){ // Otherwise it's been found already
             if( i == returnSumOfFactors(checkNum) && i != checkNum ){
-//              std::cout << i << " " << checkNum << std::endl;
+                //              std::cout << i << " " << checkNum << std::endl;
                 sum += (i+checkNum);
             }
         }
