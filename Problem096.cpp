@@ -18,16 +18,16 @@
 // http://github.com/Falcorian/Project-Euler-Solutions
 
 /*
- * Su Doku (Japanese meaning number place) is the name given to a popular puzzle concept. Its origin is unclear, but credit must be attributed to Leonhard Euler who invent
+ *Su Doku (Japanese meaning number place) is the name given to a popular puzzle concept. Its origin is unclear, but credit must be attributed to Leonhard Euler who invent
  *
- * puzzle:   003020600900305001001806400008102900700000008006708200002609500800203009005010300
- * solution: 483921657967345821251876493548132976729564138136798245372689514814253769695417382
+ *puzzle:   003020600900305001001806400008102900700000008006708200002609500800203009005010300
+ *solution: 483921657967345821251876493548132976729564138136798245372689514814253769695417382
  *
- * A well constructed Su Doku puzzle has a unique solution and can be solved by logic, although it may be necessary to employ "guess and test" methods in order to eliminat
+ *A well constructed Su Doku puzzle has a unique solution and can be solved by logic, although it may be necessary to employ "guess and test" methods in order to eliminat
  *
- * The 6K text file, sudoku.txt (right click and 'Save Link/Target As...'), contains fifty different Su Doku puzzles ranging in difficulty, but all with unique solutions (
+ *The 6K text file, sudoku.txt (right click and 'Save Link/Target As...'), contains fifty different Su Doku puzzles ranging in difficulty, but all with unique solutions (
  *
- * By solving all fifty puzzles find the sum of the 3-digit numbers found in the top left corner of each solution grid; for example, 483 is the 3-digit number found in the
+ *By solving all fifty puzzles find the sum of the 3-digit numbers found in the top left corner of each solution grid; for example, 483 is the 3-digit number found in the
  */
 
 #include    <iostream>
@@ -39,32 +39,40 @@ class Grid {
     private:
         // Gameboard
         short m_grid[9][9];
-        short *returnRow( short i, short j);
-        short *returnCol( short i, short j);
+        bool  m_possible[9][9][9];
+        short* returnRow( short i, short j);
+        short* returnCol( short i, short j);
+        short* returnSqr( short i, short j);
+        void pullNeighbors( short i, short j);
+        void pushNeightbrs( short i, short j, short val);
 
     public:
         Grid();
+        void printGrid();
 
         // Creates a nice way to access the gameboard
-        struct CellsPoshorter{
-            short *A1, *A2, *A3, *A4, *A5, *A6, *A7, *A8, *A9;
-            short *B1, *B2, *B3, *B4, *B5, *B6, *B7, *B8, *B9;
-            short *C1, *C2, *C3, *C4, *C5, *C6, *C7, *C8, *C9;
-            short *D1, *D2, *D3, *D4, *D5, *D6, *D7, *D8, *D9;
-            short *E1, *E2, *E3, *E4, *E5, *E6, *E7, *E8, *E9;
-            short *F1, *F2, *F3, *F4, *F5, *F6, *F7, *F8, *F9;
-            short *G1, *G2, *G3, *G4, *G5, *G6, *G7, *G8, *G9;
-            short *H1, *H2, *H3, *H4, *H5, *H6, *H7, *H8, *H9;
-            short *I1, *I2, *I3, *I4, *I5, *I6, *I7, *I8, *I9;
+        struct Cells{
+            short* A1,* A2,* A3,* A4,* A5,* A6,* A7,* A8,* A9;
+            short* B1,* B2,* B3,* B4,* B5,* B6,* B7,* B8,* B9;
+            short* C1,* C2,* C3,* C4,* C5,* C6,* C7,* C8,* C9;
+            short* D1,* D2,* D3,* D4,* D5,* D6,* D7,* D8,* D9;
+            short* E1,* E2,* E3,* E4,* E5,* E6,* E7,* E8,* E9;
+            short* F1,* F2,* F3,* F4,* F5,* F6,* F7,* F8,* F9;
+            short* G1,* G2,* G3,* G4,* G5,* G6,* G7,* G8,* G9;
+            short* H1,* H2,* H3,* H4,* H5,* H6,* H7,* H8,* H9;
+            short* I1,* I2,* I3,* I4,* I5,* I6,* I7,* I8,* I9;
         } m_cells;
 
 };
 
 Grid::Grid (){
-    // Blank gameboard 
+    // Blank gameboard and possibilites
     for ( short i=0 ; i<9 ; i++ ) {
         for ( short j=0 ; j<9 ; j++ ) {
-            m_grid[i][j] = 0;
+            m_grid[i][j] = i;
+            for ( short k=0 ; k<9 ; k++ ) {
+                m_possible[i][j][k]=true;
+            }
         }
     }
 
@@ -81,8 +89,8 @@ Grid::Grid (){
 
 }
 
-short *Grid::returnRow( short i, short j) {
-    short *row = new short[8];
+short* Grid::returnRow( short i, short j) {
+    short* row = new short[8];
     short l=0;
     for ( short k=0; k<9; k++) {
         if ( k != j ) { // We don't want the cell we're looking at in the row
@@ -93,8 +101,8 @@ short *Grid::returnRow( short i, short j) {
     return row;
 }
 
-short *Grid::returnCol( short i, short j) {
-    short *col = new short[8];
+short* Grid::returnCol( short i, short j) {
+    short* col = new short[8];
     short l=0;
     for ( short k=0; k<9; k++) {
         if ( k != i ) { // We don't want the cell we're looking at in the col
@@ -105,9 +113,135 @@ short *Grid::returnCol( short i, short j) {
     return col;
 }
 
-int main () {
+short* Grid::returnSqr( short i, short j) {
+    short* sqr = new short[8];
+    short rowStart, rowEnd;
+    short colStart, colEnd;
 
+    switch ( i ) {
+        case 0:	
+        case 1:	
+        case 2:	
+            rowStart=0;
+            rowEnd=3;
+            break;
+
+        case 3:	
+        case 4:	
+        case 5:	
+            rowStart=3;
+            rowEnd=6;
+            break;
+
+        case 6:	
+        case 7:	
+        case 8:	
+            rowStart=6;
+            rowEnd=9;
+            break;
+
+        default:	
+            break;
+    }
+
+    switch ( j ) {
+        case 0:	
+        case 1:	
+        case 2:	
+            colStart=0;
+            colEnd=3;
+            break;
+
+        case 3:	
+        case 4:	
+        case 5:	
+            colStart=3;
+            colEnd=6;
+            break;
+
+        case 6:	
+        case 7:	
+        case 8:	
+            colStart=6;
+            colEnd=9;
+            break;
+
+        default:	
+            break;
+    }
+
+    short m = 0;
+    for ( short k=rowStart; k < rowEnd; k++ ) {
+        for ( short l=colStart; l < colEnd; l++ ) {
+            if (i != k || j != l) {
+                sqr[m] = m_grid[k][l];
+                std::cout << m_grid[k][l] << " grid[" << k << "][" << l << ']' << std::endl;
+                m++;
+            }
+        }
+    }
+    return sqr;
+}
+
+void Grid::pullNeighbors( short i, short j) {
+    /* 
+       Given a cell at i,j, c, checks all other cells connected to c
+       and removes values from c's possiblity array.
+       */       
+    bool* pos[9]; 
+    for ( short k=0; k<9; k++) {
+        pos[k] = &m_possible[i][j][k];
+    }
+
+    short* sqr;
+    sqr = returnSqr(i,j);
+    for ( short k = 0; k<8; k++){ 
+        if (sqr[k] != 0) {
+            pos[sqr[k]-1] == false;
+        }
+    }
+
+    short* row;
+    row = returnRow(i,j);
+    for ( short k = 0; k<8; k++){
+        if (row[k] != 0) {
+            pos[row[k]-1] == false;
+        }
+    }
+
+    short* col;
+    col = returnCol(i,j);
+    for ( short k = 0; k<8; k++){
+        if (col[k] != 0) {
+            pos[col[k]-1] == false;
+        }
+    }
+}
+
+void Grid::pushNeightbrs( short i, short j, short val) {
+
+}
+
+void Grid::printGrid() {
+    using namespace std;
+
+    for ( short i=0; i<9; i++ ) {
+        if ( i != 0 && i%3 == 0) {
+            cout << "-------+-------+-------" << endl;
+        }
+        for ( short j=0; j<9; j++ ) {
+            if ( j != 0 && j%3 == 0) {
+                cout << " |";
+            }
+            cout << ' ' << m_grid[i][j];
+        }
+        cout << endl;
+    }
+}
+
+int main () { 
     Grid g;
+    g.printGrid();
 
     return EXIT_SUCCESS;
 }
