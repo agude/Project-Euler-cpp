@@ -31,9 +31,9 @@
  */
 
 #include    <iostream>
-#include    <math.h>
+//#include    <fstream>
 #include    <stdlib.h>
-#include	<string>
+#include    <string>
 
 class Grid {
     private:
@@ -45,9 +45,11 @@ class Grid {
         short* returnSqr( short i, short j);
         void pullNeighbors( short i, short j);
         void pushNeightbrs( short i, short j, short val);
+        void checkCell( short i, short j);
+        short strtoint(char str);
 
     public:
-        Grid();
+        Grid(std::string inPuzzle);
         void printGrid();
 
         // Creates a nice way to access the gameboard
@@ -65,17 +67,33 @@ class Grid {
 
 };
 
-Grid::Grid (){
+Grid::Grid (std::string inPuzzle){
     // Blank gameboard and possibilites
     for ( short i=0 ; i<9 ; i++ ) {
         for ( short j=0 ; j<9 ; j++ ) {
-            m_grid[i][j] = i;
+            char puz = inPuzzle[i*9+j];
+            int  val = strtoint(puz);
+            m_grid[i][j] = val;
             for ( short k=0 ; k<9 ; k++ ) {
-                m_possible[i][j][k]=true;
+                if (val == 0 || k == val - 1) { // All values still possible
+                    m_possible[i][j][k]=true;
+                } else {
+                    m_possible[i][j][k]=false;
+                }
             }
         }
     }
-
+/* 
+    for ( short i=0 ; i<9 ; i++ ) {
+        for ( short j=0 ; j<9 ; j++ ) {
+            std::cout << m_grid[i][j] << ": ";
+            for ( short k=0 ; k<9 ; k++ ) {
+                std::cout << k << ':' << m_possible[i][j][k] << ", ";
+            }
+            std::cout << std::endl;
+        }
+    }
+ */
     // Assigns all the poshorters need for m_cells
     m_cells.A1 = &m_grid[0][0]; m_cells.A2 = &m_grid[0][1]; m_cells.A3 = &m_grid[0][2]; m_cells.A4 = &m_grid[0][3]; m_cells.A5 = &m_grid[0][4]; m_cells.A6 = &m_grid[0][5]; m_cells.A7 = &m_grid[0][6]; m_cells.A8 = &m_grid[0][7]; m_cells.A9 = &m_grid[0][8];
     m_cells.B1 = &m_grid[1][0]; m_cells.B2 = &m_grid[1][1]; m_cells.B3 = &m_grid[1][2]; m_cells.B4 = &m_grid[1][3]; m_cells.B5 = &m_grid[1][4]; m_cells.B6 = &m_grid[1][5]; m_cells.B7 = &m_grid[1][6]; m_cells.B8 = &m_grid[1][7]; m_cells.B9 = &m_grid[1][8];
@@ -87,6 +105,20 @@ Grid::Grid (){
     m_cells.H1 = &m_grid[7][0]; m_cells.H2 = &m_grid[7][1]; m_cells.H3 = &m_grid[7][2]; m_cells.H4 = &m_grid[7][3]; m_cells.H5 = &m_grid[7][4]; m_cells.H6 = &m_grid[7][5]; m_cells.H7 = &m_grid[7][6]; m_cells.H8 = &m_grid[7][7]; m_cells.H9 = &m_grid[7][8];
     m_cells.I1 = &m_grid[8][0]; m_cells.I2 = &m_grid[8][1]; m_cells.I3 = &m_grid[8][2]; m_cells.I4 = &m_grid[8][3]; m_cells.I5 = &m_grid[8][4]; m_cells.I6 = &m_grid[8][5]; m_cells.I7 = &m_grid[8][6]; m_cells.I8 = &m_grid[8][7]; m_cells.I9 = &m_grid[8][8];
 
+    printGrid();
+
+    for ( int z=0; z<1000; z++){
+        for ( short i=0 ; i<9 ; i++ ) {
+            for ( short j=0 ; j<9 ; j++ ) {
+                pullNeighbors(i,j);
+                checkCell(i,j);
+            }
+        }
+    }
+
+    std::cout << std::endl;
+
+    printGrid();
 }
 
 short* Grid::returnRow( short i, short j) {
@@ -175,7 +207,7 @@ short* Grid::returnSqr( short i, short j) {
         for ( short l=colStart; l < colEnd; l++ ) {
             if (i != k || j != l) {
                 sqr[m] = m_grid[k][l];
-                std::cout << m_grid[k][l] << " grid[" << k << "][" << l << ']' << std::endl;
+                //std::cout << m_grid[k][l] << " grid[" << k << "][" << l << ']' << std::endl;
                 m++;
             }
         }
@@ -185,19 +217,22 @@ short* Grid::returnSqr( short i, short j) {
 
 void Grid::pullNeighbors( short i, short j) {
     /* 
-       Given a cell at i,j, c, checks all other cells connected to c
-       and removes values from c's possiblity array.
-       */       
+      Given a cell at i,j, c, checks all other cells connected to c
+      and removes values from c's possiblity array.
+     */       
     bool* pos[9]; 
     for ( short k=0; k<9; k++) {
         pos[k] = &m_possible[i][j][k];
     }
 
+    //std::cout << "Checking m_grid[" << i << "][" << j << "] = " << m_grid[i][j] << std::endl;
+
     short* sqr;
     sqr = returnSqr(i,j);
     for ( short k = 0; k<8; k++){ 
         if (sqr[k] != 0) {
-            pos[sqr[k]-1] == false;
+            //std::cout << "\t" << "Found neighbor with value: " << sqr[k] << std::endl;
+            *pos[sqr[k]-1] = false;
         }
     }
 
@@ -205,7 +240,8 @@ void Grid::pullNeighbors( short i, short j) {
     row = returnRow(i,j);
     for ( short k = 0; k<8; k++){
         if (row[k] != 0) {
-            pos[row[k]-1] == false;
+            //std::cout << "\t" << "Found neighbor with value: " << row[k] << std::endl;
+            *pos[row[k]-1] = false;
         }
     }
 
@@ -213,13 +249,41 @@ void Grid::pullNeighbors( short i, short j) {
     col = returnCol(i,j);
     for ( short k = 0; k<8; k++){
         if (col[k] != 0) {
-            pos[col[k]-1] == false;
+            //std::cout << "\t" << "Found neighbor with value: " << col[k] << std::endl;
+            *pos[col[k]-1] = false;
         }
     }
+
+    for ( short k=0; k<9; k++) {
+        //std::cout << *pos[k];
+    }
+    //std::cout << std::endl;
+    for ( short k=0; k<9; k++) {
+        //std::cout << m_possible[i][j][k];
+    }
+    //std::cout << std::endl;
+
 }
 
 void Grid::pushNeightbrs( short i, short j, short val) {
 
+}
+
+void Grid::checkCell( short i, short j) {
+    /* 
+     * If a cell has only one possibilty left, assign it.
+     */
+    short ntrue=0;
+    short val=0;
+    for ( short k=0; k<9; k++) {
+        if (m_possible[i][j][k]) {
+            val = k+1;
+            ntrue++;
+        }
+    }
+    if (ntrue == 1) {
+        m_grid[i][j] = val;
+    }
 }
 
 void Grid::printGrid() {
@@ -239,9 +303,39 @@ void Grid::printGrid() {
     }
 }
 
+
+short Grid::strtoint(char str){
+    if (str == '0') { 
+        return 0;
+    } else if (str == '1') {
+        return 1;
+    } else if (str == '2') {
+        return 2;
+    } else if (str == '3') {
+        return 3;
+    } else if (str == '4') {
+        return 4;
+    } else if (str == '5') {
+        return 5;
+    } else if (str == '6') {
+        return 6;
+    } else if (str == '7') {
+        return 7;
+    } else if (str == '8') {
+        return 8;
+    } else if (str == '9') {
+        return 9;
+    } else {
+        return -1;
+    }
+}
+
 int main () { 
-    Grid g;
-    g.printGrid();
+    //std::string s1="003020600900305001001806400008102900700000008006708200002609500800203009005010300";
+    std::string s1="080903040006107000003000600600089004900000003700640002009000300000806200010705090";
+
+    Grid g(s1);
+    //g.printGrid();
 
     return EXIT_SUCCESS;
 }
