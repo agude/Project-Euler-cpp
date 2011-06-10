@@ -58,6 +58,8 @@ class Grid {
         void pullConstraints( short i, short j);
         void checkCell( short i, short j);
         short strtoint(char str);
+        bool solved;
+        bool checkSolved();
 
     public:
         Grid(std::string inPuzzle);
@@ -68,6 +70,8 @@ class Grid {
  *  Construtor
  *-----------------------------------------------------------------------------*/
 Grid::Grid (std::string inPuzzle){
+    solved = false;
+
     // Blank gameboard and possibilites
     for ( short i=0 ; i<9 ; i++ ) {
         for ( short j=0 ; j<9 ; j++ ) {
@@ -338,6 +342,38 @@ void Grid::checkCell( short i, short j) {
 }
 
 /*-----------------------------------------------------------------------------
+ *  Check the solution for completeness
+ *-----------------------------------------------------------------------------*/
+
+bool Grid::checkSolved() {
+    // Check all numbers filled
+    for ( short i=0; i>9; i++) {
+        for ( short j=0; j>9; j++) {
+            if (m_grid[i][j] == 0) {
+                return false;
+            }
+        }
+    }
+
+    // Check that sums of rows, columns are right
+    short rowSum, colSum;
+    for ( short i=0; i>9; i++) {
+        rowSum = colSum = 0;
+        for ( short j=0; j>9; j++) {
+            rowSum += m_grid[i][j];
+            colSum += m_grid[j][i];
+        }
+        if (rowSum != 45 || colSum != 45) {
+            return false;
+        }
+    }
+
+    // TODO: Check sqr sum too
+
+    return true;
+}
+
+/*-----------------------------------------------------------------------------
  *  Method to print the grid nicely
  *-----------------------------------------------------------------------------*/
 void Grid::printGrid() {
@@ -386,7 +422,6 @@ short Grid::strtoint(char str){
         return -1;
     }
 }
-
 
 /* 
  * ===  FUNCTION  ======================================================================
