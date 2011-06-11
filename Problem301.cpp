@@ -40,7 +40,7 @@
 
 #include <iostream>
 
-bool isLoss( int a, int b, int c) {
+bool isLoss( long a, long b, long c) {
     if ( !(a^b^c) ) {
         return true;
     }
@@ -48,11 +48,13 @@ bool isLoss( int a, int b, int c) {
 }
 
 int main(){
-    int count = 0;
-    for ( int i=1; i<=1073741824; i++) {
+    long count = 0;
+    for ( long i=1; i<=1073741824; i++) {
         if ( isLoss(i,2*i,3*i) ){
             count++;
         }
     }
     std::cout << count << std::endl;
+
+    return 0;
 }
