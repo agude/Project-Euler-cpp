@@ -30,8 +30,9 @@
  * 1/8 =   0.125 
  * 1/9 =   0.(1) 
  * 1/10    =   0.1 
- * Where 0.1(6) means 0.166666..., and has a 1-digit recurring cycle. 
- * It can be seen that 1/7 has a 6-digit recurring cycle.
+ *
+ * Where 0.1(6) means 0.166666..., and has a 1-digit recurring cycle.  It can
+ * be seen that 1/7 has a 6-digit recurring cycle.
  *
  * Find the value of d  1000 for which 1/d contains the longest recurring cycle
  * in its decimal fraction part.
@@ -41,11 +42,11 @@
 #include <iostream>
 #include <math.h>
 
-int getCycleLength(long num){
+int getCycleLength(const long num){
     int d = 1;
     
     while ( true ) {
-        long test = long( pow(10,d) - 1.0) % num;
+        const long test = long( pow(10,d) - 1.0) % num;
         //std::cout << "\t" << test << std::endl;
         if ( long( pow(10,d) - 1.0) % num == 0 ){
             return d;
@@ -54,7 +55,7 @@ int getCycleLength(long num){
     }
 }
 
-bool* getPrimeArray(long num){
+bool* getPrimeArray(const long num){
     bool* primes = new bool[num];
 
     // Fill with true
@@ -80,7 +81,7 @@ bool* getPrimeArray(long num){
 
 int main(){
 
-    int MAX = 10;
+    const int MAX = 10;
     int maxcyclen = 0;
     int num = 0;
 

@@ -52,7 +52,7 @@ int main(){
 
     int largestProduct = -1;
 
-    int Grid[20][20] = {
+    const int Grid[20][20] = {
         {8,2,22,97,38,15,0,40,0,75,4,5,7,78,52,12,50,77,91,8},
         {49,49,99,40,17,81,18,57,60,87,17,40,98,43,69,48,4,56,62,0},
         {81,49,31,73,55,79,14,29,93,71,40,67,53,88,30,3,49,13,36,65},
@@ -79,8 +79,8 @@ int main(){
     for(int col = 0; col < 16; col++){
         for(int row = 0; row < 20; row++){
 
-            int rowSum = Grid[row][col] * Grid[row][col+1] * Grid[row][col+2] * Grid[row][col+3];
-            int colSum = Grid[col][row] * Grid[col+1][row] * Grid[col+2][row] * Grid[col+3][row];
+            const int rowSum = Grid[row][col] * Grid[row][col+1] * Grid[row][col+2] * Grid[row][col+3];
+            const int colSum = Grid[col][row] * Grid[col+1][row] * Grid[col+2][row] * Grid[col+3][row];
 
             if(rowSum > largestProduct){
                 largestProduct = rowSum;
@@ -96,8 +96,8 @@ int main(){
     for(int col = 0; col < 16; col++){
         for(int row = 0; row < 16; row++){
 
-            int backSum  = Grid[row][col] * Grid[row+1][col+1] * Grid[row+2][col+2] * Grid[row+3][col+3]; /* Summing \ */
-            int slashSum = Grid[row][col+3] * Grid[row+1][col+2] * Grid[row+2][col+1] * Grid[row+3][col]; /* Summing / */
+            const int backSum  = Grid[row][col] * Grid[row+1][col+1] * Grid[row+2][col+2] * Grid[row+3][col+3]; /* Summing \ */
+            const int slashSum = Grid[row][col+3] * Grid[row+1][col+2] * Grid[row+2][col+1] * Grid[row+3][col]; /* Summing / */
 
             if(backSum > largestProduct){
                 largestProduct = backSum;

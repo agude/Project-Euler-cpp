@@ -37,7 +37,7 @@
 
 int main(){
 
-    int MAX = 100;
+    const int MAX = 100;
     int tnum = 1;
     int tden = 1;
 
@@ -45,8 +45,8 @@ int main(){
     for ( int i = 1; i<10; i++) {
         for ( int j = 1; j<10; j++) {
             for ( int k = 1; k<10; k++) {
-                int num = 10*i+j;
-                int den = j*10+k;
+                const int num = 10*i+j;
+                const int den = j*10+k;
                 if ( num < den && num*k == den*i ) {
                     tnum *= num;
                     tden *= den;

@@ -18,9 +18,11 @@
 // http://github.com/Falcorian/Project-Euler-Solutions
 
 /*
- * 2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.
+ * 2520 is the smallest number that can be divided by each of the numbers from
+ * 1 to 10 without any remainder.
  *
- * What is the smallest number that is evenly divisible by all of the numbers from 1 to 20?
+ * What is the smallest number that is evenly divisible by all of the numbers
+ * from 1 to 20?
  *
  */
 
@@ -29,7 +31,7 @@
 int main(){
 
     long testnumber = 20*19;
-    int divisor[8] = {18,17,16,15,14,13,12,11};
+    const int divisor[8] = {18,17,16,15,14,13,12,11};
     int increment = 20*19;
     bool runWhile = true;
 

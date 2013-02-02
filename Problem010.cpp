@@ -27,7 +27,7 @@
 #include <iostream>
 #include <math.h>
 
-bool isPrime(long num){
+const bool isPrime(const long num){
     if(num < 2){ // 0,1 and negative are not prime
         return false; 
     } else if(num < 4){
@@ -39,7 +39,7 @@ bool isPrime(long num){
     } else if(num%3 == 0){
         return false; 
     } else {
-        long r = floor(sqrt(num));
+        const long r = floor(sqrt(num));
         long f = 5;
         while(f <= r){
             if(num%f == 0){

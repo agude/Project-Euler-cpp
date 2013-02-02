@@ -25,8 +25,8 @@
  * This is the longest sum of consecutive primes that adds to a prime below
  * one-hundred.
  *
- * The longest sum of consecutive primes below one-thousand that adds to a prime,
- * contains 21 terms, and is equal to 953.
+ * The longest sum of consecutive primes below one-thousand that adds to a
+ * prime, contains 21 terms, and is equal to 953.
  *
  * Which prime, below one-million, can be written as the sum of the most
  * consecutive primes?
@@ -36,7 +36,7 @@
 #include <iostream>
 #include <math.h>
 
-bool* getPrimeArray(long num){
+bool* getPrimeArray(const long num){
     bool* primes = new bool[num];
 
     // Fill with true
@@ -61,7 +61,7 @@ bool* getPrimeArray(long num){
 }
 
 int main(){
-    long MAX = 1000000;
+    const long MAX = 1000000;
     bool* isPrime = getPrimeArray(MAX);
 
     // Make an array of just primes

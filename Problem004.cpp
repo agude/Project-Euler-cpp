@@ -18,7 +18,8 @@
 // http://github.com/Falcorian/Project-Euler-Solutions
 
 /*
- * A palindromic number reads the same both ways. The largest palindrome made from the product of two 2-digit numbers is 9009 = 91 x 99.
+ * A palindromic number reads the same both ways. The largest palindrome made
+ * from the product of two 2-digit numbers is 9009 = 91 x 99.
  *
  * Find the largest palindrome made from the product of two 3-digit numbers.
  *
@@ -26,7 +27,7 @@
 
 #include <iostream>
 
-long reverse(long num){
+const long reverse(long num){
 
     long reversed = 0;
     while( num > 0 ){
@@ -36,8 +37,8 @@ long reverse(long num){
     return reversed;
 }
 
-bool isPalindromic(long num){
-    long reversed = reverse(num);
+const bool isPalindromic(const long num){
+    const long reversed = reverse(num);
     if( num == reversed ){
         return true;
     }
@@ -51,7 +52,7 @@ int main(){
     for(int i = 999; i > 100; i--){
         for(int j = i; j < 1000; j++){
 
-            long testNum = i*j;
+            const long testNum = i*j;
 
             if( testNum > Palindromic ){
                 if( isPalindromic(testNum) ){

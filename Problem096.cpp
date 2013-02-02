@@ -18,16 +18,24 @@
 // http://github.com/Falcorian/Project-Euler-Solutions
 
 /*
- *Su Doku (Japanese meaning number place) is the name given to a popular puzzle concept. Its origin is unclear, but credit must be attributed to Leonhard Euler who invent
+ * Su Doku (Japanese meaning number place) is the name given to a popular
+ * puzzle concept. Its origin is unclear, but credit must be attributed to
+ * Leonhard Euler who invent
  *
- *puzzle:   003020600900305001001806400008102900700000008006708200002609500800203009005010300
- *solution: 483921657967345821251876493548132976729564138136798245372689514814253769695417382
+ * puzzle:   003020600900305001001806400008102900700000008006708200002609500800203009005010300
+ * solution: 483921657967345821251876493548132976729564138136798245372689514814253769695417382
  *
- *A well constructed Su Doku puzzle has a unique solution and can be solved by logic, although it may be necessary to employ "guess and test" methods in order to eliminat
+ * A well constructed Su Doku puzzle has a unique solution and can be solved by
+ * logic, although it may be necessary to employ "guess and test" methods in
+ * order to eliminat
  *
- *The 6K text file, sudoku.txt (right click and 'Save Link/Target As...'), contains fifty different Su Doku puzzles ranging in difficulty, but all with unique solutions (
+ * The 6K text file, sudoku.txt (right click and 'Save Link/Target As...'),
+ * contains fifty different Su Doku puzzles ranging in difficulty, but all with
+ * unique solutions (
  *
- *By solving all fifty puzzles find the sum of the 3-digit numbers found in the top left corner of each solution grid; for example, 483 is the 3-digit number found in the
+ * By solving all fifty puzzles find the sum of the 3-digit numbers found in
+ * the top left corner of each solution grid; for example, 483 is the 3-digit
+ * number found in the
  */
 
 #include    <iostream>
@@ -65,21 +73,21 @@ class Grid {
         bool checkSolved();
 
     public:
-        Grid(std::string inPuzzle);
+        Grid(const std::string inPuzzle);
         void printGrid();
 };
 
 /*-----------------------------------------------------------------------------
- *  Construtor
+ * Construtor
  *-----------------------------------------------------------------------------*/
-Grid::Grid (std::string inPuzzle){
+Grid::Grid (const std::string inPuzzle){
     solved = false;
 
     // Blank gameboard and possibilites
     for ( short i=0 ; i<9 ; i++ ) {
         for ( short j=0 ; j<9 ; j++ ) {
-            char puz = inPuzzle[i*9+j];
-            int  val = strtoint(puz);
+            const char puz = inPuzzle[i*9+j];
+            const int val = strtoint(puz);
             m_grid[i][j] = val;
             for ( short k=0 ; k<9 ; k++ ) {
                 if (val == 0 || k == val - 1) { // All values still possible
@@ -110,7 +118,7 @@ Grid::Grid (std::string inPuzzle){
 /*-----------------------------------------------------------------------------
  *  Return the coordinates of groupings of cells (rows, cols, squares)
  *-----------------------------------------------------------------------------*/
-Coordinate* Grid::returnRow( short i, short j) {
+Coordinate* Grid::returnRow( const short i, const short j) {
     Coordinate* Row = new Coordinate[8];
     short l=0;
     for ( short k=0; k<9; k++) {
@@ -209,7 +217,7 @@ Coordinate* Grid::returnSqr( short i, short j) {
 /*-----------------------------------------------------------------------------
  *  Our two propegation methods. 
  *-----------------------------------------------------------------------------*/
-void Grid::pullNeighbors( short i, short j) {
+void Grid::pullNeighbors( const short i, const short j) {
     /* 
       Given a cell, c at i,j, checks all other cells connected to c
       and removes values from c's possiblity array.
@@ -226,9 +234,9 @@ void Grid::pullNeighbors( short i, short j) {
     Coordinate* sqr;
     sqr = returnSqr(i,j);
     for ( short k = 0; k<8; k++){ 
-        short m = sqr[k].row;
-        short n = sqr[k].col;
-        short val = m_grid[m][n];
+        const short m = sqr[k].row;
+        const short n = sqr[k].col;
+        const short val = m_grid[m][n];
         if (val != 0) {
             //std::cout << "\tFound value " << val << " at " << m << ' ' << n << std::endl;
             *pos[val-1] = false;
@@ -238,9 +246,9 @@ void Grid::pullNeighbors( short i, short j) {
     Coordinate* row;
     row = returnRow(i,j);
     for ( short k = 0; k<8; k++){ 
-        short m = row[k].row;
-        short n = row[k].col;
-        short val = m_grid[m][n];
+        const short m = row[k].row;
+        const short n = row[k].col;
+        const short val = m_grid[m][n];
         if (val != 0) {
             //std::cout << "\tFound value " << val << " at " << m << ' ' << n << std::endl;
             *pos[val-1] = false;
@@ -250,9 +258,9 @@ void Grid::pullNeighbors( short i, short j) {
     Coordinate* col;
     col = returnCol(i,j);
     for ( short k = 0; k<8; k++){ 
-        short m = col[k].row;
-        short n = col[k].col;
-        short val = m_grid[m][n];
+        const short m = col[k].row;
+        const short n = col[k].col;
+        const short val = m_grid[m][n];
         if (val != 0) {
             //std::cout << "\tFound value " << val << " at " << m << ' ' << n << std::endl;
             *pos[val-1] = false;
@@ -267,7 +275,7 @@ void Grid::pullNeighbors( short i, short j) {
     //std::cout << std::endl;
 }
 
-void Grid::pullConstraints( short i, short j){
+void Grid::pullConstraints( const short i, const short j){
     /* 
      * If a cell is the only sell in its row/col/sqr
      * that can take a value, it must be that value
@@ -288,7 +296,7 @@ void Grid::pullConstraints( short i, short j){
 
 }
 
-void Grid::cSqr( short i, short j) {
+void Grid::cSqr( const short i, const short j) {
     //std::cout << "Checking contraints on " << i << ' ' << j << ':' << std::endl;
     bool onlyHere[8]; 
     for ( short l=0; l<9; l++) {
@@ -300,8 +308,8 @@ void Grid::cSqr( short i, short j) {
     Coordinate* sqr;
     sqr = returnSqr(i,j);
     for ( short k = 0; k<8; k++){ 
-        short  m = sqr[k].row;
-        short  n = sqr[k].col;
+        const short  m = sqr[k].row;
+        const short  n = sqr[k].col;
         for ( short l=0; l<9; l++) {
             if (m_possible[m][n][l]) {
                 onlyHere[l]=false;
@@ -328,7 +336,7 @@ void Grid::cSqr( short i, short j) {
     }
 }
 
-void Grid::cCol( short i, short j) {
+void Grid::cCol( const short i, const short j) {
     //std::cout << "Checking contraints on " << i << ' ' << j << ':' << std::endl;
     bool onlyHere[8]; 
     for ( short l=0; l<9; l++) {
@@ -340,8 +348,8 @@ void Grid::cCol( short i, short j) {
     Coordinate* col;
     col = returnCol(i,j);
     for ( short k = 0; k<8; k++){ 
-        short  m = col[k].row;
-        short  n = col[k].col;
+        const short m = col[k].row;
+        const short n = col[k].col;
         for ( short l=0; l<9; l++) {
             if (m_possible[m][n][l]) {
                 onlyHere[l]=false;
@@ -368,7 +376,7 @@ void Grid::cCol( short i, short j) {
     }
 }
 
-void Grid::cRow( short i, short j) {
+void Grid::cRow( const short i, const short j) {
     //std::cout << "Checking contraints on " << i << ' ' << j << ':' << std::endl;
     bool onlyHere[8]; 
     for ( short l=0; l<9; l++) {
@@ -380,8 +388,8 @@ void Grid::cRow( short i, short j) {
     Coordinate* row;
     row = returnRow(i,j);
     for ( short k = 0; k<8; k++){ 
-        short  m = row[k].row;
-        short  n = row[k].col;
+        const short m = row[k].row;
+        const short n = row[k].col;
         for ( short l=0; l<9; l++) {
             if (m_possible[m][n][l]) {
                 onlyHere[l]=false;
@@ -408,7 +416,7 @@ void Grid::cRow( short i, short j) {
     }
 }
 
-void Grid::checkCell( short i, short j) {
+void Grid::checkCell( const short i, const short j) {
     /* 
      * If a cell has only one possibilty left, assign it.
      */
@@ -514,7 +522,7 @@ short Grid::strtoint(char str){
  */
 int main () { 
     //std::string s1="003020600900305001001806400008102900700000008006708200002609500800203009005010300";
-    std::string s1="080903040006107000003000600600089004900000003700640002009000300000806200010705090";
+    const std::string s1="080903040006107000003000600600089004900000003700640002009000300000806200010705090";
 
     Grid g(s1);
     //g.printGrid();

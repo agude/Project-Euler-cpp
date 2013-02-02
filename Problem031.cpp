@@ -35,42 +35,42 @@
 
 int main(){
 
-    int MAX = 200; // pence
+    const int MAX = 200; // pence
     int combos = 0;
 
     for ( int ones = 0; ones <= MAX; ones++ ) {
         int amount = ones;
-        int MAX2 = (MAX - amount) / 2;
+        const int MAX2 = (MAX - amount) / 2;
 
         for ( int twos = 0; twos <= MAX2; twos++) {
             amount = ones + 2*twos;
             if (amount % 5 != 0) {
                 continue;
             }
-            int MAX5 = (MAX - amount) / 5;
+            const int MAX5 = (MAX - amount) / 5;
 
             for ( int fives = 0; fives <= MAX5; fives++) {
                 amount = ones + 2 * twos + 5 * fives;
                 if (amount % 10 != 0) {
                     continue;
                 }
-                int MAX10 = (MAX - amount) / 10;
+                const int MAX10 = (MAX - amount) / 10;
 
                 for ( int tens = 0; tens <= MAX10; tens++) {
                     amount = ones + 2 * twos + 5 * fives + 10 * tens;
-                    int MAX20 = (MAX - amount) / 20;
+                    const int MAX20 = (MAX - amount) / 20;
 
                     for ( int twents = 0; twents <= MAX20; twents++) {
                         amount = ones + 2 * twos + 5 * fives + 10 * tens + 20 * twents;
-                        int MAX50 = (MAX - amount) / 50;
+                        const int MAX50 = (MAX - amount) / 50;
 
                         for ( int fifts = 0; fifts <= MAX50; fifts++) {
                             amount = ones + 2 * twos + 5 * fives + 10 * tens + 20 * twents + 50 * fifts;
-                            int MAX100 = (MAX - amount) / 100;
+                            const int MAX100 = (MAX - amount) / 100;
 
                             for ( int hunds = 0; hunds <= MAX100; hunds++) {
                                 amount = ones + 2 * twos + 5 * fives + 10 * tens + 20 * twents + 50 * fifts + 100 * hunds;
-                                int MAX200 = (MAX - amount) / 200;
+                                const int MAX200 = (MAX - amount) / 200;
 
                                 for ( int twohunds = 0; twohunds <= MAX200; twohunds++) {
                                     amount = ones + 2 * twos + 5 * fives + 10 * tens + 20 * twents + 50 * fifts + 100 * hunds + 200 * twohunds;
