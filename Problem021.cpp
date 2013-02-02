@@ -14,9 +14,6 @@
 // along with this program; if not, write to the Free Software Foundation,
 // Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-// The most recent version of this program is available at: 
-// http://github.com/Falcorian/Project-Euler-Solutions
-
 /*
  * Let d(n) be defined as the sum of proper divisors of n (numbers less than n
  * which divide evenly into n).  If d(a) = b and d(b) = a, where a  b, then a

@@ -14,9 +14,6 @@
 // along with this program; if not, write to the Free Software Foundation,
 // Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-// The most recent version of this program is available at: 
-// http://github.com/Falcorian/Project-Euler-Solutions
-
 /*
  * The first known prime found to exceed one million digits was discovered in
  * 1999, and is a Mersenne prime of the form 269725931; it contains exactly

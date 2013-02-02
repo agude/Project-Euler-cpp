@@ -14,9 +14,6 @@
 // along with this program; if not, write to the Free Software Foundation,
 // Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-// The most recent version of this program is available at:
-// http://github.com/Falcorian/Project-Euler-Solutions
-
 /*
  * Nim is a game played with heaps of stones, where two players take it in turn
  * to remove any number of stones from any heap until no stones remain.

@@ -14,9 +14,6 @@
 // along with this program; if not, write to the Free Software Foundation,
 // Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-// The most recent version of this program is available at: 
-// http://github.com/Falcorian/Project-Euler-Solutions
-
 /*
  * The fraction 49/98 is a curious fraction, as an inexperienced mathematician
  * in attempting to simplify it may incorrectly believe that 49/98 = 4/8, which

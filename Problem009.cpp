@@ -14,9 +14,6 @@
 // along with this program; if not, write to the Free Software Foundation,
 // Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-// The most recent version of this program is available at:
-// http://github.com/Falcorian/Project-Euler-Solutions
-
 /*
  * A Pythagorean triplet is a set of three natural numbers, a < b < c, for
  * which, a**2 + b**2 = c**2
