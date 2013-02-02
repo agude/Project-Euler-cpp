@@ -14,7 +14,7 @@
 // along with this program; if not, write to the Free Software Foundation,
 // Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-// The most recent version of this program is avaible at: 
+// The most recent version of this program is available at: 
 // http://github.com/Falcorian/Project-Euler-Solutions
 
 /*
@@ -56,6 +56,9 @@ class Grid {
         Coordinate* returnSqr( short i, short j);
         void pullNeighbors( short i, short j);
         void pullConstraints( short i, short j);
+        void cSqr( short i, short j);
+        void cRow( short i, short j);
+        void cCol( short i, short j);
         void checkCell( short i, short j);
         short strtoint(char str);
         bool solved;
@@ -269,10 +272,30 @@ void Grid::pullConstraints( short i, short j){
      * If a cell is the only sell in its row/col/sqr
      * that can take a value, it must be that value
      */
+    
+    if ( m_grid[i][j] ==0 ) {
+        cSqr(i,j);
+        checkCell(i,j);
+    }
+    if ( m_grid[i][j] ==0 ) {
+        cRow(i,j);
+        checkCell(i,j);
+    }
+    if ( m_grid[i][j] ==0 ) {
+        cCol(i,j);
+        checkCell(i,j);
+    }
+
+}
+
+void Grid::cSqr( short i, short j) {
+    //std::cout << "Checking contraints on " << i << ' ' << j << ':' << std::endl;
     bool onlyHere[8]; 
     for ( short l=0; l<9; l++) {
         onlyHere[l] = m_possible[i][j][l];
+        //std::cout << l+1 << ':' << onlyHere[l] << ' ';
     }
+        //std::cout << std::endl;
 
     Coordinate* sqr;
     sqr = returnSqr(i,j);
@@ -285,18 +308,34 @@ void Grid::pullConstraints( short i, short j){
             }
         }
     }
+    for ( short l=0; l<9; l++) {
+        //std::cout << l+1 << ':' << onlyHere[l] << ' ';
+    }
+        //std::cout << std::endl;
 
-    Coordinate* row;
-    row = returnRow(i,j);
-    for ( short k = 0; k<8; k++){ 
-        short  m = row[k].row;
-        short  n = row[k].col;
-        for ( short l=0; l<9; l++) {
-            if (m_possible[m][n][l]) {
-                onlyHere[l]=false;
-            }
+    short ntrue=0;
+    short val=0;
+    for ( short l=0; l<9; l++) {
+        if (onlyHere[l]) {
+            val = l+1;
+            ntrue++;
         }
     }
+
+    if (ntrue == 1) {
+        std::cout << "CONSTRAINED by Sqr!" << std::endl;
+        m_grid[i][j] = val; 
+    }
+}
+
+void Grid::cCol( short i, short j) {
+    //std::cout << "Checking contraints on " << i << ' ' << j << ':' << std::endl;
+    bool onlyHere[8]; 
+    for ( short l=0; l<9; l++) {
+        onlyHere[l] = m_possible[i][j][l];
+        //std::cout << l+1 << ':' << onlyHere[l] << ' ';
+    }
+        //std::cout << std::endl;
 
     Coordinate* col;
     col = returnCol(i,j);
@@ -309,6 +348,10 @@ void Grid::pullConstraints( short i, short j){
             }
         }
     }
+    for ( short l=0; l<9; l++) {
+        //std::cout << l+1 << ':' << onlyHere[l] << ' ';
+    }
+        //std::cout << std::endl;
 
     short ntrue=0;
     short val=0;
@@ -320,7 +363,48 @@ void Grid::pullConstraints( short i, short j){
     }
 
     if (ntrue == 1) {
-       m_grid[i][j] = val; 
+        std::cout << "CONSTRAINED by Col!" << std::endl;
+        m_grid[i][j] = val; 
+    }
+}
+
+void Grid::cRow( short i, short j) {
+    //std::cout << "Checking contraints on " << i << ' ' << j << ':' << std::endl;
+    bool onlyHere[8]; 
+    for ( short l=0; l<9; l++) {
+        onlyHere[l] = m_possible[i][j][l];
+        //std::cout << l+1 << ':' << onlyHere[l] << ' ';
+    }
+        //std::cout << std::endl;
+
+    Coordinate* row;
+    row = returnRow(i,j);
+    for ( short k = 0; k<8; k++){ 
+        short  m = row[k].row;
+        short  n = row[k].col;
+        for ( short l=0; l<9; l++) {
+            if (m_possible[m][n][l]) {
+                onlyHere[l]=false;
+            }
+        }
+    }
+    for ( short l=0; l<9; l++) {
+        //std::cout << l+1 << ':' << onlyHere[l] << ' ';
+    }
+        //std::cout << std::endl;
+
+    short ntrue=0;
+    short val=0;
+    for ( short l=0; l<9; l++) {
+        if (onlyHere[l]) {
+            val = l+1;
+            ntrue++;
+        }
+    }
+
+    if (ntrue == 1) {
+        std::cout << "CONSTRAINED BY ROW!" << std::endl;
+        m_grid[i][j] = val; 
     }
 }
 
@@ -377,19 +461,17 @@ bool Grid::checkSolved() {
  *  Method to print the grid nicely
  *-----------------------------------------------------------------------------*/
 void Grid::printGrid() {
-    using namespace std;
-
     for ( short i=0; i<9; i++ ) {
         if ( i != 0 && i%3 == 0) {
-            cout << "-------+-------+-------" << endl;
+            std::cout << "-------+-------+-------" << std::endl;
         }
         for ( short j=0; j<9; j++ ) {
             if ( j != 0 && j%3 == 0) {
-                cout << " |";
+                std::cout << " |";
             }
-            cout << ' ' << m_grid[i][j];
+            std::cout << ' ' << m_grid[i][j];
         }
-        cout << endl;
+        std::cout << std::endl;
     }
 }
 
@@ -398,29 +480,30 @@ void Grid::printGrid() {
  *  Method to convert str to int. Better ways exist, needs replacement.
  *-----------------------------------------------------------------------------*/
 short Grid::strtoint(char str){
-    if (str == '0') { 
-        return 0;
-    } else if (str == '1') {
-        return 1;
-    } else if (str == '2') {
-        return 2;
-    } else if (str == '3') {
-        return 3;
-    } else if (str == '4') {
-        return 4;
-    } else if (str == '5') {
-        return 5;
-    } else if (str == '6') {
-        return 6;
-    } else if (str == '7') {
-        return 7;
-    } else if (str == '8') {
-        return 8;
-    } else if (str == '9') {
-        return 9;
-    } else {
-        return -1;
+
+    switch ( str ) {
+        case '0':
+            return 0;
+        case '1':
+            return 1;
+        case '2':
+            return 2;
+        case '3':
+            return 3;
+        case '4':
+            return 4;
+        case '5':
+            return 5;
+        case '6':
+            return 6;
+        case '7':
+            return 7;
+        case '8':
+            return 8;
+        case '9':
+            return 9;
     }
+    return -1;
 }
 
 /* 
