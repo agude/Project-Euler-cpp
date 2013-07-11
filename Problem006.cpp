@@ -37,13 +37,14 @@ int main(){
     long sqrOfSum = 0;
     long answer = 0;
 
-    for(int i; i < 101; i++){
+    for(short i = 0; i < 101; i++){
         sumOfSqr += i*i;
         sum += i;
-}
+    }
+
     sqrOfSum = sum*sum;
     answer = sqrOfSum - sumOfSqr;
-    
+
     std::cout << answer << std::endl;
 
     return 0;
