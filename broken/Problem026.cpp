@@ -31,22 +31,21 @@
  * Where 0.1(6) means 0.166666..., and has a 1-digit recurring cycle.  It can
  * be seen that 1/7 has a 6-digit recurring cycle.
  *
- * Find the value of d  1000 for which 1/d contains the longest recurring cycle
- * in its decimal fraction part.
- *
+ * Find the value of d < 1000 for which 1/d contains the longest recurring
+ * cycle in its decimal fraction part.
  */
 
 #include <iostream>  // std::cout, std::endl
-#include <math.h>
+#include <math.h>  // sqrt, floor
 
-int getCycleLength(const long num) {
+int CycleLength(const long& NUMBER) {
     int d = 1;
 
-    while ( true ) {
-        const long test = long( pow(10, d) - 1.0) % num;
+    while (true) {
+        const long test = long( pow(10, d) - 1.0) % NUMBER;
 
         //std::cout << "\t" << test << std::endl;
-        if ( long( pow(10, d) - 1.0) % num == 0 ) {
+        if ( long( pow(10, d) - 1.0) % NUMBER == 0 ) {
             return d;
         }
 
@@ -54,11 +53,11 @@ int getCycleLength(const long num) {
     }
 }
 
-bool* getPrimeArray(const long num) {
-    bool* primes = new bool[num];
+bool* getPrimeArray(const long& MAX_NUMBER) {
+    bool* primes = new bool[MAX_NUMBER];
 
     // Fill with true
-    for ( long i = 0; i < num; i++) {
+    for ( long i = 0; i < MAX_NUMBER; i++) {
         if (i == 0 || i == 1) {
             primes[i] = false;
         } else {
@@ -67,9 +66,9 @@ bool* getPrimeArray(const long num) {
     }
 
     // Sieve
-    for ( long i = 2; i < ceil(sqrt(num)); i++) {
+    for ( long i = 2; i < ceil(sqrt(MAX_NUMBER)); i++) {
         if (primes[i]) {
-            for ( long j = i * i; j < num; j += i) {
+            for ( long j = i * i; j < MAX_NUMBER; j += i) {
                 primes[j] = false;
             }
         }
@@ -88,10 +87,10 @@ int main() {
 
     for ( int i = MAX; i > 0; i-- ) {
         //std::cout << i << std::endl;
-        if ( maxcyclen >= i ) {
+        if (maxcyclen >= i) {
             break;
-        } else if ( isPrime[i] ) {
-            int cyclen = getCycleLength(i);
+        } else if (isPrime[i]) {
+            int cyclen = CycleLength(i);
 
             if ( cyclen > maxcyclen ) {
                 num = i;
