@@ -25,21 +25,20 @@
  *     1$1 + 1*50p + 2*20p + 1*5p + 1*2p + 3*1p
  *
  * How many different ways can $2 be made using any number of coins?
- *
  */
 
 #include <iostream>  // std::cout, std::endl
 
 int main() {
-
+    // We brute force all possible combinations
     const int MAX = 200; // pence
     int combos = 0;
 
-    for ( int ones = 0; ones <= MAX; ones++ ) {
+    for (int ones = 0; ones <= MAX; ones++) {
         int amount = ones;
         const int MAX2 = (MAX - amount) / 2;
 
-        for ( int twos = 0; twos <= MAX2; twos++) {
+        for (int twos = 0; twos <= MAX2; twos++) {
             amount = ones + 2 * twos;
 
             if (amount % 5 != 0) {
@@ -48,7 +47,7 @@ int main() {
 
             const int MAX5 = (MAX - amount) / 5;
 
-            for ( int fives = 0; fives <= MAX5; fives++) {
+            for (int fives = 0; fives <= MAX5; fives++) {
                 amount = ones + 2 * twos + 5 * fives;
 
                 if (amount % 10 != 0) {
@@ -57,23 +56,23 @@ int main() {
 
                 const int MAX10 = (MAX - amount) / 10;
 
-                for ( int tens = 0; tens <= MAX10; tens++) {
+                for (int tens = 0; tens <= MAX10; tens++) {
                     amount = ones + 2 * twos + 5 * fives + 10 * tens;
                     const int MAX20 = (MAX - amount) / 20;
 
-                    for ( int twents = 0; twents <= MAX20; twents++) {
+                    for (int twents = 0; twents <= MAX20; twents++) {
                         amount = ones + 2 * twos + 5 * fives + 10 * tens + 20 * twents;
                         const int MAX50 = (MAX - amount) / 50;
 
-                        for ( int fifts = 0; fifts <= MAX50; fifts++) {
+                        for (int fifts = 0; fifts <= MAX50; fifts++) {
                             amount = ones + 2 * twos + 5 * fives + 10 * tens + 20 * twents + 50 * fifts;
                             const int MAX100 = (MAX - amount) / 100;
 
-                            for ( int hunds = 0; hunds <= MAX100; hunds++) {
+                            for (int hunds = 0; hunds <= MAX100; hunds++) {
                                 amount = ones + 2 * twos + 5 * fives + 10 * tens + 20 * twents + 50 * fifts + 100 * hunds;
                                 const int MAX200 = (MAX - amount) / 200;
 
-                                for ( int twohunds = 0; twohunds <= MAX200; twohunds++) {
+                                for (int twohunds = 0; twohunds <= MAX200; twohunds++) {
                                     amount = ones + 2 * twos + 5 * fives + 10 * tens + 20 * twents + 50 * fifts + 100 * hunds + 200 * twohunds;
 
                                     if (amount == MAX) {
@@ -87,7 +86,6 @@ int main() {
             }
         }
     }
-
     std::cout << combos << std::endl;
 
     return 0;
