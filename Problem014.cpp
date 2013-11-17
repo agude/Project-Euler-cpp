@@ -18,7 +18,8 @@
  * The following iterative sequence is defined for the set of positive
  * integers:
  *
- * n --> n/2 (n is even) n --> 3n + 1 (n is odd)
+ * n --> n/2 (n is even) 
+ * n --> 3n + 1 (n is odd)
  *
  * Using the rule above and starting with 13, we generate the following
  * sequence: 13 --> 40 --> 20 --> 10 --> 5 --> 16 --> 8 --> 4 --> 2 --> 1
@@ -33,38 +34,38 @@
  */
 
 #include <iostream>  // std::cout, std::endl
-#include <math.h>
+#include <inttypes.h>  // int64_t
 
-int returnChainLength(long long num) {
-    int chainLength = 1;
+int ChainLength(int64_t number) {
+    int chain_length = 1;
 
-    while (num > 1) {
-        if (num % 2 == 0) {
-            chainLength++;
-            num = num / 2;
+    // If number is even, n --> n/2;
+    // else n --> 3n+1
+    while (number > 1) {
+        chain_length++;
+        if (number % 2 == 0) {
+            number = number / 2;
         } else {
-            chainLength++;
-            num = 3 * num + 1;
+            number = 3 * number + 1;
         }
     }
-
-    return chainLength;
+    return chain_length;
 }
 
 int main() {
+    int longest_chain = 0;
+    int64_t longest_start = 0;
 
-    int longestChain = 0;
-    long long longestStart = 0;
+    // Try all numbers
+    for (int64_t i = 1; i < 1000000; i++) {
+        int chain_length = ChainLength(i);
 
-    for (long long i = 1; i < 1000000; i++) {
-        int chainLength = returnChainLength(i);
-
-        if (chainLength > longestChain) {
-            longestChain = chainLength;
-            longestStart = i;
+        if (chain_length > longest_chain) {
+            longest_chain = chain_length;
+            longest_start = i;
         }
     }
 
-    std::cout << longestStart << " with length " << longestChain << std::endl;
+    std::cout << longest_start << " with length " << longest_chain << std::endl;
     return 0;
 }
