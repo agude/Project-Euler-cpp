@@ -15,32 +15,24 @@
 // Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 /*
- * The prime factors of 13195 are 5, 7, 13 and 29.
+ * The first known prime found to exceed one million digits was discovered in
+ * 1999, and is a Mersenne prime of the form 269725931; it contains exactly
+ * 2,098,960 digits. Subsequently other Mersenne primes, of the form 2p1, have
+ * been found which contain more digits.
  *
- * What is the largest prime factor of the number 317584931803?
+ * However, in 2004 there was found a massive non-Mersenne prime which contains
+ * 2,357,207 digits: 2843327830457+1.
+ *
+ * Find the last ten digits of this prime number.
  *
  */
 
-#include <iostream>
+#include <iostream>  // std::cout, std::endl
+#include <math.h>
 
 int main() {
 
-    long Number = 317584931803;
-    long Divisor = 2;
-    long Prime = 0;
+    std::cout << ((28433 * (pow(2, 7830457))) + 1) % 10000000000 << std::endl;
 
-    while (Number > 1) {
-        if (Number % Divisor == 0 && (Divisor % 2 != 0 || Divisor == 2)) { // 2 is the only even prime
-            if (Divisor > Prime) {
-                Prime = Divisor;
-            }
-
-            Number = Number / Divisor;
-        }
-
-        Divisor++;
-    }
-
-    std::cout << Prime << std::endl;
     return 0;
 }

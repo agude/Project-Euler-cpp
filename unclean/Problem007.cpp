@@ -21,50 +21,51 @@
  * What is the 10001st prime number?
  */
 
-#include <iostream>
-#include <math.h>
-const bool isPrime(long num) {
-    if (num < 2) { // 0,1 and negative are not prime
+#include <iostream>  // std::cout, std::endl
+#include <math.h>  // floor, sqrt
+
+bool IsPrime(const int& test_number) {
+    // We hard code in a few cases, then test in general
+    if (test_number < 2) {  // 0, 1 and negative are not prime
         return false;
-    } else if (num < 4) {
+    } else if (test_number < 4) {  // 3 is prime
         return true;
-    } else if (num % 2 == 0) {
+    } else if (test_number % 2 == 0) {  // even numbers are not prime
         return false;
-    } else if (num < 9) {
+    } else if (test_number < 9) {  // 6, 8 has been removed above
         return true;
-    } else if (num % 3 == 0) {
+    } else if (test_number % 3 == 0) {  // numbers divisible by 3 are not prime
         return false;
     } else {
-        const long r = floor(sqrt(num));
-        long f = 5;
+        const int r = floor(sqrt(test_number));
+        int f = 5;
 
         while (f <= r) {
-            if (num % f == 0) {
+            if (test_number % f == 0) {
                 return false;
-            } else if (num % (f + 2) == 0) {
+            } else if (test_number % (f + 2) == 0) {
                 return false;
             } else {
                 f += 6;
             }
         }
-
         return true;
     }
 }
 
 int main() {
 
-    int count = 1; // Skipping 2 and adding it by hand
-    long testNumber = 1;
+    // We start at 3, and add 2 by hand. This allows us to increment by 2 to
+    // only test odd numbers
+    int counter = 1;
+    int testNumber = 3;
 
-    while (count < 10001) {
+    while (counter <= 10000) {
         testNumber += 2;
 
-        if (isPrime(testNumber)) {
-            count++;
-//          std::cout << count << " " << testNumber << std::endl;
+        if (IsPrime(testNumber)) {
+            counter++;
         }
-
     }
 
     std::cout << testNumber << std::endl;

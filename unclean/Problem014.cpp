@@ -32,7 +32,7 @@
  * NOTE: Once the chain starts the terms are allowed to go above one million.
  */
 
-#include <iostream>
+#include <iostream>  // std::cout, std::endl
 #include <math.h>
 
 int returnChainLength(long long num) {

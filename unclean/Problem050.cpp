@@ -30,7 +30,7 @@
  *
  */
 
-#include <iostream>
+#include <iostream>  // std::cout, std::endl
 #include <math.h>
 
 bool* getPrimeArray(const long num) {

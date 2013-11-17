@@ -36,7 +36,7 @@
  *
  */
 
-#include <iostream>
+#include <iostream>  // std::cout, std::endl
 #include <cmath>
 
 int returnSumOfFactors(const int num) {

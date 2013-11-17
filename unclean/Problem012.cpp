@@ -35,48 +35,46 @@
  *
  * What is the value of the first triangle number to have over five hundred
  * divisors?
- *
  */
 
-#include <iostream>
-#include <math.h>
+#include <iostream>  // std::cout, std::endl
+#include <math.h>  // sqrt, floor
 
-int returnNumberOfFactors(const int num) {
-    int numberOfFactors = 0;
+int NumberOfFactors(const int& num) {
+    int number_of_factors = 0;
 
     const float fnum = (float)num;
-    const int max  = (int)floor(sqrt(fnum));
+    const int MAX  = (int)floor(sqrt(fnum));
 
-    for (int i = 1; i < max + 2; i++) {
+    for (int i = 1; i < MAX + 2; i++) {
         if (num % i == 0) {
             const int f1 = i;
             const int f2 = num / i;
 
             if (f1 == f2) {
-                numberOfFactors += 1;
+                number_of_factors += 1;
             } else {
-                numberOfFactors += 2;
+                number_of_factors += 2;
             }
         }
     }
 
-    return numberOfFactors;
+    return number_of_factors;
 }
 
-int returnTriangleNumber(const int num) {
-    return ((num) * (num + 1)) / 2;
+int TriangleNumber(const int& number) {
+    return ((number) * (number + 1)) / 2;
 }
 
 int main() {
-
     int i = 1;
 
     while (true) {
-        const int triangleNumber = returnTriangleNumber(i);
-        const int numberOfFactors = returnNumberOfFactors(triangleNumber);
+        const int triangle_number = TriangleNumber(i);
+        const int number_of_factors = NumberOfFactors(triangle_number);
 
-        if (numberOfFactors > 500) {
-            std::cout << triangleNumber << std::endl;
+        if (number_of_factors > 500) {
+            std::cout << triangle_number << std::endl;
             break;
         } else {
             i++;

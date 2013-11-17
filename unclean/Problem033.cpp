@@ -30,7 +30,7 @@
  *
  */
 
-#include <iostream>
+#include <iostream>  // std::cout, std::endl
 
 int main() {
 

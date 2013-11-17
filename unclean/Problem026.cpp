@@ -36,7 +36,7 @@
  *
  */
 
-#include <iostream>
+#include <iostream>  // std::cout, std::endl
 #include <math.h>
 
 int getCycleLength(const long num) {

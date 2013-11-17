@@ -29,7 +29,7 @@
  *
  */
 
-#include <iostream>
+#include <iostream>  // std::cout, std::endl
 #include <cmath>
 
 const bool isHex(const long num) {

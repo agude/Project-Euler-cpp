@@ -35,10 +35,9 @@
  * number found in the
  */
 
-#include    <iostream>
-//#include    <fstream>
-#include    <stdlib.h>
-#include    <string>
+#include <iostream>  // std::cout, std::endl
+#include <stdlib.h>
+#include <string>
 
 struct Coordinate {
     short col;

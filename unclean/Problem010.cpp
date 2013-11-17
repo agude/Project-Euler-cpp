@@ -21,7 +21,7 @@
  *
  */
 
-#include <iostream>
+#include <iostream>  // std::cout, std::endl
 #include <math.h>
 
 const bool isPrime(const long num) {

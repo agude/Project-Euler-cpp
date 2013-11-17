@@ -27,7 +27,7 @@
  *
  */
 
-#include <iostream>
+#include <iostream>  // std::cout, std::endl
 #include <math.h>
 
 int returnSumOfFactors(const int num) {
