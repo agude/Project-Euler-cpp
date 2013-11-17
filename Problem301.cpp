@@ -25,29 +25,31 @@
  *   single heap.
  * - The first player unable to move (because no stones remain) loses.
  *
- * If (n1,n2,n3) indicates a Nim position consisting of heaps of size n1, n2
- * and n3 then there is a simple function X(n1,n2,n3) — that you may look up or
- * attempt to deduce for yourself — that returns:
+ * If (n1, n2, n3) indicates a Nim position consisting of heaps of size n1, n2
+ * and n3 then there is a simple function X(n1, n2, n3) — that you may look up
+ * or attempt to deduce for yourself — that returns:
  *
  * zero if, with perfect strategy, the player about to move will eventually
  * lose; or non-zero if, with perfect strategy, the player about to move will
- * eventually win.  For example X(1,2,3) = 0 because, no matter what the
+ * eventually win.  For example X(1, 2, 3) = 0 because, no matter what the
  * current player does, his opponent can respond with a move that leaves two
  * heaps of equal size, at which point every move by the current player can be
  * mirrored by his opponent until no stones remain; so the current player
  * loses. To illustrate:
- * - current player moves to (1,2,1)
- * - opponent moves to (1,0,1)
- * - current player moves to (0,0,1)
- * - opponent moves to (0,0,0), and so wins.
+ * - current player moves to (1, 2, 1)
+ * - opponent moves to (1, 0, 1)
+ * - current player moves to (0, 0, 1)
+ * - opponent moves to (0, 0, 0), and so wins.
  *
- * For how many positive integers n <= 2^30 does X(n,2n,3n) = 0 ?
+ * For how many positive integers n <= 2^30 does X(n, 2n, 3n) = 0 ?
  */
 
-#include <iostream>
+#include <iostream>  // std::cout, std::endl
 
-const bool isLoss( const long a, const long b, const long c) {
-    if ( !(a ^ b ^ c) ) {
+bool IsLoss(const int& a, const int& b, const int& c) {
+    // If the xor of the positions is 0, then the next player will lose with
+    // perfect play.
+    if ((a ^ b ^ c) == 0) {
         return true;
     }
 
@@ -55,15 +57,17 @@ const bool isLoss( const long a, const long b, const long c) {
 }
 
 int main() {
-    long count = 0;
+    const int MAX = 1073741824;
+    int counter = 0;
 
-    for ( long i = 1; i <= 1073741824; i++) {
-        if ( isLoss(i, 2 * i, 3 * i) ) {
-            count++;
+    // Test all possible games
+    for (int i = 1; i <= MAX; ++i) {
+        if (IsLoss(i, 2 * i, 3 * i)) {
+            counter++;
         }
     }
 
-    std::cout << count << std::endl;
+    std::cout << counter << std::endl;
 
     return 0;
 }
