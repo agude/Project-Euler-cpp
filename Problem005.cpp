@@ -23,31 +23,38 @@
  *
  */
 
-#include <iostream>
+#include <iostream>  // std::cout, std::endl
 
 int main() {
+    /*
+     * We only need to test a subset of numbers, all other numbers are
+     * guaranteed by their inclusion (for example, a number divisible by 5 or
+     * by 4 is also divisible by 20).
+     *
+     * By incrementing by 20 * 19, we insure that the number is divisible by 20
+     * and 19 (and since they are co-prime we don't skip any numbers).
+     */
+    const int LEN_OF_DIVISORS = 8;
+    const int DIVISORS[LEN_OF_DIVISORS] = {18, 17, 16, 15, 14, 13, 12, 11};
+    const int INCREMENT = 20 * 19;
 
-    long testnumber = 20 * 19;
-    const int divisor[8] = {18, 17, 16, 15, 14, 13, 12, 11};
-    int increment = 20 * 19;
-    bool runWhile = true;
+    int test_number = 20 * 19;
+    bool run = true;
 
-    while (runWhile) {
-        for (int i = 0; i < 8; i++) {
-            int d = divisor[i];
+    while (run) {
+        for (int i = 0; i < LEN_OF_DIVISORS; i++) {
+            int divisor = DIVISORS[i];
 
-//          std::cout << d << std::endl;
-            if (testnumber % d != 0) {
-//              std::cout << testnumber%d << std::endl;
-                testnumber += increment;
+            if (test_number % divisor != 0) {
+                test_number += INCREMENT;
                 break;
             } else if (i == 7) {
-                runWhile = false;
+                run = false;
                 break;
             }
         }
     }
 
-    std::cout << testnumber << std::endl;
+    std::cout << test_number << std::endl;
     return 0;
 }
