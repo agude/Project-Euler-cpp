@@ -17,7 +17,7 @@
 /*
  * The fraction 49/98 is a curious fraction, as an inexperienced mathematician
  * in attempting to simplify it may incorrectly believe that 49/98 = 4/8, which
- * is correct, is obtained by cancelling the 9s.
+ * is correct, is obtained by canceling the 9s.
  *
  * We shall consider fractions like, 30/50 = 3/5, to be trivial examples.
  *
@@ -27,38 +27,36 @@
  *
  * If the product of these four fractions is given in its lowest common terms,
  * find the value of the denominator.
- *
  */
 
 #include <iostream>  // std::cout, std::endl
 
 int main() {
+    int numerator_product = 1;
+    int denominator_product = 1;
 
-    const int MAX = 100;
-    int tnum = 1;
-    int tden = 1;
+    // Try all fractions of the following form:
+    // ij / jk (where, for example, 41 as a numerator yields i = 4, j = 1)
+    for (int i = 1; i < 10; i++) {
+        for (int j = 1; j < 10; j++) {
+            for (int k = 1; k < 10; k++) {
+                const int NUMERATOR = 10 * i + j;
+                const int DENOMINATOR = j * 10 + k;
 
-    // Try all fractions
-    for ( int i = 1; i < 10; i++) {
-        for ( int j = 1; j < 10; j++) {
-            for ( int k = 1; k < 10; k++) {
-                const int num = 10 * i + j;
-                const int den = j * 10 + k;
-
-                if ( num < den && num * k == den * i ) {
-                    tnum *= num;
-                    tden *= den;
+                if ( NUMERATOR < DENOMINATOR && NUMERATOR * k == DENOMINATOR * i ) {
+                    //std::cout << i << j << " / " << j << k << std::endl;
+                    numerator_product *= NUMERATOR;
+                    denominator_product *= DENOMINATOR;
                 }
             }
         }
     }
 
-    // Reduce Fraction
-    if ( tden % tnum == 0 ) {
-        std::cout << "1/" << tden / tnum << std::endl;
+    // Reduce Fraction if possible
+    if (denominator_product % numerator_product == 0) {
+        std::cout << "1/" << denominator_product / numerator_product << std::endl;
     } else {
-        std::cout << tnum << '/' << tden << std::endl;
+        std::cout << numerator_product << '/' << denominator_product << std::endl;
     }
-
     return 0;
 }
