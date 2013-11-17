@@ -22,23 +22,25 @@
  *
  * There exists exactly one Pythagorean triplet for which a + b + c = 1000.
  * Find the product abc.
- *
  */
 
-#include <iostream>
+#include <iostream>  // std::cout, std::endl
 
 int main() {
+    // We loop over all numbers such that a + b + c = 1000. a is already
+    // determined once we have b and c.
     for (int c = 998; c > 0; c--) {
         for (int b = 1000 - c - 1; b > 0; b--) {
-            int a = 1000 - c - b;
-
-            if (a * a + b * b == c * c) {
-//              std::cout << a<<" "<<b<<" "<<c << std::endl;
-                std::cout << a* b* c << std::endl;
+            const int A = 1000 - c - b;
+            if (A * A + b * b == c * c) {
+                std::cout << A * b * c;
+                std::cout  << " = " << A << " * " << b << " * " << c;
+                std::cout << std::endl;
                 return 0;
             }
         }
     }
 
+    // None found!
     return 1;
 }
