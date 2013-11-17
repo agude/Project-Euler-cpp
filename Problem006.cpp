@@ -29,23 +29,24 @@
  *
  */
 
-#include <iostream>
+#include <iostream>  // std::cout, std::endl
 
 int main() {
-    long sumOfSqr = 0;
-    long sum = 0;
-    long sqrOfSum = 0;
-    long answer = 0;
+    // Brute force loop for sum of squares
+    int sum_of_squares = 0;
 
-    for (short i = 0; i < 101; i++) {
-        sumOfSqr += i * i;
-        sum += i;
+    for (int i = 0; i < 101; i++) {
+        sum_of_squares += i * i;
     }
 
-    sqrOfSum = sum * sum;
-    answer = sqrOfSum - sumOfSqr;
+    // We used the closed form of the sum:
+    // (1 + 2 + .. + N) ** 2 = (N * (N + 1) / 2) ** 2
+    const int N = 100;
+    const int SQUARE_OF_SUM = (N * (N + 1)) * (N * (N + 1)) / 4;
 
-    std::cout << answer << std::endl;
+    const int ANSWER = SQUARE_OF_SUM - sum_of_squares;
+
+    std::cout << ANSWER << std::endl;
 
     return 0;
 }
