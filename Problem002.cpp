@@ -25,7 +25,7 @@
  *
  */
 
-#include <iostream>
+#include <iostream>  // std::cout, std::endl
 
 int main() {
     int total = 0;
@@ -37,7 +37,7 @@ int main() {
         if (current_fib_number % 2 == 0) {
             total += current_fib_number;
         }
-        
+
         // Create the next Fibonacci number
         const int tmp = current_fib_number;
         current_fib_number += previous_fib_number;

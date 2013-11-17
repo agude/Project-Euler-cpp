@@ -22,7 +22,7 @@
  *
  */
 
-#include <iostream>
+#include <iostream>  // std::cout, std::endl
 
 int main() {
     int total = 0;
