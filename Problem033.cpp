@@ -18,33 +18,34 @@
  * The fraction 49/98 is a curious fraction, as an inexperienced mathematician
  * in attempting to simplify it may incorrectly believe that 49/98 = 4/8, which
  * is correct, is obtained by cancelling the 9s.
- *  
- * We shall consider fractions like, 30/50 = 3/5, to be trivial examples. 
- *   
+ *
+ * We shall consider fractions like, 30/50 = 3/5, to be trivial examples.
+ *
  * There are exactly four non-trivial examples of this type of fraction, less
  * than one in value, and containing two digits in the numerator and
- * denominator. 
- *    
+ * denominator.
+ *
  * If the product of these four fractions is given in its lowest common terms,
- * find the value of the denominator. 
+ * find the value of the denominator.
  *
  */
 
 #include <iostream>
 
-int main(){
+int main() {
 
     const int MAX = 100;
     int tnum = 1;
     int tden = 1;
 
     // Try all fractions
-    for ( int i = 1; i<10; i++) {
-        for ( int j = 1; j<10; j++) {
-            for ( int k = 1; k<10; k++) {
-                const int num = 10*i+j;
-                const int den = j*10+k;
-                if ( num < den && num*k == den*i ) {
+    for ( int i = 1; i < 10; i++) {
+        for ( int j = 1; j < 10; j++) {
+            for ( int k = 1; k < 10; k++) {
+                const int num = 10 * i + j;
+                const int den = j * 10 + k;
+
+                if ( num < den && num * k == den * i ) {
                     tnum *= num;
                     tden *= den;
                 }
@@ -53,8 +54,8 @@ int main(){
     }
 
     // Reduce Fraction
-    if ( tden%tnum == 0 ) {
-        std::cout << "1/" << tden/tnum << std::endl;
+    if ( tden % tnum == 0 ) {
+        std::cout << "1/" << tden / tnum << std::endl;
     } else {
         std::cout << tnum << '/' << tden << std::endl;
     }

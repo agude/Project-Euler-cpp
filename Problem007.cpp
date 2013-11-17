@@ -23,45 +23,48 @@
 
 #include <iostream>
 #include <math.h>
-const bool isPrime(long num){
-    if(num < 2){ // 0,1 and negative are not prime
-        return false; 
-    } else if(num < 4){
+const bool isPrime(long num) {
+    if (num < 2) { // 0,1 and negative are not prime
+        return false;
+    } else if (num < 4) {
         return true;
-    } else if(num%2 == 0){
-        return false; 
-    } else if(num < 9){
+    } else if (num % 2 == 0) {
+        return false;
+    } else if (num < 9) {
         return true;
-    } else if(num%3 == 0){
-        return false; 
+    } else if (num % 3 == 0) {
+        return false;
     } else {
         const long r = floor(sqrt(num));
         long f = 5;
-        while(f <= r){
-            if(num%f == 0){
+
+        while (f <= r) {
+            if (num % f == 0) {
                 return false;
-            } else if(num%(f+2) == 0){
+            } else if (num % (f + 2) == 0) {
                 return false;
             } else {
                 f += 6;
             }
         }
+
         return true;
     }
 }
 
-int main(){
+int main() {
 
     int count = 1; // Skipping 2 and adding it by hand
     long testNumber = 1;
 
-    while(count < 10001){
+    while (count < 10001) {
         testNumber += 2;
-        if(isPrime(testNumber)){
+
+        if (isPrime(testNumber)) {
             count++;
 //          std::cout << count << " " << testNumber << std::endl;
         }
-        
+
     }
 
     std::cout << testNumber << std::endl;

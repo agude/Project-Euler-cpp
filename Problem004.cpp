@@ -24,35 +24,39 @@
 
 #include <iostream>
 
-const long reverse(long num){
+const long reverse(long num) {
 
     long reversed = 0;
-    while( num > 0 ){
-        reversed = 10*reversed + num%10;
-        num = num/10;
+
+    while ( num > 0 ) {
+        reversed = 10 * reversed + num % 10;
+        num = num / 10;
     }
+
     return reversed;
 }
 
-const bool isPalindromic(const long num){
+const bool isPalindromic(const long num) {
     const long reversed = reverse(num);
-    if( num == reversed ){
+
+    if ( num == reversed ) {
         return true;
     }
+
     return false;
 }
 
-int main(){
+int main() {
 
     long Palindromic = 0;
 
-    for(int i = 999; i > 100; i--){
-        for(int j = i; j < 1000; j++){
+    for (int i = 999; i > 100; i--) {
+        for (int j = i; j < 1000; j++) {
 
-            const long testNum = i*j;
+            const long testNum = i * j;
 
-            if( testNum > Palindromic ){
-                if( isPalindromic(testNum) ){
+            if ( testNum > Palindromic ) {
+                if ( isPalindromic(testNum) ) {
                     Palindromic = testNum;
                 }
             }

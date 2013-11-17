@@ -41,38 +41,41 @@
 #include <iostream>
 #include <math.h>
 
-int returnNumberOfFactors(const int num){
+int returnNumberOfFactors(const int num) {
     int numberOfFactors = 0;
 
     const float fnum = (float)num;
     const int max  = (int)floor(sqrt(fnum));
 
-    for(int i = 1; i < max + 2; i++){
-        if(num%i == 0){
+    for (int i = 1; i < max + 2; i++) {
+        if (num % i == 0) {
             const int f1 = i;
             const int f2 = num / i;
-            if(f1 == f2){
+
+            if (f1 == f2) {
                 numberOfFactors += 1;
             } else {
                 numberOfFactors += 2;
             }
         }
     }
+
     return numberOfFactors;
 }
 
-int returnTriangleNumber(const int num){
-    return ((num)*(num+1))/2;
+int returnTriangleNumber(const int num) {
+    return ((num) * (num + 1)) / 2;
 }
 
-int main(){
+int main() {
 
     int i = 1;
-    while(true){
+
+    while (true) {
         const int triangleNumber = returnTriangleNumber(i);
         const int numberOfFactors = returnNumberOfFactors(triangleNumber);
 
-        if(numberOfFactors > 500){
+        if (numberOfFactors > 500) {
             std::cout << triangleNumber << std::endl;
             break;
         } else {
@@ -80,5 +83,6 @@ int main(){
         }
 
     }
+
     return 0;
 }

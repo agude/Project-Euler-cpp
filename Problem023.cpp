@@ -19,10 +19,10 @@
  * exactly equal to the number. For example, the sum of the proper divisors of
  * 28 would be 1 + 2 + 4 + 7 + 14 = 28, which means that 28 is a perfect
  * number.
- *  
+ *
  * A number n is called deficient if the sum of its proper divisors is less
  * than n and it is called abundant if this sum exceeds n.
- * 
+ *
  * As 12 is the smallest abundant number, 1 + 2 + 3 + 4 + 6 = 16, the smallest
  * number that can be written as the sum of two abundant numbers is 24. By
  * mathematical analysis, it can be shown that all integers greater than 28123
@@ -30,7 +30,7 @@
  * cannot be reduced any further by analysis even though it is known that the
  * greatest number that cannot be expressed as the sum of two abundant numbers
  * is less than this limit.
- * 
+ *
  * Find the sum of all the positive integers which cannot be written as the sum
  * of two abundant numbers.
  *
@@ -39,38 +39,41 @@
 #include <iostream>
 #include <cmath>
 
-int returnSumOfFactors(const int num){
+int returnSumOfFactors(const int num) {
     int sumOfFactors = 0;
 
     const float fnum = (float)num;
     const int max  = (int)floor(sqrt(fnum));
 
-    for(int i = 1; i <= max; i++){
-        if(num%i == 0){
+    for (int i = 1; i <= max; i++) {
+        if (num % i == 0) {
             const int f1 = i;
             const int f2 = num / i;
-            if(f1 == f2 && f1 != num){
+
+            if (f1 == f2 && f1 != num) {
                 sumOfFactors += f1;
             } else {
-                if(f1 != num){
+                if (f1 != num) {
                     sumOfFactors += f1;
                 }
-                if(f2 != num){
+
+                if (f2 != num) {
                     sumOfFactors += f2;
                 }
             }
         }
     }
+
     return sumOfFactors;
 }
 
-int main(){
+int main() {
 
     const int MAX = 28123;
     bool isAbundant[MAX];
 
     // Find abundant numbers
-    for ( int i=1; i <= MAX + 1; i++) {
+    for ( int i = 1; i <= MAX + 1; i++) {
         if ( returnSumOfFactors(i) > i ) {
             isAbundant[i] = true;
         } else {
@@ -80,10 +83,11 @@ int main(){
 
     // Now check which numbers are not a sum
     int tot = 0;
-    for ( int i=0; i <= MAX; i++ ) {
-        for ( int j=12; j <= MAX; j++ ) {
+
+    for ( int i = 0; i <= MAX; i++ ) {
+        for ( int j = 12; j <= MAX; j++ ) {
             if ( isAbundant[j] ) {
-                if ( i-j >= 0 && isAbundant[i-j] ) {
+                if ( i - j >= 0 && isAbundant[i - j] ) {
                     break;
                 } else if ( j >= i ) {
                     tot += i;

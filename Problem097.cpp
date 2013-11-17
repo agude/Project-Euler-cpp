@@ -30,9 +30,9 @@
 #include <iostream>
 #include <math.h>
 
-int main(){
+int main() {
 
-    std::cout << ((28433*(pow(2,7830457)))+1)%10000000000 << std::endl;
+    std::cout << ((28433 * (pow(2, 7830457))) + 1) % 10000000000 << std::endl;
 
     return 0;
 }

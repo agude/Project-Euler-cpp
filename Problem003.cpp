@@ -23,22 +23,24 @@
 
 #include <iostream>
 
-int main(){
+int main() {
 
     long Number = 317584931803;
     long Divisor = 2;
     long Prime = 0;
 
-    while(Number > 1){
-        if(Number%Divisor == 0 && (Divisor%2 != 0 || Divisor == 2)){ // 2 is the only even prime
-            if (Divisor > Prime){
+    while (Number > 1) {
+        if (Number % Divisor == 0 && (Divisor % 2 != 0 || Divisor == 2)) { // 2 is the only even prime
+            if (Divisor > Prime) {
                 Prime = Divisor;
             }
+
             Number = Number / Divisor;
-        } 
+        }
+
         Divisor++;
     }
 
-std::cout << Prime << std::endl;
-return 0;
+    std::cout << Prime << std::endl;
+    return 0;
 }

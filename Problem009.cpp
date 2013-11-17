@@ -27,16 +27,18 @@
 
 #include <iostream>
 
-int main(){
-    for(int c = 998; c > 0; c--){
-        for(int b = 1000 - c - 1; b > 0; b--){
+int main() {
+    for (int c = 998; c > 0; c--) {
+        for (int b = 1000 - c - 1; b > 0; b--) {
             int a = 1000 - c - b;
-            if(a*a + b*b == c*c){
+
+            if (a * a + b * b == c * c) {
 //              std::cout << a<<" "<<b<<" "<<c << std::endl;
-                std::cout << a*b*c << std::endl;
+                std::cout << a* b* c << std::endl;
                 return 0;
             }
         }
     }
+
     return 1;
 }

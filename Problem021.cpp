@@ -30,41 +30,45 @@
 #include <iostream>
 #include <math.h>
 
-int returnSumOfFactors(const int num){
+int returnSumOfFactors(const int num) {
     int sumOfFactors = 0;
 
     const float fnum = (float)num;
     const int max  = (int)floor(sqrt(fnum));
 
-    for(int i = 1; i < max + 2; i++){
-        if(num%i == 0){
+    for (int i = 1; i < max + 2; i++) {
+        if (num % i == 0) {
             const int f1 = i;
             const int f2 = num / i;
-            if(f1 == f2 && f1 != num){
+
+            if (f1 == f2 && f1 != num) {
                 sumOfFactors += f1;
             } else {
-                if(f1 != num){
+                if (f1 != num) {
                     sumOfFactors += f1;
                 }
-                if(f2 != num){
+
+                if (f2 != num) {
                     sumOfFactors += f2;
                 }
             }
         }
     }
+
     return sumOfFactors;
 }
 
-int main(){
+int main() {
 
     int sum = 0;
 
-    for(int i = 1; i < 10000; i++){
+    for (int i = 1; i < 10000; i++) {
         const int checkNum = returnSumOfFactors(i);
-        if(checkNum > i){ // Otherwise it's been found already
-            if( i == returnSumOfFactors(checkNum) && i != checkNum ){
+
+        if (checkNum > i) { // Otherwise it's been found already
+            if ( i == returnSumOfFactors(checkNum) && i != checkNum ) {
                 //              std::cout << i << " " << checkNum << std::endl;
-                sum += (i+checkNum);
+                sum += (i + checkNum);
             }
         }
     }

@@ -23,14 +23,14 @@
  * It is possible to make $2 in the following way:
  *
  *     1$1 + 1*50p + 2*20p + 1*5p + 1*2p + 3*1p
- *         
+ *
  * How many different ways can $2 be made using any number of coins?
  *
  */
 
 #include <iostream>
 
-int main(){
+int main() {
 
     const int MAX = 200; // pence
     int combos = 0;
@@ -40,17 +40,21 @@ int main(){
         const int MAX2 = (MAX - amount) / 2;
 
         for ( int twos = 0; twos <= MAX2; twos++) {
-            amount = ones + 2*twos;
+            amount = ones + 2 * twos;
+
             if (amount % 5 != 0) {
                 continue;
             }
+
             const int MAX5 = (MAX - amount) / 5;
 
             for ( int fives = 0; fives <= MAX5; fives++) {
                 amount = ones + 2 * twos + 5 * fives;
+
                 if (amount % 10 != 0) {
                     continue;
                 }
+
                 const int MAX10 = (MAX - amount) / 10;
 
                 for ( int tens = 0; tens <= MAX10; tens++) {
@@ -71,6 +75,7 @@ int main(){
 
                                 for ( int twohunds = 0; twohunds <= MAX200; twohunds++) {
                                     amount = ones + 2 * twos + 5 * fives + 10 * tens + 20 * twents + 50 * fifts + 100 * hunds + 200 * twohunds;
+
                                     if (amount == MAX) {
                                         combos++;
                                     }
@@ -82,6 +87,7 @@ int main(){
             }
         }
     }
+
     std::cout << combos << std::endl;
 
     return 0;

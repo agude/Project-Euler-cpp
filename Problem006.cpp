@@ -15,10 +15,10 @@
 // Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 /*
- * The sum of the squares of the first ten natural numbers is, 
+ * The sum of the squares of the first ten natural numbers is,
  * 1**2 + 2**2 + ... + 10**2 = 385
  *
- * The square of the sum of the first ten natural numbers is, 
+ * The square of the sum of the first ten natural numbers is,
  * (1 + 2 + ... + 10)**2 = 55**2 = 3025
  *
  * Hence the difference between the sum of the squares of the first ten natural
@@ -31,18 +31,18 @@
 
 #include <iostream>
 
-int main(){
+int main() {
     long sumOfSqr = 0;
     long sum = 0;
     long sqrOfSum = 0;
     long answer = 0;
 
-    for(short i = 0; i < 101; i++){
-        sumOfSqr += i*i;
+    for (short i = 0; i < 101; i++) {
+        sumOfSqr += i * i;
         sum += i;
     }
 
-    sqrOfSum = sum*sum;
+    sqrOfSum = sum * sum;
     answer = sqrOfSum - sumOfSqr;
 
     std::cout << answer << std::endl;

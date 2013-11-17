@@ -27,21 +27,21 @@
 
 #include <iostream>
 
-int main(){
-    long tot = 0;
-    int FibN = 1;
+int main() {
+    int total = 0;
+    int current_fib_number = 1;
     int FibNminOne = 1;
 
-    while(FibN < 1000000+1){
-        if(FibN%2 == 0){
-            tot += FibN;
-//          std::cout << tot << std::endl;
+    while (current_fib_number <= 1000000) {
+        if (current_fib_number % 2 == 0) {
+            total += current_fib_number;
         }
-        const int tmp = FibN;
-        FibN += FibNminOne;
+
+        const int tmp = current_fib_number;
+        current_fib_number += FibNminOne;
         FibNminOne = tmp;
     }
 
-    std::cout << tot << std::endl;
+    std::cout << total << std::endl;
     return 0;
 }

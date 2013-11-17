@@ -33,7 +33,7 @@
 #include <iostream>
 #include <math.h>
 
-bool* getPrimeArray(const long num){
+bool* getPrimeArray(const long num) {
     bool* primes = new bool[num];
 
     // Fill with true
@@ -45,10 +45,10 @@ bool* getPrimeArray(const long num){
         }
     }
 
-    // Sieve 
+    // Sieve
     for ( long i = 2; i < ceil(sqrt(num)); i++) {
         if (primes[i]) {
-            for ( long j = i*i; j < num; j += i) {
+            for ( long j = i * i; j < num; j += i) {
                 primes[j] = false;
             }
         }
@@ -57,19 +57,22 @@ bool* getPrimeArray(const long num){
     return primes;
 }
 
-int main(){
+int main() {
     const long MAX = 1000000;
     bool* isPrime = getPrimeArray(MAX);
 
     // Make an array of just primes
     long nprimes = 0;
+
     for ( long i = 0; i < MAX; i++) {
         if (isPrime[i]) {
             nprimes++;
         }
     }
+
     long primes[nprimes];
     long z = 0;
+
     for ( long i = 0; i < MAX; i++) {
         if (isPrime[i]) {
             primes[z] = i;
@@ -80,11 +83,13 @@ int main(){
     // Find the greatest number of primes we can sum without exceeding MAX
     long maxlen = 0;
     long tot = 0;
+
     for ( long i = 0; i < nprimes; i++) {
         tot += primes[i];
+
         if (tot < MAX) {
             maxlen++;
-        } 
+        }
     }
 
     // Try to make primes by summing
@@ -95,11 +100,14 @@ int main(){
         if (length < bestlen) {
             break;
         }
+
         for ( long start = 0; start < nprimes - length; start++) {
             long testsum = 0;
+
             for ( long i = start; i < start + length; i++) {
                 testsum += primes[i];
             }
+
             if (testsum > MAX) {
                 break;
             } else if (isPrime[testsum] && length > bestlen) {
@@ -108,7 +116,7 @@ int main(){
             }
         }
     }
-    
+
     std::cout << bestprime << std::endl;
 
     return 0;

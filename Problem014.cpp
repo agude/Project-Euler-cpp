@@ -35,28 +35,31 @@
 #include <iostream>
 #include <math.h>
 
-int returnChainLength(long long num){
+int returnChainLength(long long num) {
     int chainLength = 1;
-    while(num > 1){
-        if(num%2 == 0){
+
+    while (num > 1) {
+        if (num % 2 == 0) {
             chainLength++;
-            num = num/2;
+            num = num / 2;
         } else {
             chainLength++;
-            num = 3*num + 1;
+            num = 3 * num + 1;
         }
     }
+
     return chainLength;
 }
 
-int main(){
+int main() {
 
     int longestChain = 0;
     long long longestStart = 0;
 
-    for(long long i = 1; i < 1000000; i++){
+    for (long long i = 1; i < 1000000; i++) {
         int chainLength = returnChainLength(i);
-        if(chainLength > longestChain){
+
+        if (chainLength > longestChain) {
             longestChain = chainLength;
             longestStart = i;
         }

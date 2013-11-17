@@ -18,15 +18,15 @@
  * A unit fraction contains 1 in the numerator. The decimal representation of
  * the unit fractions with denominators 2 to 10 are given:
  *
- * 1/2 =   0.5  
- * 1/3 =   0.(3) 
- * 1/4 =   0.25 
- * 1/5 =   0.2 
- * 1/6 =   0.1(6) 
- * 1/7 =   0.(142857) 
- * 1/8 =   0.125 
- * 1/9 =   0.(1) 
- * 1/10    =   0.1 
+ * 1/2 =   0.5
+ * 1/3 =   0.(3)
+ * 1/4 =   0.25
+ * 1/5 =   0.2
+ * 1/6 =   0.1(6)
+ * 1/7 =   0.(142857)
+ * 1/8 =   0.125
+ * 1/9 =   0.(1)
+ * 1/10    =   0.1
  *
  * Where 0.1(6) means 0.166666..., and has a 1-digit recurring cycle.  It can
  * be seen that 1/7 has a 6-digit recurring cycle.
@@ -39,20 +39,22 @@
 #include <iostream>
 #include <math.h>
 
-int getCycleLength(const long num){
+int getCycleLength(const long num) {
     int d = 1;
-    
+
     while ( true ) {
-        const long test = long( pow(10,d) - 1.0) % num;
+        const long test = long( pow(10, d) - 1.0) % num;
+
         //std::cout << "\t" << test << std::endl;
-        if ( long( pow(10,d) - 1.0) % num == 0 ){
+        if ( long( pow(10, d) - 1.0) % num == 0 ) {
             return d;
         }
+
         d++;
     }
 }
 
-bool* getPrimeArray(const long num){
+bool* getPrimeArray(const long num) {
     bool* primes = new bool[num];
 
     // Fill with true
@@ -64,10 +66,10 @@ bool* getPrimeArray(const long num){
         }
     }
 
-    // Sieve 
+    // Sieve
     for ( long i = 2; i < ceil(sqrt(num)); i++) {
         if (primes[i]) {
-            for ( long j = i*i; j < num; j += i) {
+            for ( long j = i * i; j < num; j += i) {
                 primes[j] = false;
             }
         }
@@ -76,7 +78,7 @@ bool* getPrimeArray(const long num){
     return primes;
 }
 
-int main(){
+int main() {
 
     const int MAX = 10;
     int maxcyclen = 0;
@@ -90,6 +92,7 @@ int main(){
             break;
         } else if ( isPrime[i] ) {
             int cyclen = getCycleLength(i);
+
             if ( cyclen > maxcyclen ) {
                 num = i;
                 maxcyclen = cyclen;

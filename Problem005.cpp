@@ -25,22 +25,23 @@
 
 #include <iostream>
 
-int main(){
+int main() {
 
-    long testnumber = 20*19;
-    const int divisor[8] = {18,17,16,15,14,13,12,11};
-    int increment = 20*19;
+    long testnumber = 20 * 19;
+    const int divisor[8] = {18, 17, 16, 15, 14, 13, 12, 11};
+    int increment = 20 * 19;
     bool runWhile = true;
 
-    while(runWhile){
-        for(int i = 0; i < 8; i++){
+    while (runWhile) {
+        for (int i = 0; i < 8; i++) {
             int d = divisor[i];
+
 //          std::cout << d << std::endl;
-            if(testnumber%d != 0){
+            if (testnumber % d != 0) {
 //              std::cout << testnumber%d << std::endl;
                 testnumber += increment;
                 break;
-            } else if(i == 7){
+            } else if (i == 7) {
                 runWhile = false;
                 break;
             }

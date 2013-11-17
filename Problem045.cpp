@@ -33,7 +33,8 @@
 #include <cmath>
 
 const bool isHex(const long num) {
-    const double testnum = ( std::sqrt( (8*num) + 1 ) + 1. ) / 4.;
+    const double testnum = ( std::sqrt( (8 * num) + 1 ) + 1. ) / 4.;
+
     if ( std::abs(double(long(testnum)) - testnum) < 0.000001 ) {
         return true;
     } else {
@@ -42,7 +43,8 @@ const bool isHex(const long num) {
 }
 
 const bool isPent(const long num) {
-    const double testnum = ( std::sqrt( (24*num) + 1 ) + 1. ) / 6.;
+    const double testnum = ( std::sqrt( (24 * num) + 1 ) + 1. ) / 6.;
+
     if ( std::abs(double(long(testnum)) - testnum) < 0.000001 ) {
         return true;
     } else {
@@ -50,12 +52,14 @@ const bool isPent(const long num) {
     }
 }
 
-int main(){
+int main() {
 
     long n = 144;
     long num = 0;
+
     while ( true ) {
         num = n * (2 * n - 1);
+
         if ( isPent(num) ) {
             break;
         } else {
