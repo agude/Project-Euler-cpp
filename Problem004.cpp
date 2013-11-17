@@ -22,49 +22,41 @@
  *
  */
 
-#include <iostream>
+#include <iostream>  // std::cout, std::endl
 
-const long reverse(long num) {
+int Reverse(int number) {
+    int reversed = 0;
 
-    long reversed = 0;
-
-    while ( num > 0 ) {
-        reversed = 10 * reversed + num % 10;
-        num = num / 10;
+    while (number > 0) {
+        reversed = 10 * reversed + number % 10;
+        number = number / 10;
     }
 
     return reversed;
 }
 
-const bool isPalindromic(const long num) {
-    const long reversed = reverse(num);
-
-    if ( num == reversed ) {
-        return true;
-    }
-
-    return false;
+bool IsPalindromic(const int& number) {
+    return number == Reverse(number);
 }
 
 int main() {
+    int palindromic = 0;
+    int best_i = 0;
+    int best_j = 0;
 
-    long Palindromic = 0;
-
-    for (int i = 999; i > 100; i--) {
-        for (int j = i; j < 1000; j++) {
-
-            const long testNum = i * j;
-
-            if ( testNum > Palindromic ) {
-                if ( isPalindromic(testNum) ) {
-                    Palindromic = testNum;
-                }
+    // We try all combinations where j > i (j < i have already been tested) and
+    // save the largest
+    for (int i = 999; i > 100; --i) {
+        for (int j = 999; j >= i; --j) {
+            const int test_number = i * j;
+            if (test_number > palindromic && IsPalindromic(test_number)) {
+                palindromic = test_number;
+                best_i = i;
+                best_j = j;
             }
-
         }
     }
 
-    std::cout << Palindromic << std::endl;
+    std::cout << palindromic << " = " << best_i << " * " << best_j << std::endl;
     return 0;
 }
-
