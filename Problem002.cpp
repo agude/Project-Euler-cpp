@@ -30,16 +30,18 @@
 int main() {
     int total = 0;
     int current_fib_number = 1;
-    int FibNminOne = 1;
+    int previous_fib_number = 1;
 
+    // If the Fibonacci number is even, add to total
     while (current_fib_number <= 1000000) {
         if (current_fib_number % 2 == 0) {
             total += current_fib_number;
         }
-
+        
+        // Create the next Fibonacci number
         const int tmp = current_fib_number;
-        current_fib_number += FibNminOne;
-        FibNminOne = tmp;
+        current_fib_number += previous_fib_number;
+        previous_fib_number = tmp;
     }
 
     std::cout << total << std::endl;
