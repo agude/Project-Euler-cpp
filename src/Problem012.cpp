@@ -38,49 +38,23 @@
  */
 
 #include <iostream>  // std::cout, std::endl
-#include <math.h>  // sqrt, floor
 
-int NumberOfFactors(const int& num) {
-    int number_of_factors = 0;
-
-    const float fnum = (float)num;
-    const int MAX  = (int)floor(sqrt(fnum));
-
-    for (int i = 1; i < MAX + 2; i++) {
-        if (num % i == 0) {
-            const int f1 = i;
-            const int f2 = num / i;
-
-            if (f1 == f2) {
-                number_of_factors += 1;
-            } else {
-                number_of_factors += 2;
-            }
-        }
-    }
-
-    return number_of_factors;
-}
-
-int TriangleNumber(const int& number) {
-    return ((number) * (number + 1)) / 2;
-}
+#include "alexlib.h"  // NumberOfFactors, TriangleNumber
 
 int main() {
     int i = 1;
 
+    // We try all numbers until we reach 500 factors
     while (true) {
-        const int triangle_number = TriangleNumber(i);
-        const int number_of_factors = NumberOfFactors(triangle_number);
+        const int TRIANGLE_NUMBER = TriangleNumber(i);
+        const int NUMBER_OF_FACTORS = NumberOfFactors(TRIANGLE_NUMBER);
 
-        if (number_of_factors > 500) {
-            std::cout << triangle_number << std::endl;
+        if (NUMBER_OF_FACTORS > 500) {
+            std::cout << TRIANGLE_NUMBER << std::endl;
             break;
         } else {
             i++;
         }
-
     }
-
     return 0;
 }
