@@ -79,31 +79,31 @@ int TriangleNumber(const int& NTH) {
     return NTH * (NTH + 1) / 2;
 }
 
-bool IsPrime(const int64_t& num) {
-    if (num < 2) {  // 0,1 and negative are not prime
+bool IsPrime(const int64_t& test_number) {
+    // We hard code in a few cases, then test in general
+    if (test_number < 2) {  // 0, 1 and negative are not prime
         return false;
-    } else if (num < 4) {
+    } else if (test_number < 4) {  // 3 is prime
         return true;
-    } else if (num % 2 == 0) {
+    } else if (test_number % 2 == 0) {  // even numbers are not prime
         return false;
-    } else if (num < 9) {
+    } else if (test_number < 9) {  // 6, 8 has been removed above
         return true;
-    } else if (num % 3 == 0) {
+    } else if (test_number % 3 == 0) {  // numbers divisible by 3 are not prime
         return false;
     } else {
-        const int64_t r = floor(sqrt(num));
-        int64_t f = 5;
+        const int r = floor(sqrt(test_number));
+        int f = 5;
 
         while (f <= r) {
-            if (num % f == 0) {
+            if (test_number % f == 0) {
                 return false;
-            } else if (num % (f + 2) == 0) {
+            } else if (test_number % (f + 2) == 0) {
                 return false;
             } else {
                 f += 6;
             }
         }
-
         return true;
     }
 }
