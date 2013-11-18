@@ -26,7 +26,7 @@ int NumberOfFactors(const int& NUMBER) {
     int number_of_factors = 0;
 
     const float fnum = (float)NUMBER;
-    const int MAX  = (int)floor(sqrt(fnum));
+    const int MAX = (int)floor(sqrt(fnum));
 
     for (int i = 1; i < MAX + 2; i++) {
         if (NUMBER % i == 0) {
@@ -41,6 +41,32 @@ int NumberOfFactors(const int& NUMBER) {
         }
     }
     return number_of_factors;
+}
+
+int SumOfFactors(const int& NUMBER) {
+    int sumOfFactors = 0;
+
+    const float fnum = (float)NUMBER;
+    const int MAX = (int)floor(sqrt(fnum));
+
+    for (int i = 1; i < MAX + 2; i++) {
+        if (NUMBER % i == 0) {
+            const int f1 = i;
+            const int f2 = NUMBER / i;
+
+            if (f1 == f2 && f1 != NUMBER) {
+                sumOfFactors += f1;
+            } else {
+                if (f1 != NUMBER) {
+                    sumOfFactors += f1;
+                }
+                if (f2 != NUMBER) {
+                    sumOfFactors += f2;
+                }
+            }
+        }
+    }
+    return sumOfFactors;
 }
 
 int TriangleNumber(const int& NTH) {

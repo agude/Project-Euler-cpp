@@ -23,6 +23,8 @@
 
 int NumberOfFactors(const int& NUMBER);
 
+int SumOfFactors(const int& NUMBER);
+
 int TriangleNumber(const int& NTH);
 
 bool IsPrime(const int64_t& number);

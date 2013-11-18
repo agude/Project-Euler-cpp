@@ -16,7 +16,7 @@
 
 /*
  * Let d(n) be defined as the sum of proper divisors of n (numbers less than n
- * which divide evenly into n).  If d(a) = b and d(b) = a, where a  b, then a
+ * which divide evenly into n).  If d(a) = b and d(b) = a, where a != b, then a
  * and b are an amicable pair and each of a and b are called amicable numbers.
  *
  * For example, the proper divisors of 220 are 1, 2, 4, 5, 10, 11, 20, 22, 44,
@@ -24,51 +24,22 @@
  * 71 and 142; so d(284) = 220.
  *
  * Evaluate the sum of all the amicable numbers under 10000.
- *
  */
 
 #include <iostream>  // std::cout, std::endl
-#include <math.h>
 
-int returnSumOfFactors(const int num) {
-    int sumOfFactors = 0;
+#include "alexlib.h"  // SumOfFactors
 
-    const float fnum = (float)num;
-    const int max  = (int)floor(sqrt(fnum));
-
-    for (int i = 1; i < max + 2; i++) {
-        if (num % i == 0) {
-            const int f1 = i;
-            const int f2 = num / i;
-
-            if (f1 == f2 && f1 != num) {
-                sumOfFactors += f1;
-            } else {
-                if (f1 != num) {
-                    sumOfFactors += f1;
-                }
-
-                if (f2 != num) {
-                    sumOfFactors += f2;
-                }
-            }
-        }
-    }
-
-    return sumOfFactors;
-}
 
 int main() {
-
     int sum = 0;
 
-    for (int i = 1; i < 10000; i++) {
-        const int checkNum = returnSumOfFactors(i);
-
-        if (checkNum > i) { // Otherwise it's been found already
-            if ( i == returnSumOfFactors(checkNum) && i != checkNum ) {
-                //              std::cout << i << " " << checkNum << std::endl;
-                sum += (i + checkNum);
+    // Brute force search the full range for amicable numbers
+    for (int number_a = 1; number_a < 10000; number_a++) {
+        const int NUMBER_B = SumOfFactors(number_a);
+        if (NUMBER_B > number_a) {  // Avoid double counting
+            if (number_a == SumOfFactors(NUMBER_B)) {
+                sum += (number_a + NUMBER_B);
             }
         }
     }
