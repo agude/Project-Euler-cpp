@@ -17,12 +17,16 @@
 #ifndef ALEXLIB_H_
 #define ALEXLIB_H_
 
+#include <vector>  // std::vector
 #include <inttypes.h>  // int64_t
+
 
 int NumberOfFactors(const int& NUMBER);
 
 int TriangleNumber(const int& NTH);
 
 bool IsPrime(const int64_t& number);
+
+std::vector<bool>* PrimeSieve(const int64_t& LENGTH);
 
 #endif  // ALEXLIB_H_

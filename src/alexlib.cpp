@@ -17,6 +17,7 @@
 #include "alexlib.h"
 
 #include <math.h>  // sqrt, floor
+#include <algorithm>  // std::fill
 
 int NumberOfFactors(const int& NUMBER) {
     /*
@@ -79,4 +80,29 @@ bool IsPrime(const int64_t& num) {
 
         return true;
     }
+}
+
+std::vector<bool>* PrimeSieve(const int64_t& LENGTH) {
+    // Fill with true
+    std::vector<bool>* primes = new std::vector<bool>(LENGTH);
+    std::fill(primes->begin(), primes->end(), true);
+
+    // 0, 1 are not prime
+    if (LENGTH >= 2) {
+        primes->at(0) = primes->at(1) = false;
+    } else if (LENGTH < 1) {
+        return NULL;
+    } else {
+        primes->at(0) = false;
+    }
+
+    // Sieve
+    for (int64_t i = 2; i < ceil(sqrt(LENGTH)); ++i) {
+        if (primes->at(i)) {
+            for (int64_t j = i * i; j < LENGTH; j += i) {
+                primes->at(j) = false;
+            }
+        }
+    }
+    return primes;
 }
