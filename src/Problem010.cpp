@@ -18,48 +18,23 @@
  * The sum of the primes below 10 is 2 + 3 + 5 + 7 = 17.
  *
  * Find the sum of all the primes below two million.
- *
  */
 
 #include <iostream>  // std::cout, std::endl
-#include <math.h>
+#include <inttypes.h>  // int64_t
 
-const bool isPrime(const long num) {
-    if (num < 2) { // 0,1 and negative are not prime
-        return false;
-    } else if (num < 4) {
-        return true;
-    } else if (num % 2 == 0) {
-        return false;
-    } else if (num < 9) {
-        return true;
-    } else if (num % 3 == 0) {
-        return false;
-    } else {
-        const long r = floor(sqrt(num));
-        long f = 5;
-
-        while (f <= r) {
-            if (num % f == 0) {
-                return false;
-            } else if (num % (f + 2) == 0) {
-                return false;
-            } else {
-                f += 6;
-            }
-        }
-
-        return true;
-    }
-}
+#include "alexlib.h"  // IsPrime
 
 int main() {
+    /* 
+     * We loop over all odd numbers from 3 to 2 million and add the primes. We
+     * add in the only even prime, 2, by hand.
+     */
+    int64_t sum = 2;
 
-    long sum = 2;
-
-    for (long testNumber = 3; testNumber < 2000000; testNumber += 2) {
-        if (isPrime(testNumber)) {
-            sum += testNumber;
+    for (int64_t test_number = 3; test_number < 2000000; test_number += 2) {
+        if (IsPrime(test_number)) {
+            sum += test_number;
         }
     }
 

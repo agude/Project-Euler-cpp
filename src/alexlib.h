@@ -14,11 +14,15 @@
 // along with this program; if not, write to the Free Software Foundation,
 // Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-#ifndef MATHLIB_H_
-#define MATHLIB_H_
+#ifndef ALEXLIB_H_
+#define ALEXLIB_H_
+
+#include <inttypes.h>  // int64_t
 
 int NumberOfFactors(const int& NUMBER);
 
 int TriangleNumber(const int& NTH);
 
-#endif  // MATHLIB_H_
+bool IsPrime(const int64_t& number);
+
+#endif  // ALEXLIB_H_

@@ -51,3 +51,32 @@ int TriangleNumber(const int& NTH) {
      */
     return NTH * (NTH + 1) / 2;
 }
+
+bool IsPrime(const int64_t& num) {
+    if (num < 2) {  // 0,1 and negative are not prime
+        return false;
+    } else if (num < 4) {
+        return true;
+    } else if (num % 2 == 0) {
+        return false;
+    } else if (num < 9) {
+        return true;
+    } else if (num % 3 == 0) {
+        return false;
+    } else {
+        const int64_t r = floor(sqrt(num));
+        int64_t f = 5;
+
+        while (f <= r) {
+            if (num % f == 0) {
+                return false;
+            } else if (num % (f + 2) == 0) {
+                return false;
+            } else {
+                f += 6;
+            }
+        }
+
+        return true;
+    }
+}
