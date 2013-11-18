@@ -22,24 +22,32 @@
  */
 
 #include <iostream>  // std::cout, std::endl
-#include <math.h>  // floor, sqrt
+#include <math.h>  // log
+#include <vector>  // std::vector
 
 #include "alexlib.h"  // IsPrime
 
 int main() {
-    // We start at 3 (although note that test_number starts at 1 because we
-    // immediately add 2 in the loop), and add in the even prime 2 by hand.
-    // This allows us to increment by 2 to only test odd numbers.
-    int counter = 1;
-    int test_number = 1;
+    // The Nth prime number, P_N, is provably smaller than N * log(N) + N *
+    // log(log(N)). We use this bound to seed our sieve.
+    const int PRIME_LIMIT = 10001;
+    const int BOUND = PRIME_LIMIT * log(PRIME_LIMIT) 
+        + PRIME_LIMIT * log(log(PRIME_LIMIT));
 
-    while (counter < 10001) {
-        test_number += 2;
-        if (IsPrime(test_number)) {
+    // Sieve the primes up to our bound
+    std::vector<bool> const * const PRIMES = PrimeSieve(BOUND);
+    int counter = 0;
+    int prime = 0;
+    for (int i = 0; i < BOUND; ++i) {
+        if (PRIMES->at(i)) {
             ++counter;
+        }
+        if (counter >= PRIME_LIMIT) {
+           prime = i; 
+           break;
         }
     }
 
-    std::cout << test_number << std::endl;
+    std::cout << prime << std::endl;
     return 0;
 }
