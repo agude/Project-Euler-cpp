@@ -1,6 +1,6 @@
 # Compiler
 CXX=g++
-CXXFLAGS=-O2
+CXXFLAGS=-O2 -Wall -pedantic -Wconversion -Wextra
 RM=rm -f
 
 # Make a list of all the files we need
