@@ -1,4 +1,4 @@
-// Copyright (C) 2010  Alexander Gude - alex.public.account+ProjectEulerSolutions@gmail.com
+// Copyright (C) 2013  Alexander Gude - alex.public.account+ProjectEulerSolutions@gmail.com
 
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,33 +17,25 @@
 /*
  * The prime factors of 13195 are 5, 7, 13 and 29.
  *
- * What is the largest prime factor of the number 317584931803?
- *
+ * What is the largest prime factor of the number 600851475143?
  */
 
 #include <iostream>  // std::cout, std::endl
 #include <inttypes.h>  // int64_t
 
+#include "alexlib.h"  // PrimeFactors
+
+
 int main() {
-    //int64_t Number = 317584931803;
-    int64_t Number = 8;
-    int64_t Divisor = 2;
-    int64_t Prime = 0;
+    using std::vector;
+    using std::cout;
+    using std::endl;
 
-    while (Number > 1) {
-        // Test for factors and make sure the factors are prime. Since we have divided out all smaller primes, all odd numbers that divide
-        if (    Number % Divisor == 0 
-                && (Divisor == 2 || Divisor % 2 != 0)
-           ) {  // 2 is the only even prime
-            if (Divisor > Prime) {
-                Prime = Divisor;
-            }
-            Number = Number / Divisor;
-        }
+    const int64_t NUMBER = 600851475143;
 
-        Divisor++;
-    }
+    // We find all the prime factors, then the largest is the final one
+    vector<int64_t> const * const PRIME_FACTORS = PrimeFactors(NUMBER);
 
-    std::cout << Prime << std::endl;
+    cout << PRIME_FACTORS->back() << endl;
     return 0;
 }

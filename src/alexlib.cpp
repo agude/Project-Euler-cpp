@@ -16,17 +16,19 @@
 
 #include "alexlib.h"
 
-#include <math.h>  // sqrt, floor
+#include <cmath>  // std::sqrt, std::floor, std::abs, std::ceil
 #include <algorithm>  // std::fill
+//#include <iostream>  // std::cout, std::endl
 
 int NumberOfFactors(const int& NUMBER) {
+    using std::sqrt;
     /*
      * Given a number, returns the number of factors.
      */
     int number_of_factors = 0;
 
     const float fnum = (float)NUMBER;
-    const int MAX = (int)floor(sqrt(fnum));
+    const int MAX = (int)std::floor(sqrt(fnum));
 
     for (int i = 1; i < MAX + 2; i++) {
         if (NUMBER % i == 0) {
@@ -44,10 +46,11 @@ int NumberOfFactors(const int& NUMBER) {
 }
 
 int SumOfFactors(const int& NUMBER) {
+    using std::sqrt;
     int sumOfFactors = 0;
 
     const float fnum = (float)NUMBER;
-    const int MAX = (int)floor(sqrt(fnum));
+    const int MAX = (int)std::floor(sqrt(fnum));
 
     for (int i = 1; i < MAX + 2; i++) {
         if (NUMBER % i == 0) {
@@ -80,6 +83,7 @@ int TriangleNumber(const int& NTH) {
 }
 
 bool IsPrime(const int64_t& test_number) {
+    using std::sqrt;
     // We hard code in a few cases, then test in general
     if (test_number < 2) {  // 0, 1 and negative are not prime
         return false;
@@ -92,7 +96,7 @@ bool IsPrime(const int64_t& test_number) {
     } else if (test_number % 3 == 0) {  // numbers divisible by 3 are not prime
         return false;
     } else {
-        const int r = floor(sqrt(test_number));
+        const int r = std::floor(sqrt(test_number));
         int f = 5;
 
         while (f <= r) {
@@ -109,6 +113,7 @@ bool IsPrime(const int64_t& test_number) {
 }
 
 std::vector<bool>* PrimeSieve(const int64_t& LENGTH) {
+    using std::sqrt;
     // Fill with true
     std::vector<bool>* primes = new std::vector<bool>(LENGTH);
     std::fill(primes->begin(), primes->end(), true);
@@ -123,7 +128,7 @@ std::vector<bool>* PrimeSieve(const int64_t& LENGTH) {
     }
 
     // Sieve
-    for (int64_t i = 2; i < ceil(sqrt(LENGTH)); ++i) {
+    for (int64_t i = 2; i < std::ceil(sqrt(LENGTH)); ++i) {
         if (primes->at(i)) {
             for (int64_t j = i * i; j < LENGTH; j += i) {
                 primes->at(j) = false;
@@ -131,4 +136,51 @@ std::vector<bool>* PrimeSieve(const int64_t& LENGTH) {
         }
     }
     return primes;
+}
+
+std::vector<int64_t>* PrimeFactors(const int64_t NUMBER) {
+    using std::sqrt;
+    // We only need to test up to the square root of the number, if this fails
+    // we know it's prime
+    const int64_t LIMIT = std::ceil(sqrt(NUMBER));
+    std::vector<bool> const * const PRIMES = PrimeSieve(LIMIT);
+
+    int64_t current_number = NUMBER;
+    std::vector<int64_t>* prime_factors = new std::vector<int64_t>();
+    // We try dividing through by primes until our number reaches 1, then
+    // return the list of primes
+    for (int64_t i = 0; i < LIMIT; ++i) {
+        if (PRIMES->at(i) && current_number % i == 0) {  // Is Prime
+            do {
+                current_number = current_number / i;
+                prime_factors->push_back(i);
+                if (current_number <= 1) {
+                    return prime_factors;
+                }
+            } while(current_number % i == 0);
+        }
+    }
+    // Returns from the loop
+}
+
+bool IsHex(const int64_t& NUMBER) {
+    using std::sqrt;
+    const double test_number = (sqrt((8 * NUMBER) + 1) + 1.) / 4.;
+
+    if (std::abs(double(int64_t(test_number)) - test_number) < 0.000001) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+bool IsPent(const int64_t& NUMBER) {
+    using std::sqrt;
+    const double test_number = (sqrt((24 * NUMBER) + 1) + 1.) / 6.;
+
+    if (std::abs(double(int64_t(test_number)) - test_number) < 0.000001) {
+        return true;
+    } else {
+        return false;
+    }
 }

@@ -31,4 +31,10 @@ bool IsPrime(const int64_t& number);
 
 std::vector<bool>* PrimeSieve(const int64_t& LENGTH);
 
+std::vector<int64_t>* PrimeFactors(const int64_t NUMBER);
+
+bool IsHex(const int64_t& NUMBER);
+
+bool IsPent(const int64_t& NUMBER);
+
 #endif  // ALEXLIB_H_
