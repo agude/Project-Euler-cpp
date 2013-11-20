@@ -27,8 +27,8 @@ int NumberOfFactors(const int& NUMBER) {
      */
     int number_of_factors = 0;
 
-    const double fnum = (double)NUMBER;
-    const int MAX = (int)std::floor(sqrt(fnum));
+    const double fnum = static_cast<double>(NUMBER);
+    const int MAX = static_cast<int>(std::floor(sqrt(fnum)));
 
     for (int i = 1; i < MAX + 2; i++) {
         if (NUMBER % i == 0) {
@@ -49,8 +49,8 @@ int SumOfFactors(const int& NUMBER) {
     using std::sqrt;
     int sumOfFactors = 0;
 
-    const double fnum = (double)NUMBER;
-    const int MAX = (int)std::floor(sqrt(fnum));
+    const double fnum = static_cast<double>(NUMBER);
+    const int MAX = static_cast<int>(std::floor(sqrt(fnum)));
 
     for (int i = 1; i < MAX + 2; i++) {
         if (NUMBER % i == 0) {
@@ -96,7 +96,7 @@ bool IsPrime(const int64_t& test_number) {
     } else if (test_number % 3 == 0) {  // numbers divisible by 3 are not prime
         return false;
     } else {
-        const int r = std::floor(sqrt(test_number));
+        const int r = static_cast<int>(std::floor(sqrt(test_number)));
         int f = 5;
 
         while (f <= r) {
@@ -160,7 +160,8 @@ std::vector<int64_t>* PrimeFactors(const int64_t NUMBER) {
             } while(current_number % i == 0);
         }
     }
-    // Returns from the loop
+    // Should return from the loop
+    return NULL;
 }
 
 bool IsHex(const int64_t& NUMBER) {
