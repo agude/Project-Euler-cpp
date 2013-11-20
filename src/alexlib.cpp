@@ -27,7 +27,7 @@ int NumberOfFactors(const int& NUMBER) {
      */
     int number_of_factors = 0;
 
-    const float fnum = (float)NUMBER;
+    const double fnum = (double)NUMBER;
     const int MAX = (int)std::floor(sqrt(fnum));
 
     for (int i = 1; i < MAX + 2; i++) {
@@ -49,7 +49,7 @@ int SumOfFactors(const int& NUMBER) {
     using std::sqrt;
     int sumOfFactors = 0;
 
-    const float fnum = (float)NUMBER;
+    const double fnum = (double)NUMBER;
     const int MAX = (int)std::floor(sqrt(fnum));
 
     for (int i = 1; i < MAX + 2; i++) {
