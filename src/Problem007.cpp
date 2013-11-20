@@ -27,15 +27,21 @@
 
 #include "alexlib.h"  // IsPrime
 
+
 int main() {
-    // The Nth prime number, P_N, is provably smaller than N * log(N) + N *
-    // log(log(N)). We use this bound to seed our sieve.
+    using std::cout;
+    using std::endl;
+    using std::vector;
+
+    // The Nth prime number, P_N, is provably smaller than:
+    //     N * log(N) + N * log(log(N))
+    //
+    // We use this bound to set the upper bound of the prime sieve.
     const int PRIME_LIMIT = 10001;
-    const int BOUND = PRIME_LIMIT * log(PRIME_LIMIT) 
-        + PRIME_LIMIT * log(log(PRIME_LIMIT));
+    const int BOUND = PRIME_LIMIT * (log(PRIME_LIMIT) + log(log(PRIME_LIMIT)));
 
     // Sieve the primes up to our bound
-    std::vector<bool> const * const PRIMES = PrimeSieve(BOUND);
+    vector<bool> const * const PRIMES = PrimeSieve(BOUND);
     int counter = 0;
     int prime = 0;
     for (int i = 0; i < BOUND; ++i) {
@@ -43,11 +49,11 @@ int main() {
             ++counter;
         }
         if (counter >= PRIME_LIMIT) {
-           prime = i; 
-           break;
+            prime = i;
+            break;
         }
     }
 
-    std::cout << prime << std::endl;
+    cout << prime << endl;
     return 0;
 }
