@@ -38,7 +38,7 @@ int main() {
     //
     // We use this bound to set the upper bound of the prime sieve.
     const int PRIME_LIMIT = 10001;
-    const int BOUND = PRIME_LIMIT * (log(PRIME_LIMIT) + log(log(PRIME_LIMIT)));
+    const int BOUND = static_cast<int>(PRIME_LIMIT * (log(PRIME_LIMIT) + log(log(PRIME_LIMIT))));
 
     // Sieve the primes up to our bound
     vector<bool> const * const PRIMES = PrimeSieve(BOUND);

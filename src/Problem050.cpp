@@ -48,7 +48,7 @@ int main() {
             primes.push_back(i);
         }
     }
-    const int N_PRIMES = primes.size();
+    const int N_PRIMES = static_cast<int>(primes.size());
 
     // Put a limit on the maximum number of primes we can sum together without
     // go over MAX. We start at the lowest prime because this will give us the
@@ -65,7 +65,7 @@ int main() {
 
     // We now sum numbers from our primes list and test to see if the result is
     // also prime
-    int prime_from_sum = 0;
+    int64_t prime_from_sum = 0;
     int longest_length = 0;
 
     for (int test_length = max_length; test_length >= 2; test_length--) {
