@@ -39,7 +39,7 @@
 
 #include <iostream>  // std::cout, std::endl
 
-#include "alexlib.h"  // NumberOfFactors, TriangleNumber
+#include "lib/alexlib.h"  // NumberOfFactors, TriangleNumber
 
 int main() {
     int i = 1;

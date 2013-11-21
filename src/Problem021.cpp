@@ -28,7 +28,7 @@
 
 #include <iostream>  // std::cout, std::endl
 
-#include "alexlib.h"  // SumOfFactors
+#include "lib/alexlib.h"  // SumOfFactors
 
 
 int main() {

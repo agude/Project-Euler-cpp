@@ -17,13 +17,9 @@
 #ifndef ALEXLIB_H_
 #define ALEXLIB_H_
 
-#include <vector>  // std::vector
 #include <inttypes.h>  // int64_t
+#include <vector>  // std::vector
 
-
-int NumberOfFactors(const int& NUMBER);
-
-int SumOfFactors(const int& NUMBER);
 
 int TriangleNumber(const int& NTH);
 
@@ -36,5 +32,17 @@ std::vector<int64_t>* PrimeFactors(const int64_t NUMBER);
 bool IsHex(const int64_t& NUMBER);
 
 bool IsPent(const int64_t& NUMBER);
+
+template <class T>
+std::vector<T>* Factors(const T& NUMBER);
+
+template <class T>
+T NumberOfFactors(const T& NUMBER);
+
+template <class T>
+T SumOfFactors(const T& NUMBER);
+
+// Templated function implementations
+#include "alexlib.tcc"  // Factors, NumberOfFactors, SumOfFactors
 
 #endif  // ALEXLIB_H_

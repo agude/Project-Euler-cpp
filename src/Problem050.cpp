@@ -33,7 +33,7 @@
 #include <vector>  // std::vector
 #include <inttypes.h>  // int64_t
 
-#include "alexlib.h"
+#include "lib/alexlib.h"
 
 
 int main() {

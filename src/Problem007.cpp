@@ -25,7 +25,7 @@
 #include <math.h>  // log
 #include <vector>  // std::vector
 
-#include "alexlib.h"  // PrimeSieve
+#include "lib/alexlib.h"  // PrimeSieve
 
 
 int main() {

@@ -18,7 +18,7 @@ all: $(EXE_FILES)
 	$(CXX) $(CXXFLAGS) -o $@ $^
 
 # Build our library
-obj/alexlib.o: src/alexlib.h src/alexlib.cpp
+obj/alexlib.o: lib/alexlib.h lib/alexlib.cpp lib/alexlib.tcc
 	$(CXX) $(CXXFLAGS) -c src/alexlib.cpp -o $@
 
 # Clean up

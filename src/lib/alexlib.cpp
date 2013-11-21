@@ -16,61 +16,9 @@
 
 #include "alexlib.h"
 
-#include <cmath>  // std::sqrt, std::floor, std::abs, std::ceil
 #include <algorithm>  // std::fill
+#include <cmath>  // std::sqrt, std::floor, std::abs, std::ceil
 //#include <iostream>  // std::cout, std::endl
-
-int NumberOfFactors(const int& NUMBER) {
-    using std::sqrt;
-    /*
-     * Given a number, returns the number of factors.
-     */
-    int number_of_factors = 0;
-
-    const double fnum = static_cast<double>(NUMBER);
-    const int MAX = static_cast<int>(std::floor(sqrt(fnum)));
-
-    for (int i = 1; i < MAX + 2; i++) {
-        if (NUMBER % i == 0) {
-            const int f1 = i;
-            const int f2 = NUMBER / i;
-
-            if (f1 == f2) {
-                number_of_factors += 1;
-            } else {
-                number_of_factors += 2;
-            }
-        }
-    }
-    return number_of_factors;
-}
-
-int SumOfFactors(const int& NUMBER) {
-    using std::sqrt;
-    int sumOfFactors = 0;
-
-    const double fnum = static_cast<double>(NUMBER);
-    const int MAX = static_cast<int>(std::floor(sqrt(fnum)));
-
-    for (int i = 1; i < MAX + 2; i++) {
-        if (NUMBER % i == 0) {
-            const int f1 = i;
-            const int f2 = NUMBER / i;
-
-            if (f1 == f2 && f1 != NUMBER) {
-                sumOfFactors += f1;
-            } else {
-                if (f1 != NUMBER) {
-                    sumOfFactors += f1;
-                }
-                if (f2 != NUMBER) {
-                    sumOfFactors += f2;
-                }
-            }
-        }
-    }
-    return sumOfFactors;
-}
 
 int TriangleNumber(const int& NTH) {
     /*
@@ -114,8 +62,9 @@ bool IsPrime(const int64_t& test_number) {
 
 std::vector<bool>* PrimeSieve(const int64_t& LENGTH) {
     using std::sqrt;
+    using std::vector;
     // Fill with true
-    std::vector<bool>* primes = new std::vector<bool>(LENGTH);
+    vector<bool>* primes = new vector<bool>(LENGTH);
     std::fill(primes->begin(), primes->end(), true);
 
     // 0, 1 are not prime
@@ -140,13 +89,14 @@ std::vector<bool>* PrimeSieve(const int64_t& LENGTH) {
 
 std::vector<int64_t>* PrimeFactors(const int64_t NUMBER) {
     using std::sqrt;
+    using std::vector;
     // We only need to test up to the square root of the number, if this fails
     // we know it's prime
-    const int64_t LIMIT = std::ceil(sqrt(NUMBER));
-    std::vector<bool> const * const PRIMES = PrimeSieve(LIMIT);
+    const int64_t LIMIT = static_cast<int64_t>(std::ceil(sqrt(NUMBER)));
+    vector<bool> const * const PRIMES = PrimeSieve(LIMIT);
 
     int64_t current_number = NUMBER;
-    std::vector<int64_t>* prime_factors = new std::vector<int64_t>();
+    vector<int64_t>* prime_factors = new vector<int64_t>();
     // We try dividing through by primes until our number reaches 1, then
     // return the list of primes
     for (int64_t i = 0; i < LIMIT; ++i) {
