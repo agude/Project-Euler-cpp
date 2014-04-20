@@ -33,21 +33,20 @@ std::vector<T>* Factors(const T& NUMBER) {
 
     const T MAX = static_cast<int>(floor(sqrt(NUMBER)));
 
-    for (T i = 1; i < MAX + 2; i++) {
+    for (T i = 1; i <= MAX; ++i) {
         if (NUMBER % i == 0) {
-            const T f1 = i;
-            const T f2 = NUMBER / i;
+            const T FACTOR_0 = i;
+            const T FACTOR_1 = NUMBER / i;
 
-            if (f1 == f2) {
-                factors->push_back(f1);
+            if (FACTOR_0 == FACTOR_1) {
+                factors->push_back(FACTOR_0);
             } else {
-                factors->push_back(f1);
-                factors->push_back(f2);
+                factors->push_back(FACTOR_0);
+                factors->push_back(FACTOR_1);
             }
         }
     }
     return factors;
-
 }
 
 template <class T>
@@ -61,6 +60,14 @@ T NumberOfFactors(const T& NUMBER) {
 }
 
 template <class T>
+T NumberOfProperFactors(const T& NUMBER) {
+    /*
+     * Given a number, returns the number of proper factors.
+     */
+    return NumberOfFactors(NUMBER) - 1;
+}
+
+template <class T>
 T SumOfFactors(const T& NUMBER) {
     using std::accumulate;
     using std::vector;
@@ -70,6 +77,15 @@ T SumOfFactors(const T& NUMBER) {
     vector<T> const * const FACTORS = Factors(NUMBER);
     const T INITIAL_VALUE = 0;
     return accumulate(FACTORS->begin(), FACTORS->end(), INITIAL_VALUE);
+}
+
+template <class T>
+T SumOfProperFactors(const T& NUMBER) {
+    /*
+     * Given a number, returns the sum of proper factors, that is all the
+     * factors except for the number itself.
+     */
+    return SumOfFactors(NUMBER) - NUMBER;
 }
 
 #endif  // ALEXLIB_TCC_
