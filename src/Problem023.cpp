@@ -33,71 +33,61 @@
  *
  * Find the sum of all the positive integers which cannot be written as the sum
  * of two abundant numbers.
- *
  */
 
 #include <iostream>  // std::cout, std::endl
-#include <cmath>
+#include <set>  // std::set
 
-int returnSumOfFactors(const int num) {
-    int sumOfFactors = 0;
-
-    const float fnum = (float)num;
-    const int max  = (int)floor(sqrt(fnum));
-
-    for (int i = 1; i <= max; i++) {
-        if (num % i == 0) {
-            const int f1 = i;
-            const int f2 = num / i;
-
-            if (f1 == f2 && f1 != num) {
-                sumOfFactors += f1;
-            } else {
-                if (f1 != num) {
-                    sumOfFactors += f1;
-                }
-
-                if (f2 != num) {
-                    sumOfFactors += f2;
-                }
-            }
-        }
-    }
-
-    return sumOfFactors;
-}
+#include "lib/alexlib.h"  // SumOfProperFactors
 
 int main() {
+    using std::set;
 
-    const int MAX = 28123;
-    bool isAbundant[MAX];
+    // It is provably true that 28123 is the last number, but it can be
+    // exhaustively shown that the lower bounds is actually 20161
+    const int MAX = 20161;
+    set<int> abundant_numbers;
 
-    // Find abundant numbers
-    for ( int i = 1; i <= MAX + 1; i++) {
-        if ( returnSumOfFactors(i) > i ) {
-            isAbundant[i] = true;
-        } else {
-            isAbundant[i] = false;
-        }
-    }
-
-    // Now check which numbers are not a sum
-    int tot = 0;
-
-    for ( int i = 0; i <= MAX; i++ ) {
-        for ( int j = 12; j <= MAX; j++ ) {
-            if ( isAbundant[j] ) {
-                if ( i - j >= 0 && isAbundant[i - j] ) {
-                    break;
-                } else if ( j >= i ) {
-                    tot += i;
-                    break;
-                }
+    // Find abundant numbers, we keep going until we find one larger than MAX.
+    // This insures that when testing our trial numbers later, we know we've
+    // tried all the abundant numbers once we have (trial - abundant) < 0.
+    for (int i = 1; ; ++i) {
+        if (SumOfProperFactors(i) > i) {
+            // Since the numbers are tested in order, all numbers should be
+            // added to the end of the set
+            abundant_numbers.emplace_hint(abundant_numbers.end(), i);
+            if (i > MAX) {
+                break;
             }
         }
     }
 
-    std::cout << tot << std::endl;
+    // Check all numbers (trial) by subtracting all known abundant numbers
+    // (abundant) less than that number and see if the resulting differences
+    // are abundant. If none of them are, we have found a number which is not
+    // the sum of two abundant numbers.
+    int sum = 0;
+    for (int trial = 0; trial <= MAX + 1; ++trial) {
+        for (auto& abundant : abundant_numbers) {
+            const int RESULT = trial - abundant;
+            if (RESULT >= 0) {
+                auto it = abundant_numbers.find(RESULT);
+                // If RESULT is also abundant, the trial is the sum of two
+                // abundant numbers, and we don't want it.
+                if (it != abundant_numbers.end()) {
+                    break;
+                }
+            } else if (abundant >= trial) {
+                // Having gotten this far, we know (through exhaustive search)
+                // that the number can not be written as the sum of abundant
+                // numbers, and so is one we are interested in
+                sum += trial;
+                break;
+            }
+        }
+    }
+
+    std::cout << sum << std::endl;
 
     return 0;
 }
