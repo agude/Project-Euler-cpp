@@ -49,9 +49,11 @@ int main() {
     set<int> abundant_numbers;
 
     // Find abundant numbers, we keep going until we find one larger than MAX.
-    // This insures that when testing our trial numbers later, we know we've
-    // tried all the abundant numbers once we have (trial - abundant) < 0.
-    for (int i = 1; ; ++i) {
+    // This insures that when testing our trial numbers later we know to end
+    // when (trial - abundant) < 0.
+    int i = 0;
+    while (true) {
+        ++i;
         if (SumOfProperFactors(i) > i) {
             // Since the numbers are tested in order, all numbers should be
             // added to the end of the set
@@ -71,9 +73,9 @@ int main() {
         for (auto& abundant : abundant_numbers) {
             const int RESULT = trial - abundant;
             if (RESULT >= 0) {
-                auto it = abundant_numbers.find(RESULT);
                 // If RESULT is also abundant, the trial is the sum of two
                 // abundant numbers, and we don't want it.
+                auto it = abundant_numbers.find(RESULT);
                 if (it != abundant_numbers.end()) {
                     break;
                 }
