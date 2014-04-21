@@ -29,9 +29,17 @@ std::vector<bool>* PrimeSieve(const int64_t& LENGTH);
 
 std::vector<int64_t>* PrimeFactors(const int64_t NUMBER);
 
-bool IsHex(const int64_t& NUMBER);
+bool IsPolygonal(
+        const int64_t& NUMBER,
+        const int& MULTIPLIER,
+        const double& DIVISOR
+        );
 
-bool IsPent(const int64_t& NUMBER);
+bool IsTriangular(const int64_t& NUMBER);
+
+bool IsPentagonal(const int64_t& NUMBER);
+
+bool IsHexagonal(const int64_t& NUMBER);
 
 template <class T>
 std::vector<T>* Factors(const T& NUMBER);

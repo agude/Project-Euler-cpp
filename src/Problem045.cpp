@@ -30,7 +30,7 @@
 #include <iostream>  // std::cout, std::endl
 #include <inttypes.h>  // int64_t
 
-#include "lib/alexlib.h"  // IsPent
+#include "lib/alexlib.h"  // IsPentagonal
 
 
 int main() {
@@ -48,7 +48,7 @@ int main() {
     while (true) {
         num = n * (2 * n - 1);
         // If it is also pentagonal, we're done
-        if (IsPent(num)) {
+        if (IsPentagonal(num)) {
             break;
         } else {
             ++n;
