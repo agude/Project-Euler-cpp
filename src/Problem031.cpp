@@ -1,4 +1,4 @@
-// Copyright (C) 2011  Alexander Gude - alex.public.account+ProjectEulerSolutions@gmail.com
+// Copyright (C) 2014  Alexander Gude - alex.public.account+ProjectEulerSolutions@gmail.com
 
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -28,65 +28,43 @@
  */
 
 #include <iostream>  // std::cout, std::endl
+#include <map>  // std::map
+#include <vector>  // std::vector
 
 int main() {
-    // We brute force all possible combinations
+
+    // Set up constants used in the problem
+    const std::vector<int> COIN_VALUES = {1, 2, 5, 10, 20, 50, 100, 200};
     const int MAX = 200; // pence
-    int combos = 0;
 
-    for (int ones = 0; ones <= MAX; ones++) {
-        int amount = ones;
-        const int MAX2 = (MAX - amount) / 2;
+    /* If we want to know how many ways we can make change for a total price of
+     * 4p, then using 1p coins it is equal to the number of ways we can make
+     * change for 3p. For 2p as my coin it is equal to the number of ways we can
+     * make change for 2p, etc. We therefore make a list of all the ways you can
+     * make change for np(where n is the index) and use this to build the
+     * solutions at each level.
+     */
 
-        for (int twos = 0; twos <= MAX2; twos++) {
-            amount = ones + 2 * twos;
+    // Fill the map
+    std::map<int, int> combinations;
+    for (int i = 0; i <= MAX; ++i) {
+        combinations[i] = 0;
+    }
+    combinations[0] = 1;
 
-            if (amount % 5 != 0) {
-                continue;
-            }
-
-            const int MAX5 = (MAX - amount) / 5;
-
-            for (int fives = 0; fives <= MAX5; fives++) {
-                amount = ones + 2 * twos + 5 * fives;
-
-                if (amount % 10 != 0) {
-                    continue;
-                }
-
-                const int MAX10 = (MAX - amount) / 10;
-
-                for (int tens = 0; tens <= MAX10; tens++) {
-                    amount = ones + 2 * twos + 5 * fives + 10 * tens;
-                    const int MAX20 = (MAX - amount) / 20;
-
-                    for (int twents = 0; twents <= MAX20; twents++) {
-                        amount = ones + 2 * twos + 5 * fives + 10 * tens + 20 * twents;
-                        const int MAX50 = (MAX - amount) / 50;
-
-                        for (int fifts = 0; fifts <= MAX50; fifts++) {
-                            amount = ones + 2 * twos + 5 * fives + 10 * tens + 20 * twents + 50 * fifts;
-                            const int MAX100 = (MAX - amount) / 100;
-
-                            for (int hunds = 0; hunds <= MAX100; hunds++) {
-                                amount = ones + 2 * twos + 5 * fives + 10 * tens + 20 * twents + 50 * fifts + 100 * hunds;
-                                const int MAX200 = (MAX - amount) / 200;
-
-                                for (int twohunds = 0; twohunds <= MAX200; twohunds++) {
-                                    amount = ones + 2 * twos + 5 * fives + 10 * tens + 20 * twents + 50 * fifts + 100 * hunds + 200 * twohunds;
-
-                                    if (amount == MAX) {
-                                        combos++;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+    for (auto& coin_value : COIN_VALUES) {
+        /* We loop starting at coin_value (because anything smaller would not
+         * yield a positive number) and go until we hit the target value. The
+         * number of combinations at each level is incremented by the number of
+         * legal ways we've found so far to make change for the current value
+         * minus the value of the coin.
+         */
+        for (int target = coin_value; target <= MAX; ++target) {
+            combinations[target] += combinations[target - coin_value];
         }
     }
-    std::cout << combos << std::endl;
+
+    std::cout << combinations[MAX] << std::endl;
 
     return 0;
 }
