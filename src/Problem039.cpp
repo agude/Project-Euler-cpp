@@ -55,9 +55,9 @@ int main() {
             const int MAX_B = std::min(parameter - a, parameter / 2);
             for (int b = 1; b < MAX_B; ++b) {
                 double c = sqrt(a * a + b * b);
-                // Check that c is integral
-                if (trunc(c) == c) {
-                    if (a + b + c == parameter) {
+                if (a + b + c == parameter) {
+                    // Check that c is integral
+                    if (trunc(c) == c) {
                         ++combos;
                     }
                 }
