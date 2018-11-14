@@ -28,9 +28,10 @@
  */
 
 #include <iostream>  // std::cout, std::endl
-#include <math.h>
+#include <cmath>  // std::pow
 
 int main() {
+    using std::pow
 
     std::cout << ((28433 * (pow(2, 7830457))) + 1) % 10000000000 << std::endl;
 

@@ -18,15 +18,15 @@
  * A unit fraction contains 1 in the numerator. The decimal representation of
  * the unit fractions with denominators 2 to 10 are given:
  *
- * 1/2 =   0.5
- * 1/3 =   0.(3)
- * 1/4 =   0.25
- * 1/5 =   0.2
- * 1/6 =   0.1(6)
- * 1/7 =   0.(142857)
- * 1/8 =   0.125
- * 1/9 =   0.(1)
- * 1/10    =   0.1
+ * 1/2   =   0.5
+ * 1/3   =   0.(3)
+ * 1/4   =   0.25
+ * 1/5   =   0.2
+ * 1/6   =   0.1(6)
+ * 1/7   =   0.(142857)
+ * 1/8   =   0.125
+ * 1/9   =   0.(1)
+ * 1/10  =   0.1
  *
  * Where 0.1(6) means 0.166666..., and has a 1-digit recurring cycle.  It can
  * be seen that 1/7 has a 6-digit recurring cycle.
@@ -36,61 +36,38 @@
  */
 
 #include <iostream>  // std::cout, std::endl
-#include <math.h>  // sqrt, floor
+#include <vector>  // std::vector
+#include <inttypes.h>  // int64_t
 
-int CycleLength(const long& NUMBER) {
+#include "lib/alexlib.h"  // PrimeSeive
+
+int CycleLength(const int64_t& NUMBER) {
     int d = 1;
 
     while (true) {
-        const long test = long( pow(10, d) - 1.0) % NUMBER;
+        const int64_t test = static_cast<int64_t>(pow(10, d) - 1.0) % NUMBER;
 
         //std::cout << "\t" << test << std::endl;
-        if ( long( pow(10, d) - 1.0) % NUMBER == 0 ) {
+        if (static_cast<int64_t>(pow(10, d) - 1.0) % NUMBER == 0) {
             return d;
         }
-
-        d++;
+        ++d;
     }
-}
-
-bool* getPrimeArray(const long& MAX_NUMBER) {
-    bool* primes = new bool[MAX_NUMBER];
-
-    // Fill with true
-    for ( long i = 0; i < MAX_NUMBER; i++) {
-        if (i == 0 || i == 1) {
-            primes[i] = false;
-        } else {
-            primes[i] = true;
-        }
-    }
-
-    // Sieve
-    for ( long i = 2; i < ceil(sqrt(MAX_NUMBER)); i++) {
-        if (primes[i]) {
-            for ( long j = i * i; j < MAX_NUMBER; j += i) {
-                primes[j] = false;
-            }
-        }
-    }
-
-    return primes;
 }
 
 int main() {
-
     const int MAX = 10;
     int maxcyclen = 0;
     int num = 0;
 
-    bool* isPrime = getPrimeArray(MAX);
+    std::vector<bool> const * const PRIMES = PrimeSeive(MAX);
 
-    for ( int i = MAX; i > 0; i-- ) {
+    for (int i = MAX; i > 0; --i) {
         //std::cout << i << std::endl;
         if (maxcyclen >= i) {
             break;
-        } else if (isPrime[i]) {
-            int cyclen = CycleLength(i);
+        } else if (PRIMES->at(i)) {
+            const int cyclen = CycleLength(i);
 
             if ( cyclen > maxcyclen ) {
                 num = i;

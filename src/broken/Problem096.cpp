@@ -40,8 +40,8 @@
 #include <string>
 
 struct Coordinate {
-    short col;
-    short row;
+    int col;
+    int row;
 };
 
 /*
@@ -53,18 +53,18 @@ struct Coordinate {
 class Grid {
   private:
     // Gameboard
-    short m_grid[9][9];
+    int m_grid[9][9];
     bool  m_possible[9][9][9];
-    Coordinate* returnRow( short i, short j);
-    Coordinate* returnCol( short i, short j);
-    Coordinate* returnSqr( short i, short j);
-    void pullNeighbors( short i, short j);
-    void pullConstraints( short i, short j);
-    void cSqr( short i, short j);
-    void cRow( short i, short j);
-    void cCol( short i, short j);
-    void checkCell( short i, short j);
-    short strtoint(char str);
+    Coordinate* returnRow(int i, int j);
+    Coordinate* returnCol(int i, int j);
+    Coordinate* returnSqr(int i, int j);
+    void pullNeighbors(int i, int j);
+    void pullConstraints( int i, int j);
+    void cSqr(int i, int j);
+    void cRow(int i, int j);
+    void cCol(int i, int j);
+    void checkCell( int i, int j);
+    int strtoint(char str);
     bool solved;
     bool checkSolved();
 
@@ -74,19 +74,19 @@ class Grid {
 };
 
 /*-----------------------------------------------------------------------------
- * Construtor
+ * Constructor
  *-----------------------------------------------------------------------------*/
 Grid::Grid (const std::string inPuzzle) {
     solved = false;
 
     // Blank gameboard and possibilites
-    for ( short i = 0 ; i < 9 ; i++ ) {
-        for ( short j = 0 ; j < 9 ; j++ ) {
+    for ( int i = 0 ; i < 9 ; i++ ) {
+        for ( int j = 0 ; j < 9 ; j++ ) {
             const char puz = inPuzzle[i * 9 + j];
             const int val = strtoint(puz);
             m_grid[i][j] = val;
 
-            for ( short k = 0 ; k < 9 ; k++ ) {
+            for ( int k = 0 ; k < 9 ; k++ ) {
                 if (val == 0 || k == val - 1) { // All values still possible
                     m_possible[i][j][k] = true;
                 } else {
@@ -99,8 +99,8 @@ Grid::Grid (const std::string inPuzzle) {
     printGrid();
 
     for ( int z = 0; z < 100; z++) {
-        for ( short i = 0 ; i < 9 ; i++ ) {
-            for ( short j = 0 ; j < 9 ; j++ ) {
+        for ( int i = 0 ; i < 9 ; i++ ) {
+            for ( int j = 0 ; j < 9 ; j++ ) {
                 checkCell(i, j);
                 pullNeighbors(i, j);
                 checkCell(i, j);
@@ -117,11 +117,11 @@ Grid::Grid (const std::string inPuzzle) {
 /*-----------------------------------------------------------------------------
  *  Return the coordinates of groupings of cells (rows, cols, squares)
  *-----------------------------------------------------------------------------*/
-Coordinate* Grid::returnRow( const short i, const short j) {
+Coordinate* Grid::returnRow( const int i, const int j) {
     Coordinate* Row = new Coordinate[8];
-    short l = 0;
+    int l = 0;
 
-    for ( short k = 0; k < 9; k++) {
+    for ( int k = 0; k < 9; k++) {
         if ( k != j ) { // We don't want the cell we're looking at in the row
             Row[l].row = i;
             Row[l].col = k;
@@ -132,11 +132,11 @@ Coordinate* Grid::returnRow( const short i, const short j) {
     return Row;
 }
 
-Coordinate* Grid::returnCol( short i, short j) {
+Coordinate* Grid::returnCol( int i, int j) {
     Coordinate* Col = new Coordinate[8];
-    short l = 0;
+    int l = 0;
 
-    for ( short k = 0; k < 9; k++) {
+    for ( int k = 0; k < 9; k++) {
         if ( k != i ) { // We don't want the cell we're looking at in the col
             Col[l].row = k;
             Col[l].col = j;
@@ -147,10 +147,10 @@ Coordinate* Grid::returnCol( short i, short j) {
     return Col;
 }
 
-Coordinate* Grid::returnSqr( short i, short j) {
+Coordinate* Grid::returnSqr(int i, int j) {
     Coordinate* Sqr = new Coordinate[8];
-    short rowStart, rowEnd;
-    short colStart, colEnd;
+    int rowStart, rowEnd;
+    int colStart, colEnd;
 
     switch ( i ) {
     case 0:
@@ -204,10 +204,10 @@ Coordinate* Grid::returnSqr( short i, short j) {
         break;
     }
 
-    short m = 0;
+    int m = 0;
 
-    for ( short k = rowStart; k < rowEnd; k++ ) {
-        for ( short l = colStart; l < colEnd; l++ ) {
+    for ( int k = rowStart; k < rowEnd; k++ ) {
+        for ( int l = colStart; l < colEnd; l++ ) {
             if (i != k || j != l) {
                 Sqr[m].row = k;
                 Sqr[m].col = l;
@@ -222,7 +222,7 @@ Coordinate* Grid::returnSqr( short i, short j) {
 /*-----------------------------------------------------------------------------
  *  Our two propegation methods.
  *-----------------------------------------------------------------------------*/
-void Grid::pullNeighbors( const short i, const short j) {
+void Grid::pullNeighbors( const int i, const int j) {
     /*
       Given a cell, c at i,j, checks all other cells connected to c
       and removes values from c's possiblity array.
@@ -231,7 +231,7 @@ void Grid::pullNeighbors( const short i, const short j) {
 
     bool* pos[9];
 
-    for ( short k = 0; k < 9; k++) {
+    for ( int k = 0; k < 9; k++) {
         pos[k] = &m_possible[i][j][k];
         //std::cout << ' ' << k+1 << ':' << *pos[k];
     }
@@ -241,10 +241,10 @@ void Grid::pullNeighbors( const short i, const short j) {
     Coordinate* sqr;
     sqr = returnSqr(i, j);
 
-    for ( short k = 0; k < 8; k++) {
-        const short m = sqr[k].row;
-        const short n = sqr[k].col;
-        const short val = m_grid[m][n];
+    for ( int k = 0; k < 8; k++) {
+        const int m = sqr[k].row;
+        const int n = sqr[k].col;
+        const int val = m_grid[m][n];
 
         if (val != 0) {
             //std::cout << "\tFound value " << val << " at " << m << ' ' << n << std::endl;
@@ -255,10 +255,10 @@ void Grid::pullNeighbors( const short i, const short j) {
     Coordinate* row;
     row = returnRow(i, j);
 
-    for ( short k = 0; k < 8; k++) {
-        const short m = row[k].row;
-        const short n = row[k].col;
-        const short val = m_grid[m][n];
+    for ( int k = 0; k < 8; k++) {
+        const int m = row[k].row;
+        const int n = row[k].col;
+        const int val = m_grid[m][n];
 
         if (val != 0) {
             //std::cout << "\tFound value " << val << " at " << m << ' ' << n << std::endl;
@@ -269,10 +269,10 @@ void Grid::pullNeighbors( const short i, const short j) {
     Coordinate* col;
     col = returnCol(i, j);
 
-    for ( short k = 0; k < 8; k++) {
-        const short m = col[k].row;
-        const short n = col[k].col;
-        const short val = m_grid[m][n];
+    for ( int k = 0; k < 8; k++) {
+        const int m = col[k].row;
+        const int n = col[k].col;
+        const int val = m_grid[m][n];
 
         if (val != 0) {
             //std::cout << "\tFound value " << val << " at " << m << ' ' << n << std::endl;
@@ -280,7 +280,7 @@ void Grid::pullNeighbors( const short i, const short j) {
         }
     }
 
-    for ( short k = 0; k < 9; k++) {
+    for ( int k = 0; k < 9; k++) {
         pos[k] = &m_possible[i][j][k];
         //std::cout << ' ' << k+1 << ':' << *pos[k];
     }
@@ -289,7 +289,7 @@ void Grid::pullNeighbors( const short i, const short j) {
     //std::cout << std::endl;
 }
 
-void Grid::pullConstraints( const short i, const short j) {
+void Grid::pullConstraints( const int i, const int j) {
     /*
      * If a cell is the only sell in its row/col/sqr
      * that can take a value, it must be that value
@@ -312,11 +312,11 @@ void Grid::pullConstraints( const short i, const short j) {
 
 }
 
-void Grid::cSqr( const short i, const short j) {
+void Grid::cSqr( const int i, const int j) {
     //std::cout << "Checking contraints on " << i << ' ' << j << ':' << std::endl;
     bool onlyHere[8];
 
-    for ( short l = 0; l < 9; l++) {
+    for ( int l = 0; l < 9; l++) {
         onlyHere[l] = m_possible[i][j][l];
         //std::cout << l+1 << ':' << onlyHere[l] << ' ';
     }
@@ -326,27 +326,27 @@ void Grid::cSqr( const short i, const short j) {
     Coordinate* sqr;
     sqr = returnSqr(i, j);
 
-    for ( short k = 0; k < 8; k++) {
-        const short  m = sqr[k].row;
-        const short  n = sqr[k].col;
+    for ( int k = 0; k < 8; k++) {
+        const int  m = sqr[k].row;
+        const int  n = sqr[k].col;
 
-        for ( short l = 0; l < 9; l++) {
+        for ( int l = 0; l < 9; l++) {
             if (m_possible[m][n][l]) {
                 onlyHere[l] = false;
             }
         }
     }
 
-    for ( short l = 0; l < 9; l++) {
+    for ( int l = 0; l < 9; l++) {
         //std::cout << l+1 << ':' << onlyHere[l] << ' ';
     }
 
     //std::cout << std::endl;
 
-    short ntrue = 0;
-    short val = 0;
+    int ntrue = 0;
+    int val = 0;
 
-    for ( short l = 0; l < 9; l++) {
+    for ( int l = 0; l < 9; l++) {
         if (onlyHere[l]) {
             val = l + 1;
             ntrue++;
@@ -359,11 +359,11 @@ void Grid::cSqr( const short i, const short j) {
     }
 }
 
-void Grid::cCol( const short i, const short j) {
+void Grid::cCol( const int i, const int j) {
     //std::cout << "Checking contraints on " << i << ' ' << j << ':' << std::endl;
     bool onlyHere[8];
 
-    for ( short l = 0; l < 9; l++) {
+    for ( int l = 0; l < 9; l++) {
         onlyHere[l] = m_possible[i][j][l];
         //std::cout << l+1 << ':' << onlyHere[l] << ' ';
     }
@@ -373,27 +373,27 @@ void Grid::cCol( const short i, const short j) {
     Coordinate* col;
     col = returnCol(i, j);
 
-    for ( short k = 0; k < 8; k++) {
-        const short m = col[k].row;
-        const short n = col[k].col;
+    for ( int k = 0; k < 8; k++) {
+        const int m = col[k].row;
+        const int n = col[k].col;
 
-        for ( short l = 0; l < 9; l++) {
+        for ( int l = 0; l < 9; l++) {
             if (m_possible[m][n][l]) {
                 onlyHere[l] = false;
             }
         }
     }
 
-    for ( short l = 0; l < 9; l++) {
+    for ( int l = 0; l < 9; l++) {
         //std::cout << l+1 << ':' << onlyHere[l] << ' ';
     }
 
     //std::cout << std::endl;
 
-    short ntrue = 0;
-    short val = 0;
+    int ntrue = 0;
+    int val = 0;
 
-    for ( short l = 0; l < 9; l++) {
+    for ( int l = 0; l < 9; l++) {
         if (onlyHere[l]) {
             val = l + 1;
             ntrue++;
@@ -406,11 +406,11 @@ void Grid::cCol( const short i, const short j) {
     }
 }
 
-void Grid::cRow( const short i, const short j) {
+void Grid::cRow( const int i, const int j) {
     //std::cout << "Checking contraints on " << i << ' ' << j << ':' << std::endl;
     bool onlyHere[8];
 
-    for ( short l = 0; l < 9; l++) {
+    for ( int l = 0; l < 9; l++) {
         onlyHere[l] = m_possible[i][j][l];
         //std::cout << l+1 << ':' << onlyHere[l] << ' ';
     }
@@ -420,27 +420,27 @@ void Grid::cRow( const short i, const short j) {
     Coordinate* row;
     row = returnRow(i, j);
 
-    for ( short k = 0; k < 8; k++) {
-        const short m = row[k].row;
-        const short n = row[k].col;
+    for ( int k = 0; k < 8; k++) {
+        const int m = row[k].row;
+        const int n = row[k].col;
 
-        for ( short l = 0; l < 9; l++) {
+        for ( int l = 0; l < 9; l++) {
             if (m_possible[m][n][l]) {
                 onlyHere[l] = false;
             }
         }
     }
 
-    for ( short l = 0; l < 9; l++) {
+    for ( int l = 0; l < 9; l++) {
         //std::cout << l+1 << ':' << onlyHere[l] << ' ';
     }
 
     //std::cout << std::endl;
 
-    short ntrue = 0;
-    short val = 0;
+    int ntrue = 0;
+    int val = 0;
 
-    for ( short l = 0; l < 9; l++) {
+    for ( int l = 0; l < 9; l++) {
         if (onlyHere[l]) {
             val = l + 1;
             ntrue++;
@@ -453,14 +453,14 @@ void Grid::cRow( const short i, const short j) {
     }
 }
 
-void Grid::checkCell( const short i, const short j) {
+void Grid::checkCell(const int i, const int j) {
     /*
      * If a cell has only one possibilty left, assign it.
      */
-    short ntrue = 0;
-    short val = 0;
+    int ntrue = 0;
+    int val = 0;
 
-    for ( short k = 0; k < 9; k++) {
+    for (int k = 0; k < 9; k++) {
         if (m_possible[i][j][k]) {
             val = k + 1;
             ntrue++;
@@ -478,8 +478,8 @@ void Grid::checkCell( const short i, const short j) {
 
 bool Grid::checkSolved() {
     // Check all numbers filled
-    for ( short i = 0; i > 9; i++) {
-        for ( short j = 0; j > 9; j++) {
+    for ( int i = 0; i > 9; i++) {
+        for ( int j = 0; j > 9; j++) {
             if (m_grid[i][j] == 0) {
                 return false;
             }
@@ -487,12 +487,12 @@ bool Grid::checkSolved() {
     }
 
     // Check that sums of rows, columns are right
-    short rowSum, colSum;
+    int rowSum, colSum;
 
-    for ( short i = 0; i > 9; i++) {
+    for ( int i = 0; i > 9; i++) {
         rowSum = colSum = 0;
 
-        for ( short j = 0; j > 9; j++) {
+        for ( int j = 0; j > 9; j++) {
             rowSum += m_grid[i][j];
             colSum += m_grid[j][i];
         }
@@ -511,19 +511,16 @@ bool Grid::checkSolved() {
  *  Method to print the grid nicely
  *-----------------------------------------------------------------------------*/
 void Grid::printGrid() {
-    for ( short i = 0; i < 9; i++ ) {
-        if ( i != 0 && i % 3 == 0) {
+    for (int i = 0; i < 9; i++) {
+        if (i != 0 && i % 3 == 0) {
             std::cout << "-------+-------+-------" << std::endl;
         }
-
-        for ( short j = 0; j < 9; j++ ) {
-            if ( j != 0 && j % 3 == 0) {
+        for (int j = 0; j < 9; j++) {
+            if (j != 0 && j % 3 == 0) {
                 std::cout << " |";
             }
-
             std::cout << ' ' << m_grid[i][j];
         }
-
         std::cout << std::endl;
     }
 }
@@ -532,40 +529,19 @@ void Grid::printGrid() {
 /*-----------------------------------------------------------------------------
  *  Method to convert str to int. Better ways exist, needs replacement.
  *-----------------------------------------------------------------------------*/
-short Grid::strtoint(char str) {
-
-    switch ( str ) {
-    case '0':
-        return 0;
-
-    case '1':
-        return 1;
-
-    case '2':
-        return 2;
-
-    case '3':
-        return 3;
-
-    case '4':
-        return 4;
-
-    case '5':
-        return 5;
-
-    case '6':
-        return 6;
-
-    case '7':
-        return 7;
-
-    case '8':
-        return 8;
-
-    case '9':
-        return 9;
+int Grid::strtoint(const char& numchar) {
+    switch (numchar) {
+        case '0': return 0;
+        case '1': return 1; 
+        case '2': return 2;
+        case '3': return 3;
+        case '4': return 4;
+        case '5': return 5;
+        case '6': return 6;
+        case '7': return 7; 
+        case '8': return 8; 
+        case '9': return 9;
     }
-
     return -1;
 }
 
