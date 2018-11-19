@@ -1,5 +1,4 @@
 # Compiler
-CXX=g++
 CXXFLAGS=-O3 -pipe -Wall -pedantic -Wconversion -Wextra -std=c++11
 RM=rm -f
 
