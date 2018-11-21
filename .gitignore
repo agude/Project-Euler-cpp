@@ -65,3 +65,7 @@ Session.vim
 
 # Don't ignore the library
 !alexlib.*
+
+# Ignore cmake build dir and output dir
+build/
+bin/
