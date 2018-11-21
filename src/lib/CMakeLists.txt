@@ -1,1 +1,1 @@
-add_library(euler alexlib.cpp alexlib.h alexlib.tcc)
+add_library(euler alexlib.cpp)
