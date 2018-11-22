@@ -55,7 +55,7 @@ int main() {
         // The step size is (LENGTH-1)!, but since gamma(N) = (N-1)! we don't
         // need to subtract.
         const uint_fast32_t STEP_SIZE = static_cast<uint_fast32_t>(round(tgamma(digits.size())));
-        const uint_fast32_t DIGIT_PLACE = target / STEP_SIZE;  // We want it to truncate
+        const int_fast32_t DIGIT_PLACE = target / STEP_SIZE;  // We want it to truncate
         // Save the digit as a string, and remove it from our list
         out_num += to_string(digits[DIGIT_PLACE]);
         digits.erase(digits.begin() + DIGIT_PLACE);

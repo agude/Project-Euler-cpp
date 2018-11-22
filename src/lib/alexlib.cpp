@@ -81,7 +81,8 @@ std::vector<bool>* PrimeSieve(const uint_fast64_t& LENGTH) {
     }
 
     // Sieve
-    for (uint_fast64_t i = 2; i < ceil(sqrt(LENGTH)); ++i) {
+    const uint_fast64_t LIMIT = static_cast<uint_fast64_t>(ceil(sqrt(LENGTH)));
+    for (uint_fast64_t i = 2; i < LIMIT; ++i) {
         if (primes->at(i)) {
             for (uint_fast64_t j = i * i; j < LENGTH; j += i) {
                 primes->at(j) = false;
