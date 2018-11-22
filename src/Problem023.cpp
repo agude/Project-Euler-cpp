@@ -45,13 +45,13 @@ int main() {
 
     // It is provably true that 28123 is the last number, but it can be
     // exhaustively shown that the lower bounds is actually 20161
-    const int MAX = 20161;
-    set<int> abundant_numbers;
+    const uint_fast16_t MAX = 20161;
+    set<uint_fast16_t> abundant_numbers;
 
     // Find abundant numbers, we keep going until we find one larger than MAX.
     // This insures that when testing our trial numbers later we know to end
     // when (trial - abundant) < 0.
-    int i = 0;
+    uint_fast16_t i = 0;
     while (true) {
         ++i;
         if (SumOfProperFactors(i) > i) {
@@ -68,10 +68,10 @@ int main() {
     // (abundant) less than that number and see if the resulting differences
     // are abundant. If none of them are, we have found a number which is not
     // the sum of two abundant numbers.
-    int sum = 0;
-    for (int trial = 0; trial <= MAX + 1; ++trial) {
+    uint_fast32_t sum = 0;
+    for (uint_fast16_t trial = 0; trial <= MAX + 1; ++trial) {
         for (auto& abundant : abundant_numbers) {
-            const int RESULT = trial - abundant;
+            const int_fast16_t RESULT = trial - abundant;
             if (RESULT >= 0) {
                 // If RESULT is also abundant, the trial is the sum of two
                 // abundant numbers, and we don't want it.

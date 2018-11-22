@@ -44,9 +44,9 @@
 #include <iostream>  // std::cout, std::endl
 
 int main() {
-    int largest_product = -1;
+    uint_fast32_t largest_product = 0;
 
-    const int GRID[20][20] = {
+    const uint_fast8_t GRID[20][20] = {
         {8,  2,  22, 97, 38, 15, 0,  40, 0,  75, 4,  5,  7,  78, 52, 12, 50, 77, 91, 8},
         {49, 49, 99, 40, 17, 81, 18, 57, 60, 87, 17, 40, 98, 43, 69, 48, 4,  56, 62, 0},
         {81, 49, 31, 73, 55, 79, 14, 29, 93, 71, 40, 67, 53, 88, 30, 3,  49, 13, 36, 65},
@@ -69,36 +69,36 @@ int main() {
         {1,  70, 54, 71, 83, 51, 54, 69, 16, 92, 33, 48, 61, 43, 52, 1,  89, 19, 67, 48}
     };
 
-    for (int col = 0; col < 16; col++) {
-        for (int row = 0; row < 20; row++) {
+    for (uint_fast8_t col = 0; col < 16; col++) {
+        for (uint_fast8_t row = 0; row < 20; row++) {
 
             /* Check all rows and columns */
-            const int row_sum = GRID[row][col] * GRID[row][col + 1]
+            const uint_fast32_t row_product = GRID[row][col] * GRID[row][col + 1]
                 * GRID[row][col + 2] * GRID[row][col + 3];
-            const int col_sum = GRID[col][row] * GRID[col + 1][row] 
+            const uint_fast32_t col_product = GRID[col][row] * GRID[col + 1][row] 
                 * GRID[col + 2][row] * GRID[col + 3][row];
 
-            if (row_sum > largest_product) {
-                largest_product = row_sum;
+            if (row_product > largest_product) {
+                largest_product = row_product;
             }
 
-            if (col_sum > largest_product) {
-                largest_product = col_sum;
+            if (col_product > largest_product) {
+                largest_product = col_product;
             }
             /* Check all diagonals */
             if (row < 16) {
-                // Summing down and right
-                const int back_sum  = GRID[row][col] * GRID[row + 1][col + 1]
+                // Taking the product down and right
+                const uint_fast32_t back_product  = GRID[row][col] * GRID[row + 1][col + 1]
                     * GRID[row + 2][col + 2] * GRID[row + 3][col + 3];
-                // Summing down and left
-                const int slash_sum = GRID[row][col + 3] * GRID[row + 1][col + 2]
+                // Taking the product down and left
+                const uint_fast32_t slash_product = GRID[row][col + 3] * GRID[row + 1][col + 2]
                     * GRID[row + 2][col + 1] * GRID[row + 3][col];
-                if (back_sum > largest_product) {
-                    largest_product = back_sum;
+                if (back_product > largest_product) {
+                    largest_product = back_product;
                 }
 
-                if (slash_sum > largest_product) {
-                    largest_product = slash_sum;
+                if (slash_product > largest_product) {
+                    largest_product = slash_product;
                 }
             }
         }

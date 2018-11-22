@@ -34,8 +34,8 @@
 int main() {
 
     // Set up constants used in the problem
-    const std::vector<int> COIN_VALUES = {1, 2, 5, 10, 20, 50, 100, 200};
-    const int MAX = 200; // pence
+    const std::vector<uint_fast8_t> COIN_VALUES = {1, 2, 5, 10, 20, 50, 100, 200};
+    const uint_fast8_t MAX = 200; // pence
 
     /* If we want to know how many ways we can make change for a total price of
      * 4p, then using 1p coins it is equal to the number of ways we can make
@@ -46,8 +46,8 @@ int main() {
      */
 
     // Fill the map
-    std::map<int, int> combinations;
-    for (int i = 0; i <= MAX; ++i) {
+    std::map<int_fast16_t, int_fast16_t> combinations;
+    for (uint_fast8_t i = 0; i <= MAX; ++i) {
         combinations[i] = 0;
     }
     combinations[0] = 1;
@@ -59,7 +59,7 @@ int main() {
          * legal ways we've found so far to make change for the current value
          * minus the value of the coin.
          */
-        for (int target = coin_value; target <= MAX; ++target) {
+        for (uint_fast8_t target = coin_value; target <= MAX; ++target) {
             combinations[target] += combinations[target - coin_value];
         }
     }

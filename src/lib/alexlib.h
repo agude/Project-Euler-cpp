@@ -17,29 +17,29 @@
 #ifndef ALEXLIB_H_
 #define ALEXLIB_H_
 
-#include <inttypes.h>  // int64_t
+#include <inttypes.h>  // uint_fast64_t
 #include <vector>  // std::vector
 
 
-int TriangleNumber(const int& NTH);
+uint_fast32_t TriangleNumber(const uint_fast32_t& NTH);
 
-bool IsPrime(const int64_t& number);
+bool IsPrime(const uint_fast64_t& number);
 
-std::vector<bool>* PrimeSieve(const int64_t& LENGTH);
+std::vector<bool>* PrimeSieve(const uint_fast64_t& LENGTH);
 
-std::vector<int64_t>* PrimeFactors(const int64_t NUMBER);
+std::vector<uint_fast64_t>* PrimeFactors(const uint_fast64_t NUMBER);
 
 bool IsPolygonal(
-        const int64_t& NUMBER,
-        const int& MULTIPLIER,
+        const uint_fast64_t& NUMBER,
+        const uint_fast32_t& MULTIPLIER,
         const double& DIVISOR
         );
 
-bool IsTriangular(const int64_t& NUMBER);
+bool IsTriangular(const uint_fast64_t& NUMBER);
 
-bool IsPentagonal(const int64_t& NUMBER);
+bool IsPentagonal(const uint_fast64_t& NUMBER);
 
-bool IsHexagonal(const int64_t& NUMBER);
+bool IsHexagonal(const uint_fast64_t& NUMBER);
 
 template <class T>
 std::vector<T>* Factors(const T& NUMBER);

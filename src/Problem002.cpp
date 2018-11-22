@@ -28,9 +28,9 @@
 #include <iostream>  // std::cout, std::endl
 
 int main() {
-    int total = 0;
-    int current_fib_number = 1;
-    int previous_fib_number = 1;
+    uint_fast32_t total = 0;
+    uint_fast32_t current_fib_number = 1;
+    uint_fast32_t previous_fib_number = 1;
 
     // If the Fibonacci number is even, add to total
     while (current_fib_number <= 1000000) {
@@ -39,7 +39,7 @@ int main() {
         }
 
         // Create the next Fibonacci number
-        const int tmp = current_fib_number;
+        const uint_fast32_t tmp = current_fib_number;
         current_fib_number += previous_fib_number;
         previous_fib_number = tmp;
     }

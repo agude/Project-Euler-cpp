@@ -32,14 +32,15 @@
 
 
 int main() {
-    int sum = 0;
+    uint_fast32_t sum = 0;
 
     // Brute force search the full range for amicable numbers
-    for (int number_a = 1; number_a < 10000; number_a++) {
-        const int NUMBER_B = SumOfFactors(number_a);
+    for (uint_fast16_t number_a = 1; number_a < 10000; number_a++) {
+        const uint_fast16_t NUMBER_B = SumOfFactors(number_a);
         if (NUMBER_B > number_a) {  // Avoid double counting
             if (number_a == SumOfFactors(NUMBER_B)) {
                 sum += (number_a + NUMBER_B);
+                std::cout << number_a << " and " << NUMBER_B << std::endl;
             }
         }
     }

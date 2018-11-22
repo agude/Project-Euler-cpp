@@ -20,7 +20,7 @@
 #include <cmath>  // std::sqrt, std::floor, std::abs, std::ceil
 //#include <iostream>  // std::cout, std::endl
 
-int TriangleNumber(const int& NTH) {
+uint_fast32_t TriangleNumber(const uint_fast32_t& NTH) {
     /*
      * Returns the Nth triangle number. The Nth triangle number is equal to the
      * sum of all numbers from 1 to N.
@@ -30,7 +30,7 @@ int TriangleNumber(const int& NTH) {
     return NTH * (NTH + 1) / 2;
 }
 
-bool IsPrime(const int64_t& INPUT_NUM) {
+bool IsPrime(const uint_fast64_t& INPUT_NUM) {
     using std::sqrt;
     using std::floor;
     // We hard code in a few cases, then test in general
@@ -46,8 +46,8 @@ bool IsPrime(const int64_t& INPUT_NUM) {
         return false;
     } else {
         const double FLOOR_ROOT = floor(sqrt(INPUT_NUM));
-        const int R = static_cast<int>(FLOOR_ROOT);
-        int f = 5;
+        const uint_fast32_t R = static_cast<uint_fast32_t>(FLOOR_ROOT);
+        uint_fast32_t f = 5;
 
         while (f <= R) {
             if (INPUT_NUM % f == 0) {
@@ -62,7 +62,7 @@ bool IsPrime(const int64_t& INPUT_NUM) {
     }
 }
 
-std::vector<bool>* PrimeSieve(const int64_t& LENGTH) {
+std::vector<bool>* PrimeSieve(const uint_fast64_t& LENGTH) {
     using std::ceil;
     using std::fill;
     using std::sqrt;
@@ -81,9 +81,9 @@ std::vector<bool>* PrimeSieve(const int64_t& LENGTH) {
     }
 
     // Sieve
-    for (int64_t i = 2; i < ceil(sqrt(LENGTH)); ++i) {
+    for (uint_fast64_t i = 2; i < ceil(sqrt(LENGTH)); ++i) {
         if (primes->at(i)) {
-            for (int64_t j = i * i; j < LENGTH; j += i) {
+            for (uint_fast64_t j = i * i; j < LENGTH; j += i) {
                 primes->at(j) = false;
             }
         }
@@ -91,20 +91,20 @@ std::vector<bool>* PrimeSieve(const int64_t& LENGTH) {
     return primes;
 }
 
-std::vector<int64_t>* PrimeFactors(const int64_t NUMBER) {
+std::vector<uint_fast64_t>* PrimeFactors(const uint_fast64_t NUMBER) {
     using std::ceil;
     using std::sqrt;
     using std::vector;
     // We only need to test up to the square root of the number, if this fails
     // we know it's prime
-    const int64_t LIMIT = static_cast<int64_t>(ceil(sqrt(NUMBER)));
+    const uint_fast64_t LIMIT = static_cast<uint_fast64_t>(ceil(sqrt(NUMBER)));
     vector<bool> const * const PRIMES = PrimeSieve(LIMIT);
 
-    int64_t current_number = NUMBER;
-    vector<int64_t>* prime_factors = new vector<int64_t>();
+    uint_fast64_t current_number = NUMBER;
+    vector<uint_fast64_t>* prime_factors = new vector<uint_fast64_t>();
     // We try dividing through by primes until our number reaches 1, then
     // return the list of primes
-    for (int64_t i = 0; i < LIMIT; ++i) {
+    for (uint_fast64_t i = 0; i < LIMIT; ++i) {
         if (PRIMES->at(i) && current_number % i == 0) {  // Is Prime
             do {
                 current_number = current_number / i;
@@ -120,8 +120,8 @@ std::vector<int64_t>* PrimeFactors(const int64_t NUMBER) {
 }
 
 bool IsPolygonal(
-        const int64_t& NUMBER,
-        const int& MULTIPLIER,
+        const uint_fast64_t& NUMBER,
+        const uint_fast32_t& MULTIPLIER,
         const double& DIVISOR
         ) {
     /*
@@ -138,7 +138,7 @@ bool IsPolygonal(
     return IsPositiveInteger(TEST_NUM);
 }
 
-bool IsTriangular(const int64_t& NUMBER) {
+bool IsTriangular(const uint_fast64_t& NUMBER) {
     /*
      * For Triangular numbers, the formula is:
      *
@@ -147,7 +147,7 @@ bool IsTriangular(const int64_t& NUMBER) {
     return IsPolygonal(NUMBER, 8, 2);
 }
 
-bool IsPentagonal(const int64_t& NUMBER) {
+bool IsPentagonal(const uint_fast64_t& NUMBER) {
     /*
      * For Pentagonal numbers, the formula is:
      *
@@ -156,7 +156,7 @@ bool IsPentagonal(const int64_t& NUMBER) {
     return IsPolygonal(NUMBER, 24, 6);
 }
 
-bool IsHexagonal(const int64_t& NUMBER) {
+bool IsHexagonal(const uint_fast64_t& NUMBER) {
     /*
      * For Hexagonal numbers, the formula is:
      *

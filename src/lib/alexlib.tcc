@@ -31,7 +31,7 @@ std::vector<T>* Factors(const T& NUMBER) {
     // Vector to return
     vector<T>* factors = new vector<T>();
 
-    const T MAX = static_cast<int>(floor(sqrt(NUMBER)));
+    const T MAX = static_cast<T>(floor(sqrt(NUMBER)));
 
     for (T i = 1; i <= MAX; ++i) {
         if (NUMBER % i == 0) {

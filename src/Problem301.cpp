@@ -45,10 +45,9 @@
  */
 
 #include <iostream>  // std::cout, std::endl
-#include <inttypes.h>  // uint64_t
 
 
-bool IsLoss(const uint64_t& a, const uint64_t& b, const uint64_t& c) {
+bool IsLoss(const uint_fast64_t& a, const uint_fast64_t& b, const uint_fast64_t& c) {
     // If the xor of the positions is 0, then the next player will lose with
     // perfect play.
     if ((a ^ b ^ c) == 0) {
@@ -59,11 +58,11 @@ bool IsLoss(const uint64_t& a, const uint64_t& b, const uint64_t& c) {
 }
 
 int main() {
-    const uint64_t MAX = 1073741824;
-    uint64_t counter = 0;
+    const uint_fast64_t MAX = 1073741824;
+    uint_fast64_t counter = 0;
 
     // Test all possible games
-    for (uint64_t i = 1; i <= MAX; ++i) {
+    for (uint_fast64_t i = 1; i <= MAX; ++i) {
         if (IsLoss(i, 2 * i, 3 * i)) {
             counter++;
         }

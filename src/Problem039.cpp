@@ -30,34 +30,35 @@
 int main() {
 
     // Set up constants used in the problem
-    const int MAX = 1000;
+    const uint_fast16_t MAX = 1000;
 
     /* We note that are three cases:
      *  a even, b even -> c even -> p even
      *  a odd,  b odd  -> c even -> p even
      *  a even, b odd  -> c odd  -> p even
-
+     *
      * So we need only check even parameters
-
+     *
      * We further note that the triangle inequality holds:
      *  a + b > c --> a + b + c > 2c --> p > 2c --> p/2 > c
      *  c > a or b, hence p / 2 > c or a or b
      *  So a and be need only run up to p/2
      */
 
-    int best_combos = 0;
-    int best_parameter = 0;
-    for (int parameter = 12; parameter <= MAX; parameter += 2) {
-        int combos = 0;
-        for (int a = 1; a < parameter / 2; ++a) {
+    uint_fast16_t best_combos = 0;
+    uint_fast16_t best_parameter = 0;
+    for (uint_fast16_t parameter = 12; parameter <= MAX; parameter += 2) {
+        uint_fast16_t combos = 0;
+        for (uint_fast16_t a = 1; a < parameter / 2; ++a) {
             // b + a can't be larger than parameter, and b can't be larger than
             // half the parameter, so the limit on b is the minimum of these two
-            const int MAX_B = std::min(parameter - a, parameter / 2);
-            for (int b = 1; b < MAX_B; ++b) {
-                double c = sqrt(a * a + b * b);
-                if (a + b + c == parameter) {
-                    // Check that c is integral
-                    if (trunc(c) == c) {
+            const uint_fast16_t MAX_B = std::min(parameter - a, parameter / 2);
+            for (uint_fast16_t b = 1; b < MAX_B; ++b) {
+                const double C = sqrt(static_cast<double>(a * a + b * b));
+                // Check that c is integral
+                if (trunc(C) == C) {
+                    const uint_fast16_t INT_C = static_cast<uint_fast16_t>(C);
+                    if (a + b + INT_C == parameter) {
                         ++combos;
                     }
                 }

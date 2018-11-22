@@ -24,8 +24,8 @@
 
 #include <iostream>  // std::cout, std::endl
 
-int Reverse(int number) {
-    int reversed = 0;
+uint_fast32_t Reverse(uint_fast32_t number) {
+    uint_fast32_t reversed = 0;
 
     while (number > 0) {
         reversed = 10 * reversed + number % 10;
@@ -35,20 +35,20 @@ int Reverse(int number) {
     return reversed;
 }
 
-bool IsPalindromic(const int& number) {
+bool IsPalindromic(const uint_fast32_t& number) {
     return number == Reverse(number);
 }
 
 int main() {
-    int palindromic = 0;
-    int best_i = 0;
-    int best_j = 0;
+    uint_fast32_t palindromic = 0;
+    uint_fast16_t best_i = 0;
+    uint_fast16_t best_j = 0;
 
     // We try all combinations where j > i (j < i have already been tested) and
     // save the largest
-    for (int i = 999; i > 100; --i) {
-        for (int j = 999; j >= i; --j) {
-            const int test_number = i * j;
+    for (uint_fast16_t i = 999; i > 100; --i) {
+        for (uint_fast16_t j = 999; j >= i; --j) {
+            const uint_fast32_t test_number = i * j;
             if (test_number > palindromic && IsPalindromic(test_number)) {
                 palindromic = test_number;
                 best_i = i;

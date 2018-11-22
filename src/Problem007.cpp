@@ -37,14 +37,14 @@ int main() {
     //     N * log(N) + N * log(log(N))
     //
     // We use this bound to set the upper bound of the prime sieve.
-    const int PRIME_LIMIT = 10001;
-    const int BOUND = static_cast<int>(PRIME_LIMIT * (log(PRIME_LIMIT) + log(log(PRIME_LIMIT))));
+    const uint_fast16_t PRIME_LIMIT = 10001;
+    const uint_fast32_t BOUND = static_cast<uint_fast32_t>(PRIME_LIMIT * (log(PRIME_LIMIT) + log(log(PRIME_LIMIT))));
 
     // Sieve the primes up to our bound
     vector<bool> const * const PRIMES = PrimeSieve(BOUND);
-    int counter = 0;
-    int prime = 0;
-    for (int i = 0; i < BOUND; ++i) {
+    uint_fast32_t counter = 0;
+    uint_fast32_t prime = 0;
+    for (uint_fast32_t i = 0; i < BOUND; ++i) {
         if (PRIMES->at(i)) {
             ++counter;
         }

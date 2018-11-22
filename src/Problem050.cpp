@@ -31,32 +31,31 @@
 
 #include <iostream>  // std::cout, std::endl
 #include <vector>  // std::vector
-#include <inttypes.h>  // int64_t
 
 #include "lib/alexlib.h"
 
 
 int main() {
     // Sieve all primes under 1 million
-    const int MAX = 1000000;
+    const uint_fast32_t MAX = 1000000;
     std::vector<bool> const * const IS_PRIME = PrimeSieve(MAX);
 
     // Make an array of just the primes
-    std::vector<int> primes;
-    for (int i = 0; i < MAX; ++i) {
+    std::vector<uint_fast32_t> primes;
+    for (uint_fast32_t i = 0; i < MAX; ++i) {
         if (IS_PRIME->at(i)) {
             primes.push_back(i);
         }
     }
-    const int N_PRIMES = static_cast<int>(primes.size());
+    const uint_fast32_t N_PRIMES = static_cast<uint_fast32_t>(primes.size());
 
     // Put a limit on the maximum number of primes we can sum together without
     // go over MAX. We start at the lowest prime because this will give us the
     // most primes, and hence the more stringent limit.
-    int max_length = 0;
-    int total = 0;
+    uint_fast32_t max_length = 0;
+    uint_fast32_t total = 0;
 
-    for (int i = 0; i < N_PRIMES; ++i) {
+    for (uint_fast32_t i = 0; i < N_PRIMES; ++i) {
         total += primes[i];
         if (total < MAX) {
             max_length++;
@@ -65,18 +64,18 @@ int main() {
 
     // We now sum numbers from our primes list and test to see if the result is
     // also prime
-    int64_t prime_from_sum = 0;
-    int longest_length = 0;
+    uint_fast64_t prime_from_sum = 0;
+    uint_fast16_t longest_length = 0;
 
-    for (int test_length = max_length; test_length >= 2; test_length--) {
+    for (uint_fast32_t test_length = max_length; test_length >= 2; test_length--) {
         if (test_length < longest_length) {
             break;
         }
 
-        for (int start = 0; start < N_PRIMES - test_length; start++) {
-            int64_t test_sum = 0;
+        for (uint_fast32_t start = 0; start < N_PRIMES - test_length; start++) {
+            uint_fast64_t test_sum = 0;
 
-            for (int i = start; i < start + test_length; i++) {
+            for (uint_fast32_t i = start; i < start + test_length; i++) {
                 test_sum += primes[i];
             }
 

@@ -21,7 +21,7 @@
  */
 
 #include <iostream>  // std::cout, std::endl
-#include <inttypes.h>  // int64_t
+#include <inttypes.h>  // uint_fast64_t
 
 #include "lib/alexlib.h"  // IsPrime
 
@@ -30,9 +30,9 @@ int main() {
      * We loop over all odd numbers from 3 to 2 million and add the primes. We
      * add in the only even prime, 2, by hand.
      */
-    int64_t sum = 2;
+    uint_fast64_t sum = 2;
 
-    for (int64_t test_number = 3; test_number < 2000000; test_number += 2) {
+    for (uint_fast32_t test_number = 3; test_number < 2000000; test_number += 2) {
         if (IsPrime(test_number)) {
             sum += test_number;
         }

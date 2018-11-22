@@ -42,12 +42,12 @@
 #include "lib/alexlib.h"  // NumberOfFactors, TriangleNumber
 
 int main() {
-    int i = 1;
+    uint_fast16_t i = 1;
 
     // We try all numbers until we reach 500 factors
     while (true) {
-        const int TRIANGLE_NUMBER = TriangleNumber(i);
-        const int NUMBER_OF_FACTORS = NumberOfFactors(TRIANGLE_NUMBER);
+        const uint_fast32_t TRIANGLE_NUMBER = TriangleNumber(i);
+        const uint_fast16_t NUMBER_OF_FACTORS = NumberOfFactors(TRIANGLE_NUMBER);
 
         if (NUMBER_OF_FACTORS > 500) {
             std::cout << TRIANGLE_NUMBER << std::endl;

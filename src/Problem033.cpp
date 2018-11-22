@@ -32,16 +32,16 @@
 #include <iostream>  // std::cout, std::endl
 
 int main() {
-    int numerator_product = 1;
-    int denominator_product = 1;
+    uint_fast16_t numerator_product = 1;
+    uint_fast16_t denominator_product = 1;
 
     // Try all fractions of the following form:
     // ij / jk (where, for example, 41 as a numerator yields i = 4, j = 1)
-    for (int i = 1; i < 10; i++) {
-        for (int j = 1; j < 10; j++) {
-            for (int k = 1; k < 10; k++) {
-                const int NUMERATOR = 10 * i + j;
-                const int DENOMINATOR = j * 10 + k;
+    for (uint_fast8_t i = 1; i < 10; i++) {
+        for (uint_fast8_t j = 1; j < 10; j++) {
+            for (uint_fast8_t k = 1; k < 10; k++) {
+                const uint_fast16_t NUMERATOR = 10 * i + j;
+                const uint_fast16_t DENOMINATOR = j * 10 + k;
 
                 if ( NUMERATOR < DENOMINATOR && NUMERATOR * k == DENOMINATOR * i ) {
                     //std::cout << i << j << " / " << j << k << std::endl;

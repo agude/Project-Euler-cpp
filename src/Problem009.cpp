@@ -29,12 +29,12 @@
 int main() {
     // We loop over all numbers such that a + b + c = 1000. a is already
     // determined once we have b and c.
-    for (int c = 998; c > 0; c--) {
-        for (int b = 1000 - c - 1; b > 0; b--) {
-            const int A = 1000 - c - b;
+    for (uint_fast16_t c = 998; c > 0; c--) {
+        for (uint_fast16_t b = 1000 - c - 1; b > 0; b--) {
+            const uint_fast16_t A = 1000 - c - b;
             if (A * A + b * b == c * c) {
                 std::cout << A * b * c;
-                std::cout  << " = " << A << " * " << b << " * " << c;
+                std::cout << " = " << A << " * " << b << " * " << c;
                 std::cout << std::endl;
                 return 0;
             }

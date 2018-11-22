@@ -28,7 +28,6 @@
  */
 
 #include <iostream>  // std::cout, std::endl
-#include <inttypes.h>  // int64_t
 
 #include "lib/alexlib.h"  // IsPentagonal
 
@@ -41,8 +40,8 @@ int main() {
      * hexagonal numbers because there are fewer of them, and therefore we have
      * to check fewer numbers before finding the correct result.
      */
-    int n = 144; // H143 satisfies the conditions, so we start after
-    int64_t num = 0;
+    uint_fast32_t n = 144; // H143 satisfies the conditions, so we start after
+    uint_fast64_t num = 0;
 
     // Try hexagonal numbers until we find a match
     while (true) {

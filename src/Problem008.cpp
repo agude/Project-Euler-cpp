@@ -46,7 +46,7 @@
 int main() {
 
     // We hardcode the number as an array of digits
-    const int NUMBER[1000] = {
+    const uint_fast8_t NUMBER[1000] = {
         7, 3, 1, 6, 7, 1, 7, 6, 5, 3, 1, 3, 3, 0, 6, 2, 4, 9, 1, 9, 2, 2, 5, 1,
         1, 9, 6, 7, 4, 4, 2, 6, 5, 7, 4, 7, 4, 2, 3, 5, 5, 3, 4, 9, 1, 9, 4, 9,
         3, 4, 9, 6, 9, 8, 3, 5, 2, 0, 3, 1, 2, 7, 7, 4, 5, 0, 6, 3, 2, 6, 2, 3,
@@ -91,11 +91,11 @@ int main() {
         7, 5, 3, 0, 4, 2, 0, 7, 5, 2, 9, 6, 3, 4, 5, 0
     };
 
-    int product = 0;
+    uint_fast16_t product = 0;
    
     // We brute force our way through the number
-    for (int i = 0; i < 996; i++) {
-        int testProduct = NUMBER[i] * NUMBER[i + 1] * NUMBER[i + 2] * NUMBER[i + 3] * NUMBER[i + 4];
+    for (uint_fast16_t i = 0; i < 996; i++) {
+        uint_fast16_t testProduct = NUMBER[i] * NUMBER[i + 1] * NUMBER[i + 2] * NUMBER[i + 3] * NUMBER[i + 4];
 
         if (testProduct > product) {
             product = testProduct;

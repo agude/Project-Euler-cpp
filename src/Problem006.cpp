@@ -33,18 +33,18 @@
 
 int main() {
     // Brute force loop for sum of squares
-    int sum_of_squares = 0;
+    uint_fast32_t sum_of_squares = 0;
 
-    for (int i = 0; i < 101; i++) {
+    for (uint_fast8_t i = 0; i < 101; i++) {
         sum_of_squares += i * i;
     }
 
     // We used the closed form of the sum:
     // (1 + 2 + .. + N) ** 2 = (N * (N + 1) / 2) ** 2
-    const int N = 100;
-    const int SQUARE_OF_SUM = (N * (N + 1)) * (N * (N + 1)) / 4;
+    const uint_fast8_t N = 100;
+    const uint_fast32_t SQUARE_OF_SUM = (N * (N + 1)) * (N * (N + 1)) / 4;
 
-    const int ANSWER = SQUARE_OF_SUM - sum_of_squares;
+    const uint_fast32_t ANSWER = SQUARE_OF_SUM - sum_of_squares;
 
     std::cout << ANSWER << std::endl;
 

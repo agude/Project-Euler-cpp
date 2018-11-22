@@ -34,10 +34,9 @@
  */
 
 #include <iostream>  // std::cout, std::endl
-#include <inttypes.h>  // int64_t
 
-int ChainLength(int64_t number) {
-    int chain_length = 1;
+uint_fast32_t ChainLength(uint_fast32_t number) {
+    uint_fast32_t chain_length = 1;
 
     // If number is even, n --> n/2;
     // else n --> 3n+1
@@ -53,12 +52,12 @@ int ChainLength(int64_t number) {
 }
 
 int main() {
-    int longest_chain = 0;
-    int64_t longest_start = 0;
+    uint_fast32_t longest_chain = 0;
+    uint_fast32_t longest_start = 0;
 
     // Try all numbers
-    for (int64_t i = 1; i < 1000000; i++) {
-        int chain_length = ChainLength(i);
+    for (uint_fast32_t i = 1; i < 1000000; i++) {
+        uint_fast32_t chain_length = ChainLength(i);
 
         if (chain_length > longest_chain) {
             longest_chain = chain_length;

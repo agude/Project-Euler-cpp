@@ -34,16 +34,16 @@ int main() {
      * By incrementing by 20 * 19, we insure that the number is divisible by 20
      * and 19 (and since they are co-prime we don't skip any numbers).
      */
-    const int LEN_OF_DIVISORS = 8;
-    const int DIVISORS[LEN_OF_DIVISORS] = {18, 17, 16, 15, 14, 13, 12, 11};
-    const int INCREMENT = 20 * 19;
+    const uint_fast8_t LEN_OF_DIVISORS = 8;
+    const uint_fast8_t DIVISORS[LEN_OF_DIVISORS] = {18, 17, 16, 15, 14, 13, 12, 11};
+    const uint_fast16_t INCREMENT = 20 * 19;
 
-    int test_number = 20 * 19;
+    uint_fast32_t test_number = INCREMENT;
     bool run = true;
 
     while (run) {
-        for (int i = 0; i < LEN_OF_DIVISORS; i++) {
-            int divisor = DIVISORS[i];
+        for (uint_fast8_t i = 0; i < LEN_OF_DIVISORS; i++) {
+            uint_fast8_t divisor = DIVISORS[i];
 
             if (test_number % divisor != 0) {
                 test_number += INCREMENT;

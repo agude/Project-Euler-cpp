@@ -47,15 +47,15 @@ int main() {
     using std::tgamma;
     using std::to_string;
     // Set up the vector of digits and the target number
-    std::vector<int> digits = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-    int target = 1000000 - 1;  // -1 to account for 0 indexed arrays
+    std::vector<uint_fast8_t> digits = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    uint_fast32_t target = 1000000 - 1;  // -1 to account for 0 indexed arrays
 
     string out_num = "";
     while (digits.size() > 0) {
         // The step size is (LENGTH-1)!, but since gamma(N) = (N-1)! we don't
         // need to subtract.
-        const int STEP_SIZE = static_cast<int>(round(tgamma(digits.size())));
-        const int DIGIT_PLACE = target / STEP_SIZE;  // We want it to truncate
+        const uint_fast32_t STEP_SIZE = static_cast<uint_fast32_t>(round(tgamma(digits.size())));
+        const uint_fast32_t DIGIT_PLACE = target / STEP_SIZE;  // We want it to truncate
         // Save the digit as a string, and remove it from our list
         out_num += to_string(digits[DIGIT_PLACE]);
         digits.erase(digits.begin() + DIGIT_PLACE);
