@@ -41,7 +41,6 @@ int main() {
      * remaining numbers until we reach our goal.
      *
      */
-    using std::floor;
     using std::round;
     using std::string;
     using std::tgamma;
@@ -55,10 +54,11 @@ int main() {
         // The step size is (LENGTH-1)!, but since gamma(N) = (N-1)! we don't
         // need to subtract.
         const uint_fast32_t STEP_SIZE = static_cast<uint_fast32_t>(round(tgamma(digits.size())));
-        const int_fast32_t DIGIT_PLACE = target / STEP_SIZE;  // We want it to truncate
+        const uint_fast32_t DIGIT_PLACE = target / STEP_SIZE;  // We want the floor, so integer division is fine
         // Save the digit as a string, and remove it from our list
         out_num += to_string(digits[DIGIT_PLACE]);
-        digits.erase(digits.begin() + DIGIT_PLACE);
+        const int_fast32_t DIGIT_PLACE_SIGNED = static_cast<int_fast32_t>(DIGIT_PLACE);
+        digits.erase(digits.begin() + DIGIT_PLACE_SIGNED);
         // Calculate a new target number (used to determine the digit place)
         target -= DIGIT_PLACE * STEP_SIZE;
     }

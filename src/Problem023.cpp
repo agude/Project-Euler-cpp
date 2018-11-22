@@ -45,8 +45,8 @@ int main() {
 
     // It is provably true that 28123 is the last number, but it can be
     // exhaustively shown that the lower bounds is actually 20161
-    const uint_fast16_t MAX = 20161;
-    set<uint_fast16_t> abundant_numbers;
+    const int_fast16_t MAX = 20161;
+    set<int_fast16_t> abundant_numbers;
 
     // Find abundant numbers, we keep going until we find one larger than MAX.
     // This insures that when testing our trial numbers later we know to end
@@ -68,8 +68,8 @@ int main() {
     // (abundant) less than that number and see if the resulting differences
     // are abundant. If none of them are, we have found a number which is not
     // the sum of two abundant numbers.
-    uint_fast32_t sum = 0;
-    for (uint_fast16_t trial = 0; trial <= MAX + 1; ++trial) {
+    int_fast32_t sum = 0;
+    for (int_fast16_t trial = 0; trial <= MAX + 1; ++trial) {
         for (auto& abundant : abundant_numbers) {
             const int_fast16_t RESULT = trial - abundant;
             if (RESULT >= 0) {
