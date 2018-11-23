@@ -31,12 +31,13 @@ int main() {
      * guaranteed by their inclusion (for example, a number divisible by 5 or
      * by 4 is also divisible by 20).
      *
-     * By incrementing by 20 * 19, we insure that the number is divisible by 20
-     * and 19 (and since they are co-prime we don't skip any numbers).
+     * By incrementing by 20 * 19 * 17 * 13 * 11, we insure that the number is
+     * divisible by those numbers (and since they are coprime we don't skip
+     * any numbers).
      */
-    const uint_fast8_t LEN_OF_DIVISORS = 8;
-    const uint_fast8_t DIVISORS[LEN_OF_DIVISORS] = {18, 17, 16, 15, 14, 13, 12, 11};
-    const uint_fast16_t INCREMENT = 20 * 19;
+    const uint_fast8_t LEN_OF_DIVISORS = 5;
+    const uint_fast8_t DIVISORS[LEN_OF_DIVISORS] = {18, 16, 15, 14, 12};
+    const uint_fast16_t INCREMENT = 20 * 19 * 17 * 13 * 11;
 
     uint_fast32_t test_number = INCREMENT;
     bool run = true;
@@ -48,7 +49,7 @@ int main() {
             if (test_number % divisor != 0) {
                 test_number += INCREMENT;
                 break;
-            } else if (i == 7) {
+            } else if (i == (LEN_OF_DIVISORS - 1)) {
                 run = false;
                 break;
             }
