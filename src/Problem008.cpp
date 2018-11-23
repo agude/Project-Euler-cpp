@@ -40,8 +40,9 @@
  *
  */
 
-#include <iostream>  // std::cout, std::endl
-#include <math.h>
+#include <iostream>   // std::cout, std::endl
+#include <algorithm>  // std::max
+
 
 int main() {
 
@@ -92,14 +93,11 @@ int main() {
     };
 
     uint_fast16_t product = 0;
-   
+
     // We brute force our way through the number
     for (uint_fast16_t i = 0; i < 996; i++) {
         uint_fast16_t testProduct = NUMBER[i] * NUMBER[i + 1] * NUMBER[i + 2] * NUMBER[i + 3] * NUMBER[i + 4];
-
-        if (testProduct > product) {
-            product = testProduct;
-        }
+        product = std::max(testProduct, product);
     }
 
     std::cout << product << std::endl;
