@@ -14,8 +14,8 @@
 // along with this program; if not, write to the Free Software Foundation,
 // Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-#ifndef ALEXLIB_H_
-#define ALEXLIB_H_
+#ifndef PRIMESLIB_H_
+#define PRIMESLIB_H_
 
 #include <inttypes.h>  // uint_fast64_t
 #include <vector>  // std::vector
@@ -28,4 +28,4 @@ std::vector<bool>* PrimeSieve(const uint_fast64_t& LENGTH);
 std::vector<uint_fast64_t>* PrimeFactors(const uint_fast64_t NUMBER);
 
 
-#endif  // ALEXLIB_H_
+#endif  // PRIMESLIB_H_
