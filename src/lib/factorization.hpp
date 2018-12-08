@@ -40,7 +40,8 @@ std::vector<T>* Factors(const T& NUMBER) {
 
             if (FACTOR_0 == FACTOR_1) {
                 factors->push_back(FACTOR_0);
-            } else {
+            }
+            else {
                 factors->push_back(FACTOR_0);
                 factors->push_back(FACTOR_1);
             }
@@ -55,7 +56,7 @@ T NumberOfFactors(const T& NUMBER) {
     /*
      * Given a number, returns the number of factors.
      */
-    vector<T> const * const FACTORS = Factors(NUMBER);
+    vector<T> const* const FACTORS = Factors(NUMBER);
     return static_cast<T>(FACTORS->size());
 }
 
@@ -74,7 +75,7 @@ T SumOfFactors(const T& NUMBER) {
     /*
      * Given a number, returns the number of factors.
      */
-    vector<T> const * const FACTORS = Factors(NUMBER);
+    vector<T> const* const FACTORS = Factors(NUMBER);
     const T INITIAL_VALUE = 0;
     return accumulate(FACTORS->begin(), FACTORS->end(), INITIAL_VALUE);
 }

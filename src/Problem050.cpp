@@ -38,7 +38,7 @@
 int main() {
     // Sieve all primes under 1 million
     const uint_fast32_t MAX = 1000000;
-    std::vector<bool> const * const IS_PRIME = PrimeSieve(MAX);
+    std::vector<bool> const* const IS_PRIME = PrimeSieve(MAX);
 
     // Make an array of just the primes
     std::vector<uint_fast32_t> primes;
@@ -81,7 +81,8 @@ int main() {
 
             if (test_sum > MAX) {
                 break;
-            } else if (IS_PRIME->at(test_sum) && test_length > longest_length) {
+            }
+            else if (IS_PRIME->at(test_sum) && test_length > longest_length) {
                 prime_from_sum = test_sum;
                 longest_length = test_length;
             }

@@ -32,10 +32,10 @@ uint_fast32_t TriangleNumber(const uint_fast32_t& NTH) {
 
 
 bool IsPolygonal(
-        const uint_fast64_t& NUMBER,
-        const uint_fast32_t& MULTIPLIER,
-        const double& DIVISOR
-        ) {
+    const uint_fast64_t& NUMBER,
+    const uint_fast32_t& MULTIPLIER,
+    const double& DIVISOR
+) {
     /*
      * A general formula for checking if a number, N, is polygonal is to check
      * if P is a natural number, with:

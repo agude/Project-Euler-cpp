@@ -26,7 +26,7 @@
 #include "lib/primes.h"  // IsPrime
 
 int main() {
-    /* 
+    /*
      * We loop over all odd numbers from 3 to 2 million and add the primes. We
      * add in the only even prime, 2, by hand.
      */

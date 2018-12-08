@@ -34,7 +34,7 @@ int main() {
     const uint_fast64_t NUMBER = 600851475143;
 
     // We find all the prime factors, then the largest is the final one
-    vector<uint_fast64_t> const * const PRIME_FACTORS = PrimeFactors(NUMBER);
+    vector<uint_fast64_t> const* const PRIME_FACTORS = PrimeFactors(NUMBER);
 
     cout << PRIME_FACTORS->back() << endl;
     return 0;

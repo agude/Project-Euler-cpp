@@ -26,15 +26,20 @@ bool IsPrime(const uint_fast64_t& INPUT_NUM) {
     // We hard code in a few cases, then test in general
     if (INPUT_NUM < 2) {  // 0, 1 and negative are not prime
         return false;
-    } else if (INPUT_NUM < 4) {  // 3 is prime
+    }
+    else if (INPUT_NUM < 4) {    // 3 is prime
         return true;
-    } else if (INPUT_NUM % 2 == 0) {  // even numbers are not prime
+    }
+    else if (INPUT_NUM % 2 == 0) {    // even numbers are not prime
         return false;
-    } else if (INPUT_NUM < 9) {  // 6, 8 has been removed above
+    }
+    else if (INPUT_NUM < 9) {    // 6, 8 has been removed above
         return true;
-    } else if (INPUT_NUM % 3 == 0) {  // numbers divisible by 3 are not prime
+    }
+    else if (INPUT_NUM % 3 == 0) {    // numbers divisible by 3 are not prime
         return false;
-    } else {
+    }
+    else {
         const double FLOOR_ROOT = floor(sqrt(INPUT_NUM));
         const uint_fast32_t R = static_cast<uint_fast32_t>(FLOOR_ROOT);
         uint_fast32_t f = 5;
@@ -42,9 +47,11 @@ bool IsPrime(const uint_fast64_t& INPUT_NUM) {
         while (f <= R) {
             if (INPUT_NUM % f == 0) {
                 return false;
-            } else if (INPUT_NUM % (f + 2) == 0) {
+            }
+            else if (INPUT_NUM % (f + 2) == 0) {
                 return false;
-            } else {
+            }
+            else {
                 f += 6;
             }
         }
@@ -65,9 +72,11 @@ std::vector<bool>* PrimeSieve(const uint_fast64_t& LENGTH) {
     // 0, 1 are not prime
     if (LENGTH >= 2) {
         primes->at(0) = primes->at(1) = false;
-    } else if (LENGTH < 1) {
+    }
+    else if (LENGTH < 1) {
         return NULL;
-    } else {
+    }
+    else {
         primes->at(0) = false;
     }
 
@@ -91,7 +100,7 @@ std::vector<uint_fast64_t>* PrimeFactors(const uint_fast64_t NUMBER) {
     // We only need to test up to the square root of the number, if this fails
     // we know it's prime
     const uint_fast64_t LIMIT = static_cast<uint_fast64_t>(ceil(sqrt(NUMBER)));
-    vector<bool> const * const PRIMES = PrimeSieve(LIMIT);
+    vector<bool> const* const PRIMES = PrimeSieve(LIMIT);
 
     uint_fast64_t current_number = NUMBER;
     vector<uint_fast64_t>* prime_factors = new vector<uint_fast64_t>();
@@ -105,7 +114,8 @@ std::vector<uint_fast64_t>* PrimeFactors(const uint_fast64_t NUMBER) {
                 if (current_number <= 1) {
                     return prime_factors;
                 }
-            } while(current_number % i == 0);
+            }
+            while (current_number % i == 0);
         }
     }
     // Should return from the loop

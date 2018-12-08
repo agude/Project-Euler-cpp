@@ -18,7 +18,7 @@
  * The following iterative sequence is defined for the set of positive
  * integers:
  *
- * n --> n/2 (n is even) 
+ * n --> n/2 (n is even)
  * n --> 3n + 1 (n is odd)
  *
  * Using the rule above and starting with 13, we generate the following
@@ -44,7 +44,8 @@ uint_fast32_t ChainLength(uint_fast32_t number) {
         chain_length++;
         if (number % 2 == 0) {
             number = number / 2;
-        } else {
+        }
+        else {
             number = 3 * number + 1;
         }
     }

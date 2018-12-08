@@ -74,9 +74,9 @@ int main() {
 
             /* Check all rows and columns */
             const uint_fast32_t row_product = GRID[row][col] * GRID[row][col + 1]
-                * GRID[row][col + 2] * GRID[row][col + 3];
-            const uint_fast32_t col_product = GRID[col][row] * GRID[col + 1][row] 
-                * GRID[col + 2][row] * GRID[col + 3][row];
+                                              * GRID[row][col + 2] * GRID[row][col + 3];
+            const uint_fast32_t col_product = GRID[col][row] * GRID[col + 1][row]
+                                              * GRID[col + 2][row] * GRID[col + 3][row];
 
             if (row_product > largest_product) {
                 largest_product = row_product;
@@ -89,10 +89,10 @@ int main() {
             if (row < 16) {
                 // Taking the product down and right
                 const uint_fast32_t back_product  = GRID[row][col] * GRID[row + 1][col + 1]
-                    * GRID[row + 2][col + 2] * GRID[row + 3][col + 3];
+                                                    * GRID[row + 2][col + 2] * GRID[row + 3][col + 3];
                 // Taking the product down and left
                 const uint_fast32_t slash_product = GRID[row][col + 3] * GRID[row + 1][col + 2]
-                    * GRID[row + 2][col + 1] * GRID[row + 3][col];
+                                                    * GRID[row + 2][col + 1] * GRID[row + 3][col];
                 if (back_product > largest_product) {
                     largest_product = back_product;
                 }

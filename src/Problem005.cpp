@@ -49,7 +49,8 @@ int main() {
             if (test_number % divisor != 0) {
                 test_number += INCREMENT;
                 break;
-            } else if (i == (LEN_OF_DIVISORS - 1)) {
+            }
+            else if (i == (LEN_OF_DIVISORS - 1)) {
                 run = false;
                 break;
             }

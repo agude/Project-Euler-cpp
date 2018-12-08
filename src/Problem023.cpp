@@ -79,7 +79,8 @@ int main() {
                 if (it != abundant_numbers.end()) {
                     break;
                 }
-            } else if (abundant >= trial) {
+            }
+            else if (abundant >= trial) {
                 // Having gotten this far, we know (through exhaustive search)
                 // that the number can not be written as the sum of abundant
                 // numbers, and so is one we are interested in

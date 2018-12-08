@@ -49,7 +49,8 @@ int main() {
         // If it is also pentagonal, we're done
         if (IsPentagonal(num)) {
             break;
-        } else {
+        }
+        else {
             ++n;
         }
     }

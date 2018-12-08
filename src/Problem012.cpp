@@ -53,7 +53,8 @@ int main() {
         if (NUMBER_OF_FACTORS > 500) {
             std::cout << TRIANGLE_NUMBER << std::endl;
             break;
-        } else {
+        }
+        else {
             i++;
         }
     }

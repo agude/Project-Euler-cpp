@@ -41,7 +41,7 @@ int main() {
     const uint_fast32_t BOUND = static_cast<uint_fast32_t>(PRIME_LIMIT * (log(PRIME_LIMIT) + log(log(PRIME_LIMIT))));
 
     // Sieve the primes up to our bound
-    vector<bool> const * const PRIMES = PrimeSieve(BOUND);
+    vector<bool> const* const PRIMES = PrimeSieve(BOUND);
     uint_fast32_t counter = 0;
     uint_fast32_t prime = 0;
     for (uint_fast32_t i = 0; i < BOUND; ++i) {

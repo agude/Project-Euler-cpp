@@ -23,10 +23,10 @@
 uint_fast32_t TriangleNumber(const uint_fast32_t& NTH);
 
 bool IsPolygonal(
-        const uint_fast64_t& NUMBER,
-        const uint_fast32_t& MULTIPLIER,
-        const double& DIVISOR
-        );
+    const uint_fast64_t& NUMBER,
+    const uint_fast32_t& MULTIPLIER,
+    const double& DIVISOR
+);
 
 bool IsTriangular(const uint_fast64_t& NUMBER);
 

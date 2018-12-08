@@ -43,7 +43,7 @@ int main() {
                 const uint_fast16_t NUMERATOR = 10 * i + j;
                 const uint_fast16_t DENOMINATOR = j * 10 + k;
 
-                if ( NUMERATOR < DENOMINATOR && NUMERATOR * k == DENOMINATOR * i ) {
+                if (NUMERATOR < DENOMINATOR && NUMERATOR * k == DENOMINATOR * i) {
                     //std::cout << i << j << " / " << j << k << std::endl;
                     numerator_product *= NUMERATOR;
                     denominator_product *= DENOMINATOR;
@@ -55,7 +55,8 @@ int main() {
     // Reduce Fraction if possible
     if (denominator_product % numerator_product == 0) {
         std::cout << "1/" << denominator_product / numerator_product << std::endl;
-    } else {
+    }
+    else {
         std::cout << numerator_product << '/' << denominator_product << std::endl;
     }
     return 0;
