@@ -1,2 +1,1 @@
-add_library(euler alexlib.cpp)
-add_library(primes primes.cpp)
+add_library(euler alexlib.cpp primes.cpp polygonal.cpp)

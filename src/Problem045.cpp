@@ -29,7 +29,7 @@
 
 #include <iostream>  // std::cout, std::endl
 
-#include "lib/alexlib.h"  // IsPentagonal
+#include "lib/polygonal.h"  // IsPentagonal
 
 
 int main() {

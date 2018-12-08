@@ -29,5 +29,4 @@ foreach(source_file ${SOURCES})
 
     add_executable(${bin_file} ${source_file})
     target_link_libraries(${bin_file} euler)
-    target_link_libraries(${bin_file} primes)
 endforeach(source_file ${SOURCES})

@@ -1,4 +1,4 @@
-// Copyright (C) 2013  Alexander Gude - alex.public.account+ProjectEulerSolutions@gmail.com
+// Copyright (C) 2018  Alexander Gude - alex.public.account+ProjectEulerSolutions@gmail.com
 
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -14,24 +14,25 @@
 // along with this program; if not, write to the Free Software Foundation,
 // Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-#ifndef ALEXLIB_H_
-#define ALEXLIB_H_
+#ifndef POLYGONALLIB_H_
+#define POLYGONALLIB_H_
 
 #include <inttypes.h>  // uint_fast64_t
-#include <vector>  // std::vector
 
 
-template <class T>
-std::vector<T>* Factors(const T& NUMBER);
+uint_fast32_t TriangleNumber(const uint_fast32_t& NTH);
 
-template <class T>
-T NumberOfFactors(const T& NUMBER);
+bool IsPolygonal(
+        const uint_fast64_t& NUMBER,
+        const uint_fast32_t& MULTIPLIER,
+        const double& DIVISOR
+        );
 
-template <class T>
-T SumOfFactors(const T& NUMBER);
+bool IsTriangular(const uint_fast64_t& NUMBER);
 
-// Templated function implementations
-#include "alexlib.tcc"  // Factors, NumberOfFactors, SumOfFactors
+bool IsPentagonal(const uint_fast64_t& NUMBER);
+
+bool IsHexagonal(const uint_fast64_t& NUMBER);
 
 
-#endif  // ALEXLIB_H_
+#endif  // POLYGONALLIB_H_
