@@ -14,8 +14,8 @@
 // along with this program; if not, write to the Free Software Foundation,
 // Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-#ifndef ALEXLIB_TCC_
-#define ALEXLIB_TCC_
+#ifndef FACTORSLIB_TCC_
+#define FACTORSLIB_TCC_
 
 #include <cmath>  // std::sqrt, std::floor
 #include <numeric>  // std::accumulate
@@ -89,4 +89,4 @@ T SumOfProperFactors(const T& NUMBER) {
 }
 
 
-#endif  // ALEXLIB_TCC_
+#endif  // FACTORSLIB_TCC_

@@ -28,7 +28,7 @@
 
 #include <iostream>  // std::cout, std::endl
 
-#include "lib/alexlib.h"  // SumOfFactors
+#include "lib/factorization.hpp"  // SumOfFactors
 
 
 int main() {
