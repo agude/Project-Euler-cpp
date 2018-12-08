@@ -17,7 +17,7 @@
 #ifndef ALEXLIB_TCC_
 #define ALEXLIB_TCC_
 
-#include <cmath>  // std::sqrt, std::floor, std::abs, std::ceil, std::modf
+#include <cmath>  // std::sqrt, std::floor
 #include <numeric>  // std::accumulate
 #include <vector>  // std::vector
 
@@ -88,55 +88,5 @@ T SumOfProperFactors(const T& NUMBER) {
     return SumOfFactors(NUMBER) - NUMBER;
 }
 
-
-template <class T>
-bool IsInteger(const T& NUMBER) {
-    /*
-     * Returns "true" if NUMBER is an integer (..., -2, -1, 0, 1, 2, ...),
-     * "false" otherwise.
-     */
-    using std::modf;
-    double int_part = 0;
-    double decimal_part = 0;
-    // modf splits a.b into a, and 0.b
-    decimal_part = modf(NUMBER, &int_part);
-    return (decimal_part == 0);
-}
-
-template <class T>
-bool IsPositiveInteger(const T& NUMBER) {
-    /*
-     * Returns "true" if NUMBER is a positive integer (1, 2, 3, ...), "false"
-     * otherwise.
-     */
-    return (NUMBER >= 1 && IsInteger(NUMBER));
-}
-
-template <class T>
-bool IsNonNegativeInteger(const T& NUMBER) {
-    /*
-     * Returns "true" if NUMBER is a nonnegative integer (0, 1, 2, 3, ...),
-     * "false" otherwise.
-     */
-    return (NUMBER >= 0 && IsInteger(NUMBER));
-}
-
-template <class T>
-bool IsNonPositiveInteger(const T& NUMBER) {
-    /*
-     * Returns "true" if NUMBER is a nonpositive integer (0, -1, -2, -3, ...),
-     * "false" otherwise.
-     */
-    return (NUMBER <= 0 && IsInteger(NUMBER));
-}
-
-template <class T>
-bool IsNegativeInteger(const T& NUMBER) {
-    /*
-     * Returns "true" if NUMBER is a negative integer (-1, -2, -3, ...),
-     * "false" otherwise.
-     */
-    return (NUMBER <= -1 && IsInteger(NUMBER));
-}
 
 #endif  // ALEXLIB_TCC_
