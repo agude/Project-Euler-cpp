@@ -39,7 +39,8 @@
 
 #include <iostream>  // std::cout, std::endl
 
-#include "lib/alexlib.h"  // NumberOfFactors, TriangleNumber
+#include "lib/polygonal.h"  // TriangleNumber
+#include "lib/factorization.hpp"  // NumberOfFactors
 
 int main() {
     uint_fast16_t i = 1;

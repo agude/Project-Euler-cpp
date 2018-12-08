@@ -23,7 +23,7 @@
 #include <iostream>  // std::cout, std::endl
 #include <inttypes.h>  // uint_fast64_t
 
-#include "lib/alexlib.h"  // IsPrime
+#include "lib/primes.h"  // IsPrime
 
 int main() {
     /* 

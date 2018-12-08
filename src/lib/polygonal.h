@@ -1,4 +1,4 @@
-// Copyright (C) 2013  Alexander Gude - alex.public.account+ProjectEulerSolutions@gmail.com
+// Copyright (C) 2018  Alexander Gude - alex.public.account+ProjectEulerSolutions@gmail.com
 
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -14,28 +14,25 @@
 // along with this program; if not, write to the Free Software Foundation,
 // Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-/*
- * The prime factors of 13195 are 5, 7, 13 and 29.
- *
- * What is the largest prime factor of the number 600851475143?
- */
+#ifndef POLYGONALLIB_H_
+#define POLYGONALLIB_H_
 
-#include <iostream>  // std::cout, std::endl
-#include <inttypes.h>  // int64_t
-
-#include "lib/primes.h"  // PrimeFactors
+#include <inttypes.h>  // uint_fast64_t
 
 
-int main() {
-    using std::vector;
-    using std::cout;
-    using std::endl;
+uint_fast32_t TriangleNumber(const uint_fast32_t& NTH);
 
-    const uint_fast64_t NUMBER = 600851475143;
+bool IsPolygonal(
+        const uint_fast64_t& NUMBER,
+        const uint_fast32_t& MULTIPLIER,
+        const double& DIVISOR
+        );
 
-    // We find all the prime factors, then the largest is the final one
-    vector<uint_fast64_t> const * const PRIME_FACTORS = PrimeFactors(NUMBER);
+bool IsTriangular(const uint_fast64_t& NUMBER);
 
-    cout << PRIME_FACTORS->back() << endl;
-    return 0;
-}
+bool IsPentagonal(const uint_fast64_t& NUMBER);
+
+bool IsHexagonal(const uint_fast64_t& NUMBER);
+
+
+#endif  // POLYGONALLIB_H_

@@ -32,7 +32,7 @@
 #include <iostream>  // std::cout, std::endl
 #include <vector>  // std::vector
 
-#include "lib/alexlib.h"
+#include "lib/primes.h"
 
 
 int main() {

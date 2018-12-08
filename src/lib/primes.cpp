@@ -1,4 +1,4 @@
-// Copyright (C) 2013  Alexander Gude - alex.public.account+ProjectEulerSolutions@gmail.com
+// Copyright (C) 2018  Alexander Gude - alex.public.account+ProjectEulerSolutions@gmail.com
 
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -14,21 +14,11 @@
 // along with this program; if not, write to the Free Software Foundation,
 // Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-#include "alexlib.h"
+#include "primes.h"
 
 #include <algorithm>  // std::fill
 #include <cmath>  // std::sqrt, std::floor, std::abs, std::ceil
-//#include <iostream>  // std::cout, std::endl
 
-uint_fast32_t TriangleNumber(const uint_fast32_t& NTH) {
-    /*
-     * Returns the Nth triangle number. The Nth triangle number is equal to the
-     * sum of all numbers from 1 to N.
-     *
-     * We use the closed form solution of the sum 1 to N = N * (N + 1) / 2.
-     */
-    return NTH * (NTH + 1) / 2;
-}
 
 bool IsPrime(const uint_fast64_t& INPUT_NUM) {
     using std::sqrt;
@@ -62,6 +52,7 @@ bool IsPrime(const uint_fast64_t& INPUT_NUM) {
     }
 }
 
+
 std::vector<bool>* PrimeSieve(const uint_fast64_t& LENGTH) {
     using std::ceil;
     using std::fill;
@@ -92,6 +83,7 @@ std::vector<bool>* PrimeSieve(const uint_fast64_t& LENGTH) {
     return primes;
 }
 
+
 std::vector<uint_fast64_t>* PrimeFactors(const uint_fast64_t NUMBER) {
     using std::ceil;
     using std::sqrt;
@@ -118,50 +110,4 @@ std::vector<uint_fast64_t>* PrimeFactors(const uint_fast64_t NUMBER) {
     }
     // Should return from the loop
     return NULL;
-}
-
-bool IsPolygonal(
-        const uint_fast64_t& NUMBER,
-        const uint_fast32_t& MULTIPLIER,
-        const double& DIVISOR
-        ) {
-    /*
-     * A general formula for checking if a number, N, is polygonal is to check
-     * if P is a natural number, with:
-     *
-     *     P = (Sqrt(A * N + 1) + 1) / B
-     *
-     * Where A is the MULTIPLIER and B is the DIVISOR. A and B are set for each
-     * type of Polygonal number separately.
-     */
-    using std::sqrt;
-    const double TEST_NUM = (sqrt(MULTIPLIER * NUMBER + 1) + 1) / DIVISOR;
-    return IsPositiveInteger(TEST_NUM);
-}
-
-bool IsTriangular(const uint_fast64_t& NUMBER) {
-    /*
-     * For Triangular numbers, the formula is:
-     *
-     *     P = (Sqrt(8 * N + 1) + 1) / 2
-     */
-    return IsPolygonal(NUMBER, 8, 2);
-}
-
-bool IsPentagonal(const uint_fast64_t& NUMBER) {
-    /*
-     * For Pentagonal numbers, the formula is:
-     *
-     *     P = (Sqrt(24 * N + 1) + 1) / 6
-     */
-    return IsPolygonal(NUMBER, 24, 6);
-}
-
-bool IsHexagonal(const uint_fast64_t& NUMBER) {
-    /*
-     * For Hexagonal numbers, the formula is:
-     *
-     *     P = (Sqrt(8 * N + 1) + 1) / 4
-     */
-    return IsPolygonal(NUMBER, 8, 4);
 }

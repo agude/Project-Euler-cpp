@@ -38,7 +38,7 @@
 #include <iostream>  // std::cout, std::endl
 #include <set>  // std::set
 
-#include "lib/alexlib.h"  // SumOfProperFactors
+#include "lib/factorization.hpp"  // SumOfProperFactors
 
 int main() {
     using std::set;

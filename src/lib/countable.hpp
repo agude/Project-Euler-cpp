@@ -14,70 +14,11 @@
 // along with this program; if not, write to the Free Software Foundation,
 // Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-#ifndef ALEXLIB_TCC_
-#define ALEXLIB_TCC_
+#ifndef COUNTABLELIB_H_
+#define COUNTABLELIB_H_
 
-#include <cmath>  // std::sqrt, std::floor, std::abs, std::ceil, std::modf
-#include <numeric>  // std::accumulate
-#include <vector>  // std::vector
+#include <cmath>  // std::modf
 
-
-template <class T>
-std::vector<T>* Factors(const T& NUMBER) {
-    using std::floor;
-    using std::sqrt;
-    using std::vector;
-
-    // Vector to return
-    vector<T>* factors = new vector<T>();
-
-    const T MAX = static_cast<T>(floor(sqrt(NUMBER)));
-
-    for (T i = 1; i <= MAX; ++i) {
-        if (NUMBER % i == 0) {
-            const T FACTOR_0 = i;
-            const T FACTOR_1 = NUMBER / i;
-
-            if (FACTOR_0 == FACTOR_1) {
-                factors->push_back(FACTOR_0);
-            } else {
-                factors->push_back(FACTOR_0);
-                factors->push_back(FACTOR_1);
-            }
-        }
-    }
-    return factors;
-}
-
-template <class T>
-T NumberOfFactors(const T& NUMBER) {
-    using std::vector;
-    /*
-     * Given a number, returns the number of factors.
-     */
-    vector<T> const * const FACTORS = Factors(NUMBER);
-    return static_cast<T>(FACTORS->size());
-}
-
-template <class T>
-T NumberOfProperFactors(const T& NUMBER) {
-    /*
-     * Given a number, returns the number of proper factors.
-     */
-    return NumberOfFactors(NUMBER) - 1;
-}
-
-template <class T>
-T SumOfFactors(const T& NUMBER) {
-    using std::accumulate;
-    using std::vector;
-    /*
-     * Given a number, returns the number of factors.
-     */
-    vector<T> const * const FACTORS = Factors(NUMBER);
-    const T INITIAL_VALUE = 0;
-    return accumulate(FACTORS->begin(), FACTORS->end(), INITIAL_VALUE);
-}
 
 template <class T>
 T SumOfProperFactors(const T& NUMBER) {
@@ -139,4 +80,5 @@ bool IsNegativeInteger(const T& NUMBER) {
     return (NUMBER <= -1 && IsInteger(NUMBER));
 }
 
-#endif  // ALEXLIB_TCC_
+
+#endif  // COUNTABLELIB_H_
