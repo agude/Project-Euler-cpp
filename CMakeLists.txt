@@ -16,9 +16,9 @@ set(CMAKE_BINARY_DIR ${CMAKE_SOURCE_DIR}/bin)
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 set(LIBRARY_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/obj)
 
-# The Euler library
+# The Euler libraries
 include_directories("${PROJECT_SOURCE_DIR}/src/lib/")
-add_subdirectory(src/lib)  # Defines `euler` library
+add_subdirectory(src/lib)  # Defines various libraries
 
 # Build all the problems
 file(GLOB SOURCES "src/*.cpp")
@@ -29,4 +29,5 @@ foreach(source_file ${SOURCES})
 
     add_executable(${bin_file} ${source_file})
     target_link_libraries(${bin_file} euler)
+    target_link_libraries(${bin_file} primes)
 endforeach(source_file ${SOURCES})

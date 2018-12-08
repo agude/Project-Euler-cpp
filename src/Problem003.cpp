@@ -23,7 +23,7 @@
 #include <iostream>  // std::cout, std::endl
 #include <inttypes.h>  // int64_t
 
-#include "lib/alexlib.h"  // PrimeFactors
+#include "lib/primes.h"  // PrimeFactors
 
 
 int main() {
